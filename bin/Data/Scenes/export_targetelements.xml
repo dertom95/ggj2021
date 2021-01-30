@@ -1,0 +1,53 @@
+<scene id="1">
+	<component id="259270001" type="Octree"/>
+	<component id="259270003" type="DebugRenderer"/>
+	<node id="259270000">
+		<attribute name="Name" value="export_targetelements"/>
+		<component id="259270005" type="Zone">
+			<attribute name="Bounding Box Min" value="-2000 -2000 -2000"/>
+			<attribute name="Bounding Box Max" value="2000 2000 2000"/>
+			<attribute name="Ambient Color" value="0.15 0.15 0.15 1"/>
+			<attribute name="Fog Color" value="0.5 0.5 0.7 1"/>
+			<attribute name="Fog Start" value="300"/>
+			<attribute name="Fog End" value="500"/>
+		</component>
+		<component id="259270007" type="RenderData">
+			<attribute name="RenderPath" value="RenderPaths/Forward.xml"/>
+			<attribute name="HDR" value="False"/>
+			<attribute name="Gamma" value="False"/>
+			<attribute name="Bloom" value="False"/>
+			<attribute name="FXAA2" value="False"/>
+			<attribute name="sRGB" value="False"/>
+		</component>
+		<node id="259270001">
+			<attribute name="Name" value="test1.001"/>
+			<attribute name="Position" value="22.3508 9.84055 4.15169"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<component id="21" type="GroupInstance">
+				<attribute name="groupFilename" value="Objects/col_test1.xml"/>
+			</component>
+		</node>
+		<node id="259270002">
+			<attribute name="Name" value="test2.001"/>
+			<attribute name="Position" value="22.3508 9.84055 4.15169"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<component id="27" type="GroupInstance">
+				<attribute name="groupFilename" value="Objects/col_test2.xml"/>
+			</component>
+		</node>
+		<node id="259270003">
+			<attribute name="Name" value="test3.001"/>
+			<attribute name="Position" value="22.3508 9.84055 4.15169"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<component id="33" type="GroupInstance">
+				<attribute name="groupFilename" value="Objects/col_test3.xml"/>
+			</component>
+		</node>
+	</node>
+</scene>

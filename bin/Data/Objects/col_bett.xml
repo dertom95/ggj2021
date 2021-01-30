@@ -1,0 +1,78 @@
+<node>
+	<node id="259120006">
+		<attribute name="Name" value="kissen"/>
+		<attribute name="Position" value="-0.00970934 0.43925 -0.305949"/>
+		<attribute name="Rotation" value="1 -0 -0 -0"/>
+		<attribute name="Scale" value="1 1 1"/>
+		<attribute name="Variables">
+			<variant hash="1360791162" type="String" value="color"/>
+			<variant hash="773762347" type="String" value="pillow"/>
+		</attribute>
+		<attribute name="Tags">
+			<string value="target_element"/>
+			<string value="bett"/>
+			<string value="bett_recursive"/>
+		</attribute>
+		<component id="259120016" type="StaticModel">
+			<attribute name="Model" value="Model;Models/259-props-Cube.009.mdl"/>
+			<attribute name="Material" value="Material;"/>
+			<attribute name="Cast Shadows" value="true"/>
+		</component>
+		<node id="259120007">
+			<attribute name="Name" value="decke"/>
+			<attribute name="Position" value="0.0420229 -0.00847864 0.305457"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables">
+				<variant hash="1360791162" type="String" value="color"/>
+				<variant hash="773762347" type="String" value="blanket"/>
+			</attribute>
+			<attribute name="Tags">
+				<string value="target_element"/>
+				<string value="bett"/>
+				<string value="bett_recursive"/>
+			</attribute>
+			<component id="259120017" type="StaticModel">
+				<attribute name="Model" value="Model;Models/259-props-Plane.mdl"/>
+				<attribute name="Material" value="Material;"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+	</node>
+	<node id="259120008">
+		<attribute name="Name" value="gestell"/>
+		<attribute name="Position" value="-0.0489604 0.40374 0.0334476"/>
+		<attribute name="Rotation" value="-1.62921e-07 -0 -1 -0"/>
+		<attribute name="Scale" value="1 1 1"/>
+		<attribute name="Variables"/>
+		<attribute name="Tags">
+			<string value="bett"/>
+			<string value="bett_recursive"/>
+		</attribute>
+		<component id="259120018" type="StaticModel">
+			<attribute name="Model" value="Model;Models/259-props-Cube.006.mdl"/>
+			<attribute name="Material" value="Material;Materials/grey.xml"/>
+			<attribute name="Cast Shadows" value="true"/>
+		</component>
+	</node>
+	<node id="259120009">
+		<attribute name="Name" value="matraze"/>
+		<attribute name="Position" value="5.01988e-10 0.343461 0.0146658"/>
+		<attribute name="Rotation" value="1 -0 -0 -0"/>
+		<attribute name="Scale" value="1 1 1"/>
+		<attribute name="Variables">
+			<variant hash="1360791162" type="String" value="color"/>
+			<variant hash="773762347" type="String" value="mattress"/>
+		</attribute>
+		<attribute name="Tags">
+			<string value="target_element"/>
+			<string value="bett"/>
+			<string value="bett_recursive"/>
+		</attribute>
+		<component id="259120019" type="StaticModel">
+			<attribute name="Model" value="Model;Models/259-props-Cube.mdl"/>
+			<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
+			<attribute name="Cast Shadows" value="true"/>
+		</component>
+	</node>
+</node>

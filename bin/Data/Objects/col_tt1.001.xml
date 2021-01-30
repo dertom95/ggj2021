@@ -1,0 +1,62 @@
+<node>
+	<node id="259700002">
+		<attribute name="Name" value="Cone.002"/>
+		<attribute name="Position" value="0.0 0.0 0.0"/>
+		<attribute name="Rotation" value="1 -0 -0 -0"/>
+		<attribute name="Scale" value="1 1 1"/>
+		<attribute name="Variables">
+			<variant hash="3925397901" type="String" value="type1"/>
+		</attribute>
+		<attribute name="Tags">
+			<string value="target_element"/>
+			<string value="tt1.001"/>
+			<string value="tt1.001_recursive"/>
+			<string value="type1.001_recursive"/>
+		</attribute>
+		<component id="259700009" type="StaticModel">
+			<attribute name="Model" value="Model;Models/259-test_scene.001-Cone.002.mdl"/>
+			<attribute name="Material" value="Material;Materials/test_mat.xml"/>
+			<attribute name="Cast Shadows" value="true"/>
+		</component>
+	</node>
+	<node id="259700004">
+		<attribute name="Name" value="Icosphere.001"/>
+		<attribute name="Position" value="-5.0 0.0 1.71143e-07"/>
+		<attribute name="Rotation" value="1 -0 -0 -0"/>
+		<attribute name="Scale" value="1 1 1"/>
+		<attribute name="Variables">
+			<variant hash="3925397901" type="String" value="type2"/>
+		</attribute>
+		<attribute name="Tags">
+			<string value="target_element"/>
+			<string value="tt1.001"/>
+			<string value="tt1.001_recursive"/>
+			<string value="type1.001_recursive"/>
+		</attribute>
+		<component id="259700011" type="StaticModel">
+			<attribute name="Model" value="Model;Models/259-test_scene.001-Icosphere.001.mdl"/>
+			<attribute name="Material" value="Material;Materials/test_mat.xml"/>
+			<attribute name="Cast Shadows" value="true"/>
+		</component>
+	</node>
+	<node id="259700007">
+		<attribute name="Name" value="Suzanne.001"/>
+		<attribute name="Position" value="5.0 0.0 -1.71143e-07"/>
+		<attribute name="Rotation" value="0.707107 -0 0.707107 -0"/>
+		<attribute name="Scale" value="1 1 1"/>
+		<attribute name="Variables">
+			<variant hash="3925397901" type="String" value="type3"/>
+		</attribute>
+		<attribute name="Tags">
+			<string value="target_element"/>
+			<string value="tt1.001"/>
+			<string value="tt1.001_recursive"/>
+			<string value="type1.001_recursive"/>
+		</attribute>
+		<component id="259700017" type="StaticModel">
+			<attribute name="Model" value="Model;Models/259-test_scene.001-Suzanne.001.mdl"/>
+			<attribute name="Material" value="Material;Materials/test_mat.xml"/>
+			<attribute name="Cast Shadows" value="true"/>
+		</component>
+	</node>
+</node>

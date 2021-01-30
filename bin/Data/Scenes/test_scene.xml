@@ -1,0 +1,277 @@
+<scene id="1">
+	<component id="259670001" type="Octree"/>
+	<component id="259670003" type="DebugRenderer"/>
+	<node id="259670000">
+		<attribute name="Name" value="test_scene"/>
+		<component id="259670005" type="Zone">
+			<attribute name="Bounding Box Min" value="-2000 -2000 -2000"/>
+			<attribute name="Bounding Box Max" value="2000 2000 2000"/>
+			<attribute name="Ambient Color" value="0.15 0.15 0.15 1"/>
+			<attribute name="Fog Color" value="0.5 0.5 0.7 1"/>
+			<attribute name="Fog Start" value="300"/>
+			<attribute name="Fog End" value="500"/>
+		</component>
+		<component id="259670007" type="RenderData">
+			<attribute name="RenderPath" value="RenderPaths/Forward.xml"/>
+			<attribute name="HDR" value="False"/>
+			<attribute name="Gamma" value="False"/>
+			<attribute name="Bloom" value="False"/>
+			<attribute name="FXAA2" value="False"/>
+			<attribute name="sRGB" value="False"/>
+		</component>
+		<node id="259670001">
+			<attribute name="Name" value="Camera"/>
+			<attribute name="Position" value="26.7257 4.57076 -22.0855"/>
+			<attribute name="Rotation" value="0.730005 -0.234552 0.302381 -0.566255"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="camera"/>
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="259670009" type="RotationFix"/>
+			<component id="259670011" type="Camera">
+				<attribute name="Orthographic" value="true"/>
+				<attribute name="Orthographic Size" value="17.514286041259766"/>
+				<attribute name="Near Clip" value="0.10000000149011612"/>
+				<attribute name="Far Clip" value="100.0"/>
+			</component>
+		</node>
+		<node id="259670002">
+			<attribute name="Name" value="Cube.003"/>
+			<attribute name="Position" value="4.6092 -1.40027 1.2109"/>
+			<attribute name="Rotation" value="0.707107 -0 -0.707107 -0"/>
+			<attribute name="Scale" value="7.85611 0.119854 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="259670012" type="StaticModel">
+				<attribute name="Model" value="Model;Models/259-test_scene-Cube.005.mdl"/>
+				<attribute name="Material" value="Material;Materials/grey.xml"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="259670003">
+			<attribute name="Name" value="Light"/>
+			<attribute name="Position" value="4.50568 3.68238 0.517517"/>
+			<attribute name="Rotation" value="0.930115 -0.027926 0.0723548 -0.358986"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="259670014" type="RotationFix"/>
+			<component id="259670016" type="Light">
+				<attribute name="Is Enabled" value="true"/>
+				<attribute name="Use Physical Values" value="False"/>
+				<attribute name="Brightness Multiplier" value="1.25"/>
+				<attribute name="Light Type" value="Directional"/>
+				<attribute name="Specular Intensity" value="1.0"/>
+				<attribute name="Color" value="1.0 1.0 1.0 1"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="259670004">
+			<attribute name="Name" value="Plane"/>
+			<attribute name="Position" value="4.50568 -8.43252 0.517517"/>
+			<attribute name="Rotation" value="0.707107 -0 -0.707107 -0"/>
+			<attribute name="Scale" value="37.5685 11.1592 11.1592"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection_recursive"/>
+				<string value="targetelements"/>
+				<string value="targetelements_recursive"/>
+			</attribute>
+			<component id="259670017" type="StaticModel">
+				<attribute name="Model" value="Model;Models/259-test_scene-Plane.001.mdl"/>
+				<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="259670005">
+			<attribute name="Name" value="Plane.001"/>
+			<attribute name="Position" value="3.57336 -8.43252 1.0947"/>
+			<attribute name="Rotation" value="0.5 0.5 0.5 -0.5"/>
+			<attribute name="Scale" value="38.2391 11.1592 11.1592"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection_recursive"/>
+				<string value="targetelements"/>
+				<string value="targetelements_recursive"/>
+			</attribute>
+			<component id="259670018" type="StaticModel">
+				<attribute name="Model" value="Model;Models/259-test_scene-Plane.002.mdl"/>
+				<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="259670006">
+			<attribute name="Name" value="Plane.002"/>
+			<attribute name="Position" value="3.57336 -6.77784 -11.5551"/>
+			<attribute name="Rotation" value="0.707107 0.707107 -2.36279e-07 2.10156e-07"/>
+			<attribute name="Scale" value="16.5765 11.1592 11.1592"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection_recursive"/>
+				<string value="targetelements"/>
+				<string value="targetelements_recursive"/>
+			</attribute>
+			<component id="259670019" type="StaticModel">
+				<attribute name="Model" value="Model;Models/259-test_scene-Plane.004.mdl"/>
+				<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="259670007">
+			<attribute name="Name" value="Plane.003"/>
+			<attribute name="Position" value="3.57336 -8.43252 16.9275"/>
+			<attribute name="Rotation" value="3.41652e-07 3.15529e-07 0.707107 -0.707107"/>
+			<attribute name="Scale" value="16.5765 11.1592 11.1592"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection_recursive"/>
+				<string value="targetelements"/>
+				<string value="targetelements_recursive"/>
+			</attribute>
+			<component id="259670020" type="StaticModel">
+				<attribute name="Model" value="Model;Models/259-test_scene-Plane.005.mdl"/>
+				<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="259670008">
+			<attribute name="Name" value="Plane.004"/>
+			<attribute name="Position" value="18.6874 -8.43252 1.0947"/>
+			<attribute name="Rotation" value="0.5 0.5 0.5 -0.5"/>
+			<attribute name="Scale" value="15.9546 11.1592 11.1592"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="drag_plane"/>
+				<string value="Collection_recursive"/>
+				<string value="targetelements"/>
+				<string value="targetelements_recursive"/>
+			</attribute>
+			<component id="259670021" type="StaticModel">
+				<attribute name="Model" value="Model;Models/259-test_scene-Plane.003.mdl"/>
+				<attribute name="Is Enabled" value="false"/>
+				<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+			<component id="259670023" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Size" value="1.0 1.0 1.0"/>
+				<attribute name="Offset Position" value="0.0 0.0 0.0"/>
+				<attribute name="Model" value="Model;Models/259-test_scene-Plane.003.mdl"/>
+			</component>
+			<component id="259670024" type="RigidBody">
+				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+			</component>
+		</node>
+		<node id="259670009">
+			<attribute name="Name" value="bett"/>
+			<attribute name="Position" value="10.6248 -8.88082 4.43139"/>
+			<attribute name="Rotation" value="-1.62921e-07 -0 -1 -0"/>
+			<attribute name="Scale" value="6.52006 6.52006 6.52006"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection_recursive"/>
+				<string value="targetelements"/>
+				<string value="targetelements_recursive"/>
+			</attribute>
+			<component id="136" type="GroupInstance">
+				<attribute name="groupFilename" value="Objects/col_bett.xml"/>
+			</component>
+		</node>
+		<node id="259670010">
+			<attribute name="Name" value="camera_lookat"/>
+			<attribute name="Position" value="8.81676 -3.82061 -0.390122"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="camera_lookat"/>
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+		</node>
+		<node id="259670011">
+			<attribute name="Name" value="camera_max_left"/>
+			<attribute name="Position" value="25.5507 4.09764 -21.3679"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="camera_max_left"/>
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+		</node>
+		<node id="259670012">
+			<attribute name="Name" value="camera_max_right"/>
+			<attribute name="Position" value="25.5507 4.09764 19.957"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="camera_max_right"/>
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+		</node>
+		<node id="259670013">
+			<attribute name="Name" value="test1"/>
+			<attribute name="Position" value="4.6092 -1.40027 1.2109"/>
+			<attribute name="Rotation" value="0.707107 -0 -0.707107 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection_recursive"/>
+				<string value="targetelements"/>
+				<string value="targetelements_recursive"/>
+			</attribute>
+			<component id="173" type="GroupInstance">
+				<attribute name="groupFilename" value="Objects/col_test1.xml"/>
+			</component>
+		</node>
+		<node id="259670014">
+			<attribute name="Name" value="test2"/>
+			<attribute name="Position" value="4.6092 -1.40027 7.03353"/>
+			<attribute name="Rotation" value="0.707107 -0 -0.707107 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection_recursive"/>
+				<string value="targetelements"/>
+				<string value="targetelements_recursive"/>
+			</attribute>
+			<component id="183" type="GroupInstance">
+				<attribute name="groupFilename" value="Objects/col_test2.xml"/>
+			</component>
+		</node>
+		<node id="259670015">
+			<attribute name="Name" value="test3"/>
+			<attribute name="Position" value="4.6092 -1.40027 -4.24765"/>
+			<attribute name="Rotation" value="0.707107 -0 -0.707107 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection_recursive"/>
+				<string value="targetelements"/>
+				<string value="targetelements_recursive"/>
+			</attribute>
+			<component id="193" type="GroupInstance">
+				<attribute name="groupFilename" value="Objects/col_test3.xml"/>
+			</component>
+		</node>
+	</node>
+</scene>

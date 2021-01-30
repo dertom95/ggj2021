@@ -1,0 +1,100 @@
+<scene id="1">
+	<component id="259500001" type="Octree"/>
+	<component id="259500003" type="DebugRenderer"/>
+	<node id="259500000">
+		<attribute name="Name" value="lost_n_found"/>
+		<component id="259500005" type="Zone">
+			<attribute name="Bounding Box Min" value="-2000 -2000 -2000"/>
+			<attribute name="Bounding Box Max" value="2000 2000 2000"/>
+			<attribute name="Ambient Color" value="0.15 0.15 0.15 1"/>
+			<attribute name="Fog Color" value="0.5 0.5 0.7 1"/>
+			<attribute name="Fog Start" value="300"/>
+			<attribute name="Fog End" value="500"/>
+		</component>
+		<component id="259500007" type="RenderData">
+			<attribute name="RenderPath" value="RenderPaths/Forward.xml"/>
+			<attribute name="HDR" value="False"/>
+			<attribute name="Gamma" value="False"/>
+			<attribute name="Bloom" value="False"/>
+			<attribute name="FXAA2" value="False"/>
+			<attribute name="sRGB" value="False"/>
+		</component>
+		<node id="259500001">
+			<attribute name="Name" value="Camera.002"/>
+			<attribute name="Position" value="7.48204 -4.82259 -0.222176"/>
+			<attribute name="Rotation" value="0.707107 -2.42032e-08 1.25607e-15 -0.707107"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<component id="259500009" type="RotationFix"/>
+			<component id="259500011" type="Camera">
+				<attribute name="Orthographic" value="true"/>
+				<attribute name="Orthographic Size" value="10.69999885559082"/>
+				<attribute name="Near Clip" value="0.10000000149011612"/>
+				<attribute name="Far Clip" value="1000.0"/>
+			</component>
+		</node>
+		<node id="259500002">
+			<attribute name="Name" value="Cube.002"/>
+			<attribute name="Position" value="0 0 0"/>
+			<attribute name="Rotation" value="1 -0 -4.69124e-08 -0"/>
+			<attribute name="Scale" value="0.136126 0.318972 1"/>
+			<attribute name="Variables"/>
+			<component id="259500012" type="StaticModel">
+				<attribute name="Model" value="Model;Models/259-lost_n_found-Cube.003.mdl"/>
+				<attribute name="Material" value="Material;Materials/red_unlit.xml"/>
+				<attribute name="Cast Shadows" value="false"/>
+			</component>
+		</node>
+		<node id="259500003">
+			<attribute name="Name" value="Empty"/>
+			<attribute name="Position" value="-7.37005e-08 -0.993998 -0.883809"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="laf_start"/>
+			</attribute>
+		</node>
+		<node id="259500004">
+			<attribute name="Name" value="Sun.003"/>
+			<attribute name="Position" value="0 0 0"/>
+			<attribute name="Rotation" value="0.968204 -8.56264e-09 -0 -0.250161"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<component id="259500014" type="RotationFix"/>
+			<component id="259500016" type="Light">
+				<attribute name="Is Enabled" value="true"/>
+				<attribute name="Use Physical Values" value="False"/>
+				<attribute name="Brightness Multiplier" value="1.0"/>
+				<attribute name="Light Type" value="Directional"/>
+				<attribute name="Specular Intensity" value="1.0"/>
+				<attribute name="Color" value="1.0 1.0 1.0 1"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="259500005">
+			<attribute name="Name" value="Text"/>
+			<attribute name="Position" value="-1.2837e-08 -0.119054 0.00353628"/>
+			<attribute name="Rotation" value="0.707107 -3.65825e-08 6.11943e-09 -0.707107"/>
+			<attribute name="Scale" value="0.390788 0.169733 0.193178"/>
+			<attribute name="Variables"/>
+			<component id="259500017" type="StaticModel">
+				<attribute name="Model" value="Model;Models/259-lost_n_found-Text.mdl"/>
+				<attribute name="Material" value="Material;Materials/green.xml"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="259500006">
+			<attribute name="Name" value="Text.001"/>
+			<attribute name="Position" value="-1.2837e-08 -0.119054 0.00353628"/>
+			<attribute name="Rotation" value="0.707107 -3.65825e-08 6.11943e-09 -0.707107"/>
+			<attribute name="Scale" value="0.405536 0.176139 0.200469"/>
+			<attribute name="Variables"/>
+			<component id="259500018" type="StaticModel">
+				<attribute name="Model" value="Model;Models/259-lost_n_found-Text.001.mdl"/>
+				<attribute name="Material" value="Material;Materials/lostnfound_glow.xml"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+	</node>
+</scene>

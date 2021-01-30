@@ -1,0 +1,11 @@
+<material>
+	<parameter name="MatDiffColor" value="0.118949 1 0 0.536925"/>
+	<parameter name="MatSpecColor" value="1 0.0673036 0 1"/>
+	<parameter name="MatEmissiveColor" value="0 0 0"/>
+	<parameter name="UOffset" value="1.0 0 0 0"/>
+	<parameter name="VOffset" value="0 1.0 0 0"/>
+	<cull value="ccw"/>
+	<shadowcull value="ccw"/>
+	<fill value="solid"/>
+	<technique loddistance="0" name="Techniques/NoTextureOverlay.xml" quality="0"/>
+</material>

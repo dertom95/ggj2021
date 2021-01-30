@@ -1,0 +1,21 @@
+<node>
+	<node id="259300005">
+		<attribute name="Name" value="Suzanne"/>
+		<attribute name="Position" value="0.0 1.0 -1.71143e-07"/>
+		<attribute name="Rotation" value="0.707107 -0 0.707107 -0"/>
+		<attribute name="Scale" value="1 1 1"/>
+		<attribute name="Variables">
+			<variant hash="3925397901" type="String" value="type3"/>
+		</attribute>
+		<attribute name="Tags">
+			<string value="target_element"/>
+			<string value="test3"/>
+			<string value="test3_recursive"/>
+		</attribute>
+		<component id="259300017" type="StaticModel">
+			<attribute name="Model" value="Model;Models/259-itemtypes-Suzanne.mdl"/>
+			<attribute name="Material" value="Material;Materials/test_mat.xml"/>
+			<attribute name="Cast Shadows" value="true"/>
+		</component>
+	</node>
+</node>
