@@ -5718,41 +5718,6 @@
 				"number": "4092429"
 			},
 			{
-				"id": "Scenes/Scene.xml",
-				"name": "Scenes/Scene.xml",
-				"description": "Scene Scenes/Scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "4092429"
-			},
-			{
-				"id": "Scenes/Scene.xml",
-				"name": "Scenes/Scene.xml",
-				"description": "Scene Scenes/Scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "4092429"
-			},
-			{
-				"id": "Scenes/Scene.xml",
-				"name": "Scenes/Scene.xml",
-				"description": "Scene Scenes/Scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "4092429"
-			},
-			{
-				"id": "Scenes/Scene.xml",
-				"name": "Scenes/Scene.xml",
-				"description": "Scene Scenes/Scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "4092429"
-			},
-			{
-				"id": "Scenes/Scene.xml",
-				"name": "Scenes/Scene.xml",
-				"description": "Scene Scenes/Scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "4092429"
-			},
-			{
 				"id": "Scenes/export_targetelements.xml",
 				"name": "Scenes/export_targetelements.xml",
 				"description": "Scene Scenes/export_targetelements.xml",
@@ -5807,76 +5772,6 @@
 				"description": "Scene Scenes/export_targetelements.xml",
 				"icon": "OUTLINER_DATA_MESH",
 				"number": "1711380"
-			},
-			{
-				"id": "Scenes/export_targetelements.xml",
-				"name": "Scenes/export_targetelements.xml",
-				"description": "Scene Scenes/export_targetelements.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1711380"
-			},
-			{
-				"id": "Scenes/export_targetelements.xml",
-				"name": "Scenes/export_targetelements.xml",
-				"description": "Scene Scenes/export_targetelements.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1711380"
-			},
-			{
-				"id": "Scenes/export_targetelements.xml",
-				"name": "Scenes/export_targetelements.xml",
-				"description": "Scene Scenes/export_targetelements.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1711380"
-			},
-			{
-				"id": "Scenes/export_targetelements.xml",
-				"name": "Scenes/export_targetelements.xml",
-				"description": "Scene Scenes/export_targetelements.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1711380"
-			},
-			{
-				"id": "Scenes/export_targetelements.xml",
-				"name": "Scenes/export_targetelements.xml",
-				"description": "Scene Scenes/export_targetelements.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1711380"
-			},
-			{
-				"id": "Scenes/itemtypes.xml",
-				"name": "Scenes/itemtypes.xml",
-				"description": "Scene Scenes/itemtypes.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "4133287"
-			},
-			{
-				"id": "Scenes/itemtypes.xml",
-				"name": "Scenes/itemtypes.xml",
-				"description": "Scene Scenes/itemtypes.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "4133287"
-			},
-			{
-				"id": "Scenes/itemtypes.xml",
-				"name": "Scenes/itemtypes.xml",
-				"description": "Scene Scenes/itemtypes.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "4133287"
-			},
-			{
-				"id": "Scenes/itemtypes.xml",
-				"name": "Scenes/itemtypes.xml",
-				"description": "Scene Scenes/itemtypes.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "4133287"
-			},
-			{
-				"id": "Scenes/itemtypes.xml",
-				"name": "Scenes/itemtypes.xml",
-				"description": "Scene Scenes/itemtypes.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "4133287"
 			},
 			{
 				"id": "Scenes/itemtypes.xml",
@@ -5991,76 +5886,6 @@
 				"number": "5989927"
 			},
 			{
-				"id": "Scenes/lost_n_found.xml",
-				"name": "Scenes/lost_n_found.xml",
-				"description": "Scene Scenes/lost_n_found.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5989927"
-			},
-			{
-				"id": "Scenes/lost_n_found.xml",
-				"name": "Scenes/lost_n_found.xml",
-				"description": "Scene Scenes/lost_n_found.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5989927"
-			},
-			{
-				"id": "Scenes/lost_n_found.xml",
-				"name": "Scenes/lost_n_found.xml",
-				"description": "Scene Scenes/lost_n_found.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5989927"
-			},
-			{
-				"id": "Scenes/lost_n_found.xml",
-				"name": "Scenes/lost_n_found.xml",
-				"description": "Scene Scenes/lost_n_found.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5989927"
-			},
-			{
-				"id": "Scenes/lost_n_found.xml",
-				"name": "Scenes/lost_n_found.xml",
-				"description": "Scene Scenes/lost_n_found.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5989927"
-			},
-			{
-				"id": "Scenes/props.001.xml",
-				"name": "Scenes/props.001.xml",
-				"description": "Scene Scenes/props.001.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1054324"
-			},
-			{
-				"id": "Scenes/props.001.xml",
-				"name": "Scenes/props.001.xml",
-				"description": "Scene Scenes/props.001.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1054324"
-			},
-			{
-				"id": "Scenes/props.001.xml",
-				"name": "Scenes/props.001.xml",
-				"description": "Scene Scenes/props.001.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1054324"
-			},
-			{
-				"id": "Scenes/props.001.xml",
-				"name": "Scenes/props.001.xml",
-				"description": "Scene Scenes/props.001.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1054324"
-			},
-			{
-				"id": "Scenes/props.001.xml",
-				"name": "Scenes/props.001.xml",
-				"description": "Scene Scenes/props.001.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1054324"
-			},
-			{
 				"id": "Scenes/props.001.xml",
 				"name": "Scenes/props.001.xml",
 				"description": "Scene Scenes/props.001.xml",
@@ -6173,41 +5998,6 @@
 				"number": "1285489"
 			},
 			{
-				"id": "Scenes/props.xml",
-				"name": "Scenes/props.xml",
-				"description": "Scene Scenes/props.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1285489"
-			},
-			{
-				"id": "Scenes/props.xml",
-				"name": "Scenes/props.xml",
-				"description": "Scene Scenes/props.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1285489"
-			},
-			{
-				"id": "Scenes/props.xml",
-				"name": "Scenes/props.xml",
-				"description": "Scene Scenes/props.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1285489"
-			},
-			{
-				"id": "Scenes/props.xml",
-				"name": "Scenes/props.xml",
-				"description": "Scene Scenes/props.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1285489"
-			},
-			{
-				"id": "Scenes/props.xml",
-				"name": "Scenes/props.xml",
-				"description": "Scene Scenes/props.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1285489"
-			},
-			{
 				"id": "Scenes/start_scene.xml",
 				"name": "Scenes/start_scene.xml",
 				"description": "Scene Scenes/start_scene.xml",
@@ -6262,76 +6052,6 @@
 				"description": "Scene Scenes/start_scene.xml",
 				"icon": "OUTLINER_DATA_MESH",
 				"number": "7993328"
-			},
-			{
-				"id": "Scenes/start_scene.xml",
-				"name": "Scenes/start_scene.xml",
-				"description": "Scene Scenes/start_scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "7993328"
-			},
-			{
-				"id": "Scenes/start_scene.xml",
-				"name": "Scenes/start_scene.xml",
-				"description": "Scene Scenes/start_scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "7993328"
-			},
-			{
-				"id": "Scenes/start_scene.xml",
-				"name": "Scenes/start_scene.xml",
-				"description": "Scene Scenes/start_scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "7993328"
-			},
-			{
-				"id": "Scenes/start_scene.xml",
-				"name": "Scenes/start_scene.xml",
-				"description": "Scene Scenes/start_scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "7993328"
-			},
-			{
-				"id": "Scenes/start_scene.xml",
-				"name": "Scenes/start_scene.xml",
-				"description": "Scene Scenes/start_scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "7993328"
-			},
-			{
-				"id": "Scenes/test_scene.xml",
-				"name": "Scenes/test_scene.xml",
-				"description": "Scene Scenes/test_scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "2621136"
-			},
-			{
-				"id": "Scenes/test_scene.xml",
-				"name": "Scenes/test_scene.xml",
-				"description": "Scene Scenes/test_scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "2621136"
-			},
-			{
-				"id": "Scenes/test_scene.xml",
-				"name": "Scenes/test_scene.xml",
-				"description": "Scene Scenes/test_scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "2621136"
-			},
-			{
-				"id": "Scenes/test_scene.xml",
-				"name": "Scenes/test_scene.xml",
-				"description": "Scene Scenes/test_scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "2621136"
-			},
-			{
-				"id": "Scenes/test_scene.xml",
-				"name": "Scenes/test_scene.xml",
-				"description": "Scene Scenes/test_scene.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "2621136"
 			},
 			{
 				"id": "Scenes/test_scene.xml",
@@ -6448,41 +6168,6 @@
 				"number": "2701428"
 			},
 			{
-				"id": "Objects/col_anim.xml",
-				"name": "Objects/col_anim.xml",
-				"description": "Object Objects/col_anim.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "2701428"
-			},
-			{
-				"id": "Objects/col_anim.xml",
-				"name": "Objects/col_anim.xml",
-				"description": "Object Objects/col_anim.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "2701428"
-			},
-			{
-				"id": "Objects/col_anim.xml",
-				"name": "Objects/col_anim.xml",
-				"description": "Object Objects/col_anim.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "2701428"
-			},
-			{
-				"id": "Objects/col_anim.xml",
-				"name": "Objects/col_anim.xml",
-				"description": "Object Objects/col_anim.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "2701428"
-			},
-			{
-				"id": "Objects/col_anim.xml",
-				"name": "Objects/col_anim.xml",
-				"description": "Object Objects/col_anim.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "2701428"
-			},
-			{
 				"id": "Objects/col_bett.xml",
 				"name": "Objects/col_bett.xml",
 				"description": "Object Objects/col_bett.xml",
@@ -6537,76 +6222,6 @@
 				"description": "Object Objects/col_bett.xml",
 				"icon": "OUTLINER_DATA_MESH",
 				"number": "9205862"
-			},
-			{
-				"id": "Objects/col_bett.xml",
-				"name": "Objects/col_bett.xml",
-				"description": "Object Objects/col_bett.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "9205862"
-			},
-			{
-				"id": "Objects/col_bett.xml",
-				"name": "Objects/col_bett.xml",
-				"description": "Object Objects/col_bett.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "9205862"
-			},
-			{
-				"id": "Objects/col_bett.xml",
-				"name": "Objects/col_bett.xml",
-				"description": "Object Objects/col_bett.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "9205862"
-			},
-			{
-				"id": "Objects/col_bett.xml",
-				"name": "Objects/col_bett.xml",
-				"description": "Object Objects/col_bett.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "9205862"
-			},
-			{
-				"id": "Objects/col_bett.xml",
-				"name": "Objects/col_bett.xml",
-				"description": "Object Objects/col_bett.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "9205862"
-			},
-			{
-				"id": "Objects/col_default_targetpoint.xml",
-				"name": "Objects/col_default_targetpoint.xml",
-				"description": "Object Objects/col_default_targetpoint.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1467472"
-			},
-			{
-				"id": "Objects/col_default_targetpoint.xml",
-				"name": "Objects/col_default_targetpoint.xml",
-				"description": "Object Objects/col_default_targetpoint.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1467472"
-			},
-			{
-				"id": "Objects/col_default_targetpoint.xml",
-				"name": "Objects/col_default_targetpoint.xml",
-				"description": "Object Objects/col_default_targetpoint.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1467472"
-			},
-			{
-				"id": "Objects/col_default_targetpoint.xml",
-				"name": "Objects/col_default_targetpoint.xml",
-				"description": "Object Objects/col_default_targetpoint.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1467472"
-			},
-			{
-				"id": "Objects/col_default_targetpoint.xml",
-				"name": "Objects/col_default_targetpoint.xml",
-				"description": "Object Objects/col_default_targetpoint.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1467472"
 			},
 			{
 				"id": "Objects/col_default_targetpoint.xml",
@@ -6721,76 +6336,6 @@
 				"number": "1645742"
 			},
 			{
-				"id": "Objects/col_test1.xml",
-				"name": "Objects/col_test1.xml",
-				"description": "Object Objects/col_test1.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1645742"
-			},
-			{
-				"id": "Objects/col_test1.xml",
-				"name": "Objects/col_test1.xml",
-				"description": "Object Objects/col_test1.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1645742"
-			},
-			{
-				"id": "Objects/col_test1.xml",
-				"name": "Objects/col_test1.xml",
-				"description": "Object Objects/col_test1.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1645742"
-			},
-			{
-				"id": "Objects/col_test1.xml",
-				"name": "Objects/col_test1.xml",
-				"description": "Object Objects/col_test1.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1645742"
-			},
-			{
-				"id": "Objects/col_test1.xml",
-				"name": "Objects/col_test1.xml",
-				"description": "Object Objects/col_test1.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1645742"
-			},
-			{
-				"id": "Objects/col_test2.xml",
-				"name": "Objects/col_test2.xml",
-				"description": "Object Objects/col_test2.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1210031"
-			},
-			{
-				"id": "Objects/col_test2.xml",
-				"name": "Objects/col_test2.xml",
-				"description": "Object Objects/col_test2.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1210031"
-			},
-			{
-				"id": "Objects/col_test2.xml",
-				"name": "Objects/col_test2.xml",
-				"description": "Object Objects/col_test2.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1210031"
-			},
-			{
-				"id": "Objects/col_test2.xml",
-				"name": "Objects/col_test2.xml",
-				"description": "Object Objects/col_test2.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1210031"
-			},
-			{
-				"id": "Objects/col_test2.xml",
-				"name": "Objects/col_test2.xml",
-				"description": "Object Objects/col_test2.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "1210031"
-			},
-			{
 				"id": "Objects/col_test2.xml",
 				"name": "Objects/col_test2.xml",
 				"description": "Object Objects/col_test2.xml",
@@ -6903,41 +6448,6 @@
 				"number": "5807024"
 			},
 			{
-				"id": "Objects/col_test3.xml",
-				"name": "Objects/col_test3.xml",
-				"description": "Object Objects/col_test3.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5807024"
-			},
-			{
-				"id": "Objects/col_test3.xml",
-				"name": "Objects/col_test3.xml",
-				"description": "Object Objects/col_test3.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5807024"
-			},
-			{
-				"id": "Objects/col_test3.xml",
-				"name": "Objects/col_test3.xml",
-				"description": "Object Objects/col_test3.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5807024"
-			},
-			{
-				"id": "Objects/col_test3.xml",
-				"name": "Objects/col_test3.xml",
-				"description": "Object Objects/col_test3.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5807024"
-			},
-			{
-				"id": "Objects/col_test3.xml",
-				"name": "Objects/col_test3.xml",
-				"description": "Object Objects/col_test3.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5807024"
-			},
-			{
 				"id": "Objects/col_tt1.001.xml",
 				"name": "Objects/col_tt1.001.xml",
 				"description": "Object Objects/col_tt1.001.xml",
@@ -6992,76 +6502,6 @@
 				"description": "Object Objects/col_tt1.001.xml",
 				"icon": "OUTLINER_DATA_MESH",
 				"number": "5992035"
-			},
-			{
-				"id": "Objects/col_tt1.001.xml",
-				"name": "Objects/col_tt1.001.xml",
-				"description": "Object Objects/col_tt1.001.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5992035"
-			},
-			{
-				"id": "Objects/col_tt1.001.xml",
-				"name": "Objects/col_tt1.001.xml",
-				"description": "Object Objects/col_tt1.001.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5992035"
-			},
-			{
-				"id": "Objects/col_tt1.001.xml",
-				"name": "Objects/col_tt1.001.xml",
-				"description": "Object Objects/col_tt1.001.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5992035"
-			},
-			{
-				"id": "Objects/col_tt1.001.xml",
-				"name": "Objects/col_tt1.001.xml",
-				"description": "Object Objects/col_tt1.001.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5992035"
-			},
-			{
-				"id": "Objects/col_tt1.001.xml",
-				"name": "Objects/col_tt1.001.xml",
-				"description": "Object Objects/col_tt1.001.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "5992035"
-			},
-			{
-				"id": "Objects/col_tt1.xml",
-				"name": "Objects/col_tt1.xml",
-				"description": "Object Objects/col_tt1.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "6519520"
-			},
-			{
-				"id": "Objects/col_tt1.xml",
-				"name": "Objects/col_tt1.xml",
-				"description": "Object Objects/col_tt1.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "6519520"
-			},
-			{
-				"id": "Objects/col_tt1.xml",
-				"name": "Objects/col_tt1.xml",
-				"description": "Object Objects/col_tt1.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "6519520"
-			},
-			{
-				"id": "Objects/col_tt1.xml",
-				"name": "Objects/col_tt1.xml",
-				"description": "Object Objects/col_tt1.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "6519520"
-			},
-			{
-				"id": "Objects/col_tt1.xml",
-				"name": "Objects/col_tt1.xml",
-				"description": "Object Objects/col_tt1.xml",
-				"icon": "OUTLINER_DATA_MESH",
-				"number": "6519520"
 			},
 			{
 				"id": "Objects/col_tt1.xml",

@@ -2,16 +2,21 @@
 
 #include <Urho3D/Urho3DAll.h>
 #include "../GameLogic.h"
+#include "components/LAFComponents.h"
+#include <functional>
 
 struct SceneInfo {
     String scene_name="";
-    int variations=2;
-    int remove_elements=1;
 
-    SceneInfo(const String& scene_name,int variations,int remove_elements){
+    int swaps = 1;
+    int color_toggles = 1;
+    float swap_speed = 3.0f;
+    float color_toggle_speed = 3.0f;
+
+    SceneInfo(const String& scene_name,int color_toggles,int swaps){
         this->scene_name=scene_name;
-        this->variations=variations;
-        this->remove_elements=remove_elements;
+        this->swaps=swaps;
+        this->color_toggles=color_toggles;
     }
 
     SceneInfo(){
@@ -20,6 +25,7 @@ struct SceneInfo {
 
 struct Settings {
     float camera_speed = 2.0f;
+    float long_press_time = 0.2f;
     Vector<String> color_materials = {"red","green","yellow","whitegrey"};
     String dragpoint_prefab = "Objects/col_default_targetpoint.xml";
     Vector<SceneInfo> scenes ={
@@ -28,24 +34,22 @@ struct Settings {
     };
 };
 
+struct TargetGroup;
+
 struct TargetElement {
+    SharedPtr<Node> node;
+    bool color_switch_allowed=true;
     String ui_name;
     String type;
-    SharedPtr<Node> node;
+    TargetGroup* target_group;
+//    TargetElement(Node* node){
+//        this->node=node;
+//    }
 };
 
-struct TEMatch {
-    SharedPtr<Node> in_scene;
-    SharedPtr<Node> drag_point_master;
-    SharedPtr<Node> drag_point_rigidbody_node;
-    SharedPtr<Node> in_laf;
-    TEMatch(){};
-    TEMatch(Node* in_laf,Node* in_scene,Node* drag_point_master,Node* drag_point_rigidbody_node){
-        this->in_scene=in_scene;
-        this->in_laf=in_laf;
-        this->drag_point_master=drag_point_master;
-        this->drag_point_rigidbody_node=drag_point_rigidbody_node;
-    }
+struct TargetGroup {
+    SharedPtr<Node> node;
+    Vector<TargetElement> group_elements;
 };
 
 struct SceneData {
@@ -57,26 +61,21 @@ struct SceneData {
     SharedPtr<Node> drag_plane;
     SharedPtr<Camera> camera;
 
-    Vector<TargetElement> te_all;
-    Vector<TargetElement> te_moved;
-    Vector<Node> drag_points;
+    Vector<SharedPtr<TargetElementComponent>> te_all;
+    Vector<SharedPtr<TargetGroupComponent>> targetGroups;
+    Vector<SharedPtr<TargetGroupComponent>> targetSwapGroups;
 
     float camera_target=0.5f;
 };
 
-struct LAFData {
-    SharedPtr<Scene>  lafScene;
-    SharedPtr<Viewport> lafViewport;
-    SharedPtr<Node>   lafCameraNode;
-    SharedPtr<Camera> lafCamera;
-    Vector<TEMatch>   lafMatches;
-    Vector3           lafStart;
-    int               lafWidth;
+struct ClickCheck {
+    bool wasDown = false;
+    float downTimer = 0.0f;
 };
 
 struct ActionDrag {
     bool active=false;
-    SharedPtr<Node> drag_node;
+    SharedPtr<TargetElementComponent> drag_te;
     Vector3 position;
 };
 
@@ -110,27 +109,44 @@ private:
     bool IsStartScreenVisible();
     void ShowStartScreen(bool show);
 
-    void ShowLostAndFound(bool show, bool force=false);
+    int TE_NextColor(SharedPtr<TargetElementComponent> te,bool animate=false);
+    int TE_RandomColor(SharedPtr<TargetElementComponent> te,bool animate=false);
+    void TE_SetColor(SharedPtr<TargetElementComponent> te,int colorIdx,bool animate=false);
+    bool TE_CheckGoals(SharedPtr<TargetElementComponent> te);
+    bool CheckSuccess();
 
-    void TE_RandomColor(Node* colorItem);
+
     void StartPhase2();
-    Node* CheckSuccess(Node* dragged_node, Node* drag_point,bool removeOnSuccess=true);
+
+    void AddProcess(std::function<bool(float)> proc);
+    void ProcessLambdas(float dt);
+
+    void OnShortClick();
+    void OnLongClick();
+    void OnDrag();
+    void OnDragEnd();
+
+    SharedPtr<TargetElementComponent> PickBehindDragElement(bool only_valid=true);
 
     void ProcessInput(float dt);
-    void ProcessPickray(float dt);
+
+    std::function<bool(float)> CreateSwapAnimation(SharedPtr<TargetElementComponent> swapA,SharedPtr<TargetElementComponent> swapB,float speed);
+    std::function<bool(float)> CreateMoveAnimation(SharedPtr<TargetElementComponent> swapA,Vector3 position,float speed);
+    std::function<bool(float)> CreateColorAnimation(SharedPtr<TargetElementComponent> te,SharedPtr<Material> targetMaterial,float speed);
+
+
 
     SceneData sceneData;
-    LAFData lafData;
 
     GameState gamestate = GameState::paused;
     Settings settings;
 
-    bool lost_and_found_visible = false;
-
     SharedPtr<Scene>  scene;
 
+    ClickCheck click_check;
     ActionDrag action_drag;
 
+    Vector<std::function<bool(float)>> processes;
 
     SharedPtr<Node> initialSceneNode;
     SharedPtr<Node> levelNode;

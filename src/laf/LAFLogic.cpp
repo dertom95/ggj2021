@@ -1,5 +1,9 @@
 #include "LAFLogic.h"
 #include "../Components/GroupInstance.h"
+#include "../Subsystems/LoaderTools/ComponentExporter.h"
+#include "components/ComponentsActivator.h"
+#include "components/LAFComponents.h"
+
 #include "test_scene.h"
 #include "start_scene.h"
 #include "global_resources.h"
@@ -8,16 +12,11 @@ LAFLogic::LAFLogic(Context *ctx)
     : Object(ctx)
 {}
 
-void LAFLogic::AddTargetElement(String itemtype,String groupName)
-{
-    if (!target_elements.Contains(itemtype)){
-        target_elements[itemtype]=Vector<TargetElement>();
-    }
-    target_elements[itemtype].Push((TargetElement){itemtype,groupName});
-}
-
 void LAFLogic::Setup()
 {
+    LAFComponentsActivator::RegisterComponents(context_);
+    LAFComponentsActivator::Export(context_,"laf_components.json");
+
     gl = GetSubsystem<GameLogic>();
     input = GetSubsystem<Input>();
     resCache = GetSubsystem<ResourceCache>();
@@ -29,16 +28,6 @@ void LAFLogic::Setup()
 
     initialSceneNode = scene->GetNode(res::scenes::start_scene::empties::initial_scene::id);
 
-    lafData.lafScene = new Scene(context_);
-    gl->LoadFromFile(res::global::scenes::lost_n_found_xml::path,lafData.lafScene);
-
-    lafData.lafCamera = lafData.lafScene->GetComponent<Camera>(true);
-    lafData.lafCameraNode = lafData.lafCamera->GetNode();
-    auto node_lafData_start = gl->GetFirstChildWithTag(lafData.lafScene,"laf_start",true);
-    if (node_lafData_start){
-        lafData.lafStart = node_lafData_start->GetWorldPosition();
-    }
-
     auto physicsWorld = scene->GetComponent<PhysicsWorld>(true);
 
     SubscribeToEvent(E_UPDATE,URHO3D_HANDLER(LAFLogic,HandleUpdate));
@@ -49,6 +38,7 @@ void LAFLogic::Setup()
 
 void LAFLogic::StartScene(SceneInfo scene_info)
 {
+    sceneData = SceneData();
     sceneData.scene_info = scene_info;
     gl->LoadFromFile(scene_info.scene_name,levelNode);
 
@@ -79,82 +69,164 @@ void LAFLogic::StartScene(SceneInfo scene_info)
         sceneData.camera_max_right.y_ = sceneData.camera_node->GetWorldPosition().y_;
     }
 
-    PODVector<Node*> nodes;
-    levelNode->GetChildrenWithTag(nodes,"target_element",true);
-    for (Node* n : nodes){
-        auto vType = n->GetVar("type");
-        if (vType.IsEmpty()) {
-            continue;
+    // process TARGET-ELEMENTS
+    PODVector<TargetElementComponent*> target_elements;
+    levelNode->GetComponents<TargetElementComponent>(target_elements,true);
+    for (TargetElementComponent* te : target_elements){
+        int colorIdx=-1;
+        if (te->IsColorSwitchPossible()){
+            colorIdx = TE_RandomColor(SharedPtr<TargetElementComponent>(te));
+            te->SetGoalColorIndex(colorIdx);
+
+            auto model = te->GetNode()->GetComponent<StaticModel>(true);
+            model->SetMaterial(model->GetMaterial()->Clone());
         }
-        String type = vType.GetString();
-        TargetElement te;
-        te.type = type;
-        te.node = n;
-        if (type == "color"){
-            TE_RandomColor(n);
+
+        auto te_group = te->GetNode()->GetParentComponent<TargetGroupComponent>(true);
+        if (te_group){
+            te->SetGroup(te_group);
+            te_group->AddTargetElement(te);
         }
-        auto vName = n->GetVar("name");
-        te.ui_name = vName.IsEmpty() ? vName.GetString() : "unknown";
-        sceneData.te_all.Push(te);
+
+        sceneData.te_all.Push(SharedPtr<TargetElementComponent>(te));
+
+        te->SetColorIndex(colorIdx);
+        te->SetGoalPosition(te->GetNode()->GetWorldPosition());
+        te->SetLastPosition(te->GetNode()->GetWorldPosition());
     }
+
+    // process TARGET-GROUPS
+    PODVector<TargetGroupComponent*> target_groups;
+    levelNode->GetComponents<TargetGroupComponent>(target_groups,true);
+    for (TargetGroupComponent* tg : target_groups){
+        sceneData.targetGroups.Push(SharedPtr<TargetGroupComponent>(tg));
+        if (tg->IsElementSwapAllowed()){
+            sceneData.targetSwapGroups.Push(SharedPtr<TargetGroupComponent>(tg));
+        }
+    }
+
+    URHO3D_LOGINFOF("Initial success-check:%d",CheckSuccess());
 
     gamestate = GameState::playing_observer;
 }
 
 void LAFLogic::StartPhase2()
 {
-    ShowLostAndFound(true);
-    lafData.lafMatches.Clear();
+    Vector<SharedPtr<TargetElementComponent>> tempAllTargetElements(sceneData.te_all);
+    Vector<SharedPtr<TargetGroupComponent>> tempAllTargetSwapGroups(sceneData.targetSwapGroups);
 
-    Vector<TargetElement> tempAllTargetElements(sceneData.te_all);
-    for (int i=0; i < sceneData.scene_info.remove_elements; i++){
+    // toggle colors
+    for (int i=0; i < sceneData.scene_info.color_toggles; i++){
         int idx = Random((int)tempAllTargetElements.Size());
-        auto te_element_tobe_moved = tempAllTargetElements[idx];
-        Node* current_te = te_element_tobe_moved.node;
-        sceneData.te_moved.Push(te_element_tobe_moved);
+        SharedPtr<TargetElementComponent> te_element_tobe_recolored(tempAllTargetElements[idx]);
+        TE_RandomColor(te_element_tobe_recolored,true);
         tempAllTargetElements.Erase(idx);
+    }
 
-        auto drag_point_master = levelNode->CreateChild("drag_point");
-        gl->LoadFromFile(settings.dragpoint_prefab,drag_point_master);
-        drag_point_master->SetPosition(current_te->GetWorldPosition());
-        auto drag_point_rigidnode = drag_point_master->GetComponent<RigidBody>(true)->GetNode();
-        // create variants
+    // swap
+    for (unsigned i=0,created_swaps=0; (created_swaps < sceneData.scene_info.swaps) && (i < tempAllTargetSwapGroups.Size()); i++){
+        int idx = Random((int)tempAllTargetSwapGroups.Size());
+        auto tg_swap = tempAllTargetSwapGroups[idx];
 
-        // same
-        auto clone = current_te->Clone();
+        if (tg_swap->GetTargetElements().Size()<2) {
+            continue;
+        }
 
-        // disable the one in the scene
-        current_te->SetEnabled(false);
+        Vector<SharedPtr<TargetElementComponent>> tmpGroupTElements(tg_swap->GetTargetElements());
+        int idx1 = Random((int)tmpGroupTElements.Size());
+        auto swapA = tmpGroupTElements[idx1];
+        tmpGroupTElements.Erase(idx1);
 
-        lafData.lafMatches.Push(TEMatch(clone,current_te,drag_point_master,drag_point_rigidnode)); // this clone would match
-        lafData.lafScene->AddChild(clone);
-        clone->SetPosition(lafData.lafStart);
-        clone->Rotate(Quaternion(0.f,0.f,-45.f));
-        clone->Scale(0.25f);
+        int idx2 = Random((int)tmpGroupTElements.Size());
+        auto swapB = tmpGroupTElements[idx2];
+        tmpGroupTElements.Erase(idx2);
+
+        AddProcess(CreateSwapAnimation(swapA,swapB,sceneData.scene_info.swap_speed));
+        created_swaps++;
     }
 
 
     gamestate = GameState::playing_phase2;
 }
 
-Node* LAFLogic::CheckSuccess(Node* dragged_node, Node* drag_point_riggid,bool remove_on_success)
+std::function<bool(float)> LAFLogic::CreateColorAnimation(SharedPtr<TargetElementComponent> te,SharedPtr<Material> targetMaterial,float speed)
 {
-    for (int i=0;i<lafData.lafMatches.Size();i++){
-        const TEMatch& match = lafData.lafMatches[i];
-        if (match.drag_point_rigidbody_node==drag_point_riggid){
-            if (match.in_laf==dragged_node){
-                Node* result = match.in_scene;
-                if (remove_on_success){
-                    match.drag_point_master->Remove();
-                    match.in_laf->Remove();
-                    lafData.lafMatches.Erase(i);
-                }
-                return result;
-            }
-        }
+    if (te->IsColorAnimatedInProgress()){
+        return nullptr;
     }
-    return nullptr;
+    te->SetColorAnimated(true);
+
+    auto staticModel = te->GetNode()->GetComponent<StaticModel>(true);
+    SharedPtr<Material> current_mat = SharedPtr<Material>(staticModel->GetMaterial());
+    if (!current_mat){
+        staticModel->SetMaterial(targetMaterial->Clone());
+        current_mat=targetMaterial;
+    }
+    auto matname=current_mat->GetName().CString();
+    auto destinationColor = targetMaterial->GetShaderParameter("MatDiffColor").GetColor();
+
+    return [destinationColor,current_mat,speed,te](float dt){
+        auto currentColor = current_mat->GetShaderParameter("MatDiffColor").GetColor();
+        Color newColor = currentColor.Lerp(destinationColor,speed*dt);
+        float distance = newColor.ToVector3().DistanceToPoint(destinationColor.ToVector3());
+        bool finished = false;
+        if (distance < 0.025){
+            newColor = destinationColor;
+            finished = true;
+            te->SetColorAnimated(false);
+        }
+        current_mat->SetShaderParameter("MatDiffColor",newColor);
+        return !finished;
+    };
 }
+
+
+std::function<bool(float)> LAFLogic::CreateMoveAnimation(SharedPtr<TargetElementComponent> swapA,Vector3 destination,float speed)
+{
+    if (swapA->IsPositionAnimatedInProgress()){
+        return nullptr;
+    }
+
+    swapA->SetPositionAnimated(true);
+
+    return [destination,speed,swapA](float dt){
+        Vector3 currentPosA = swapA->GetNode()->GetWorldPosition();
+
+        bool finishedA = currentPosA==destination;
+
+        if (!finishedA){
+            Vector3 newPosA = currentPosA.Lerp(destination,dt*speed);
+            float distance = newPosA.DistanceToPoint(destination);
+            if (distance < 0.025){
+                newPosA = destination;
+                finishedA = true;
+                swapA->SetPositionAnimated(false);
+                swapA->SetLastPosition(destination);
+            }
+            swapA->GetNode()->SetWorldPosition(newPosA);
+        }
+
+        return !finishedA;
+    };
+}
+
+std::function<bool(float)> LAFLogic::CreateSwapAnimation(SharedPtr<TargetElementComponent> swapA,SharedPtr<TargetElementComponent> swapB,float speed){
+    if (swapA->IsPositionAnimatedInProgress() || swapB->IsPositionAnimatedInProgress()){
+        return nullptr;
+    }
+
+    Vector3 destB = swapA->GetLastPosition();
+    Vector3 destA = swapB->GetLastPosition();
+
+
+    auto anim1 = CreateMoveAnimation(swapA,destA,speed);
+    auto anim2 = CreateMoveAnimation(swapB,destB,speed);
+
+    return [anim1,anim2](float dt){
+        return anim1(dt) && anim2(dt);
+    };
+}
+
 
 void LAFLogic::SetCameraPos(float pos){
     auto cam_pos = sceneData.camera_max_left.Lerp(sceneData.camera_max_right,pos);
@@ -174,6 +246,113 @@ bool LAFLogic::IsStartScreenVisible(){
     return initialSceneNode->IsEnabled();
 }
 
+void LAFLogic::OnShortClick(){
+    URHO3D_LOGINFO("SHORT CLICK");
+    Vector3 hitpos;
+    RigidBody* hitbody;
+    if (gl->MouseOrTouchPhysicsRaycast(10000.0f,hitpos,hitbody,"target_element")){
+        SharedPtr<TargetElementComponent> te(hitbody->GetNode()->GetComponent<TargetElementComponent>(true));
+        if (te){
+            TE_NextColor(te,true);
+        } else {
+            URHO3D_LOGERRORF("No TargetElementComponent at node:%s",hitbody->GetNode()->GetName().CString());
+        }
+    }
+}
+
+void LAFLogic::OnLongClick(){
+    URHO3D_LOGINFO("LongClickStart");
+    Vector3 hitpos;
+    RigidBody* hitbody;
+    if (gl->MouseOrTouchPhysicsRaycast(10000.0f,hitpos,hitbody,"target_element")){
+        SharedPtr<TargetElementComponent> te(hitbody->GetNode()->GetComponent<TargetElementComponent>(true));
+        if (te->GetGroup()){
+            action_drag.drag_te = te;
+            // move drag_plane to the groups_layer
+            auto position_drag_plane = sceneData.drag_plane->GetWorldPosition();
+            auto position_te = te->GetNode()->GetWorldPosition();
+            position_drag_plane.x_=position_te.x_;
+            sceneData.drag_plane->SetWorldPosition(position_drag_plane);
+            action_drag.active=true;
+            te->GetNode()->RemoveTag("target_element");
+        } else {
+            action_drag.drag_te = nullptr;
+            action_drag.active=false;
+        }
+    } else {
+        action_drag.drag_te = nullptr;
+        action_drag.active=false;
+    }
+}
+
+SharedPtr<TargetElementComponent> LAFLogic::PickBehindDragElement(bool only_valid)
+{
+    Vector3 hitpos;
+    RigidBody* hitbody;
+
+    if (gl->MouseOrTouchPhysicsRaycast(10000.0f,hitpos,hitbody,"target_element")){
+        SharedPtr<TargetElementComponent> behind_te (hitbody->GetNode()->GetComponent<TargetElementComponent>(true));
+
+        auto behind_te_group = behind_te->GetGroup();
+        if (behind_te_group && behind_te_group==action_drag.drag_te->GetGroup()){
+            // same group!
+            URHO3D_LOGINFO("SAME GROUP!");
+            return behind_te;
+        } else if (!only_valid){
+            return behind_te;
+        }
+        URHO3D_LOGINFOF("HIT TE:%s",behind_te->GetNode()->GetName().CString());
+    } else {
+        URHO3D_LOGINFOF("NO HIT TE");
+    }
+    return nullptr;
+}
+
+
+void LAFLogic::OnDrag(){
+
+    if (action_drag.active && action_drag.drag_te){
+        URHO3D_LOGINFO("DRAG");
+        Vector3 hitpos;
+        RigidBody* hitbody;
+        if (gl->MouseOrTouchPhysicsRaycast(10000.0f,hitpos,hitbody,"drag_plane")){
+            action_drag.drag_te->GetNode()->SetWorldPosition(hitpos);
+        }
+
+        auto behind_te = PickBehindDragElement();
+        if (behind_te){
+            URHO3D_LOGINFOF("Valid behind:%s",behind_te->GetNode()->GetName().CString());
+        }
+
+//        Vector3 pos = sceneData.camera->ScreenToWorldPoint(input->GetMouseMoveX())
+//        action_drag.drag_node
+    }
+
+}
+
+void LAFLogic::OnDragEnd(){
+    URHO3D_LOGINFO("DragEnd");
+
+    if (!action_drag.active || !action_drag.drag_te){
+        return;
+    }
+
+    auto drag_te = action_drag.drag_te;
+    auto behind_te = PickBehindDragElement();
+
+    if (behind_te){
+        URHO3D_LOGINFOF("Valid behind:%s",behind_te->GetNode()->GetName().CString());
+        AddProcess(CreateMoveAnimation(behind_te,drag_te->GetLastPosition(),2.0f));
+
+        drag_te->GetNode()->AddTag("target_element");
+        drag_te->GetNode()->SetWorldPosition(behind_te->GetNode()->GetWorldPosition());
+        drag_te->SetLastPosition(behind_te->GetNode()->GetWorldPosition());
+    } else {
+        AddProcess(CreateMoveAnimation(action_drag.drag_te,action_drag.drag_te->GetLastPosition(),2.0f));
+    }
+
+}
+
 void LAFLogic::ProcessInput(float dt){
     if (input->GetKeyPress(KEY_1)){
         StartScene(settings.scenes[0]);
@@ -185,7 +364,6 @@ void LAFLogic::ProcessInput(float dt){
         ShowStartScreen(!IsStartScreenVisible());
     }
     else if (input->GetKeyPress(KEY_9)){
-        ShowLostAndFound(!lost_and_found_visible);
     }
     else if (input->GetKeyPress(KEY_8)){
         StartPhase2();
@@ -203,91 +381,147 @@ void LAFLogic::ProcessInput(float dt){
         SetCameraPos(sceneData.camera_target);
     }
 
-    if (gamestate == GameState::playing_phase2)
-    {
+
+    if (gl->IsMouseDownOrTouch()){
+        click_check.wasDown=true;
         if (!action_drag.active){
-            if (gl->IsMousePressedOrTouch()){
-                Vector3 hitpos;
-                Node* hitnode=nullptr;
-                //if (gl->TouchOrMouseRaycast(10000.0f,hitpos,hitnode,"",gl->GetViewport())){
-                if (gl->MouseOrTouchRaycast(10000.0f,hitpos,hitnode,"target_element",lafData.lafViewport)){
-                    URHO3D_LOGINFOF("HIT: %s | %s",hitpos.ToString().CString(),hitnode->GetName().CString());
-                    action_drag.active=true;
-                    action_drag.drag_node=hitnode;
-                    hitnode->SetParent(levelNode);
-                    hitnode->SetScale(1.0f);
-                    hitnode->SetRotation(Quaternion::IDENTITY);
-                }
+            click_check.downTimer+=dt;
+            if (click_check.downTimer >= settings.long_press_time){
+                OnLongClick();
             }
         } else {
-            if (!gl->IsMouseDownOrTouch()){
-                // release
-                action_drag.active=false;
-                action_drag.drag_node=nullptr;
+            OnDrag();
+        // drag
+        }
+    } else {
+        if (click_check.wasDown){
+            if (action_drag.active){
+                OnDragEnd();
             } else {
-                Vector3 hitpos;
-                RigidBody* hitbody=nullptr;
-                //if (gl->TouchOrMouseRaycast(10000.0f,hitpos,hitnode,"",gl->GetViewport())){
-
-                if (gl->MouseOrTouchPhysicsRaycast(10000.0f,hitpos,hitbody,"drag_point")){
-                    URHO3D_LOGINFOF("DRAGPOINT:%s",hitbody->GetNode()->GetName().CString());
-
-                    Node* success_node = CheckSuccess(action_drag.drag_node,hitbody->GetNode());
-                    if (success_node){
-                        URHO3D_LOGINFOF("Success:%s",success_node->GetName().CString());
-                        success_node->SetEnabled(true);
-                    }
-
-                    action_drag.position = hitpos;
-                    action_drag.drag_node->SetPosition(hitpos);
-                }
-                else if (gl->MouseOrTouchPhysicsRaycast(10000.0f,hitpos,hitbody,"drag_plane")){
-                    action_drag.position = hitpos;
-                    action_drag.drag_node->SetPosition(hitpos);
-                }
+                OnShortClick();
             }
+            action_drag.active=false;
+            click_check.wasDown=false;
+            click_check.downTimer=0.0f;
         }
     }
 
+    if (gamestate == GameState::playing_phase2)
+    {
+//        if (!action_drag.active){
+//            if (gl->IsMousePressedOrTouch()){
+//                Vector3 hitpos;
+//                Node* hitnode=nullptr;
+//                //if (gl->TouchOrMouseRaycast(10000.0f,hitpos,hitnode,"",gl->GetViewport())){
+//                if (gl->MouseOrTouchRaycast(10000.0f,hitpos,hitnode,"target_element",lafData.lafViewport)){
+//                    URHO3D_LOGINFOF("HIT: %s | %s",hitpos.ToString().CString(),hitnode->GetName().CString());
+//                    action_drag.active=true;
+//                    action_drag.drag_node=hitnode;
+//                    hitnode->SetParent(levelNode);
+//                    hitnode->SetScale(1.0f);
+//                    hitnode->SetRotation(Quaternion::IDENTITY);
+//                }
+//            }
+//        } else {
+//            if (!gl->IsMouseDownOrTouch()){
+//                // release
+//                action_drag.active=false;
+//                action_drag.drag_node=nullptr;
+//            } else {
+//                Vector3 hitpos;
+//                RigidBody* hitbody=nullptr;
+//                //if (gl->TouchOrMouseRaycast(10000.0f,hitpos,hitnode,"",gl->GetViewport())){
+
+//                if (gl->MouseOrTouchPhysicsRaycast(10000.0f,hitpos,hitbody,"drag_point")){
+//                    URHO3D_LOGINFOF("DRAGPOINT:%s",hitbody->GetNode()->GetName().CString());
+
+//                    Node* success_node = CheckSuccess(action_drag.drag_node,hitbody->GetNode());
+//                    if (success_node){
+//                        URHO3D_LOGINFOF("Success:%s",success_node->GetName().CString());
+//                        success_node->SetEnabled(true);
+//                    }
+
+//                    action_drag.position = hitpos;
+//                    action_drag.drag_node->SetPosition(hitpos);
+//                }
+//                else if (gl->MouseOrTouchPhysicsRaycast(10000.0f,hitpos,hitbody,"drag_plane")){
+//                    action_drag.position = hitpos;
+//                    action_drag.drag_node->SetPosition(hitpos);
+//                }
+//            }
+//        }
+    }
+
 
 }
 
-void LAFLogic::ProcessPickray(float dt)
+void LAFLogic::AddProcess(std::function<bool(float)> proc)
 {
-    //gl->MouseOrTouchPhysicsRaycast();
-}
-
-void LAFLogic::ShowLostAndFound(bool show, bool force){
-    if (show == lost_and_found_visible && !force) return;
-
-    auto* renderer = GetSubsystem<Renderer>();
-    auto* graphics = GetSubsystem<Graphics>();
-
-    if (show == true){
-        renderer->SetNumViewports(2);
-        // bottom
-        /*        lafViewport = new Viewport(context_, lafScene, lafCamera,
-                                    IntRect(0, graphics->GetHeight()-graphics->GetHeight()/5, graphics->GetWidth(), graphics->GetHeight()));*/
-
-        // side
-
-        lafData.lafWidth = (int)(graphics->GetHeight()/4);
-        lafData.lafViewport = new Viewport(context_, lafData.lafScene, lafData.lafCamera,
-                                    IntRect(0, 0, lafData.lafWidth, graphics->GetHeight()));
-        renderer->SetViewport(1,lafData.lafViewport);
-        lost_and_found_visible = true;
-    } else {
-        renderer->SetNumViewports(1);
-        lost_and_found_visible = false;
+    if (proc){
+        processes.Push(proc);
     }
 }
 
-void LAFLogic::TE_RandomColor(Node *colorItem)
+void LAFLogic::ProcessLambdas(float dt)
 {
-    auto model = colorItem->GetDerivedComponent<StaticModel>(true);
-    String material_name = "Materials/"+settings.color_materials[Random((int)settings.color_materials.Size())]+".xml";
-    auto random_material = resCache->GetResource<Material>(material_name);
-    model->SetMaterial(random_material);
+    for (int i=processes.Size()-1;i>=0;i--){
+        bool keepRunning = processes[i](dt);
+        if (!keepRunning){
+            processes.Erase(i);
+        }
+    }
+}
+
+
+int LAFLogic::TE_NextColor(SharedPtr<TargetElementComponent> te,bool animate)
+{
+    int color_idx = te->GetColorIndex();
+    color_idx++;
+    if (color_idx >= settings.color_materials.Size()){
+        color_idx=0;
+    }
+    TE_SetColor(te,color_idx,animate);
+    return color_idx;
+}
+
+bool LAFLogic::CheckSuccess()
+{
+    for (auto te : sceneData.te_all){
+        if (!te->IsAllOk()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool LAFLogic::TE_CheckGoals(SharedPtr<TargetElementComponent> te)
+{
+    URHO3D_LOGINFOF("Check[%s]: color-ok:%d position-ok:%d all-ok:%d",te->GetNode()->GetName().CString(),te->IsColorOk(),te->IsPositionOk(),te->IsAllOk());
+    return te->IsAllOk();
+}
+
+int LAFLogic::TE_RandomColor(SharedPtr<TargetElementComponent> te,bool animate)
+{
+    int color_idx = Random((int)settings.color_materials.Size());
+    TE_SetColor(te,color_idx,animate);
+    return color_idx;
+}
+
+void LAFLogic::TE_SetColor(SharedPtr<TargetElementComponent> te,int color_idx,bool animate)
+{
+    auto model = te->GetNode()->GetDerivedComponent<StaticModel>(true);
+    te->SetColorIndex(color_idx);
+
+    TE_CheckGoals(te);
+
+    String material_name = "Materials/"+settings.color_materials[color_idx]+".xml";
+    SharedPtr<Material> color_material(resCache->GetResource<Material>(material_name));
+    URHO3D_LOGINFOF("SetColorIdx:%i",color_idx);
+    if (animate){
+        AddProcess(CreateColorAnimation(te,color_material,sceneData.scene_info.color_toggle_speed));
+    } else {
+        model->SetMaterial(color_material->Clone());
+    }
 }
 
 void LAFLogic::HandleUpdate(StringHash eventType, VariantMap& data)
@@ -296,12 +530,9 @@ void LAFLogic::HandleUpdate(StringHash eventType, VariantMap& data)
     float dt = data[P_TIMESTEP].GetFloat();
 
     ProcessInput(dt);
+    ProcessLambdas(dt);
 }
 
 void LAFLogic::HandleScreenChange(StringHash eventType, VariantMap& data)
 {
-    using namespace ScreenMode;
-    if (lost_and_found_visible){
-        ShowLostAndFound(true,true);
-    }
 }
