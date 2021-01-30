@@ -51,18 +51,24 @@ public:
 
     void SetUIText(String text,Color color = Color::WHITE);
 
-    bool TouchRaycast(int fingerIdx,float maxDistance, Vector3& hitPos, Node*& hitnode,String tag="");
-    bool MouseRaycast(float maxDistance, Vector3& hitPos, Node*& hitnode,String tag="");
-    bool Raycast(IntVector2 screenPos,float maxDistance, Vector3& hitPos, Node*& hitnode,String tag="");
+    bool TouchRaycast(int fingerIdx,float maxDistance, Vector3& hitPos, Node*& hitnode,String tag="",Viewport* vp=nullptr);
+    bool MouseRaycast(float maxDistance, Vector3& hitPos, Node*& hitnode,String tag="",Viewport* vp=nullptr);
+    bool Raycast(IntVector2 screenPos,float maxDistance, Vector3& hitPos, Node*& hitnode,String tag="",Viewport* vp=nullptr);
+    bool MouseOrTouchRaycast(float maxDistance, Vector3& hitPos, Node*& hitnode,String tag="",Viewport* vp=nullptr);
 
-    bool TouchPhysicsRaycast(int fingerIdx,float maxDistance, Vector3& hitPos, RigidBody*& hitRigidbody,String tag="");
-    bool MousePhysicsRaycast(float maxDistance, Vector3& hitPos, RigidBody*& hitRigidbody,String tag="");
-    bool PhysicsRaycast(IntVector2 screenPos,float maxDistance, Vector3& hitPos, RigidBody*& hitRigidbody,String tag="");
-    bool MouseOrTouchPhysicsRaycast(float maxDistance, Vector3& hitPos, RigidBody*& hitRigidbody,String tag="");
+    bool TouchPhysicsRaycast(int fingerIdx,float maxDistance, Vector3& hitPos, RigidBody*& hitRigidbody,String tag="",Viewport* vp=nullptr);
+    bool MousePhysicsRaycast(float maxDistance, Vector3& hitPos, RigidBody*& hitRigidbody,String tag="",Viewport* vp=nullptr);
+    bool PhysicsRaycast(IntVector2 screenPos,float maxDistance, Vector3& hitPos, RigidBody*& hitRigidbody,String tag="",Viewport* vp=nullptr);
+    bool MouseOrTouchPhysicsRaycast(float maxDistance, Vector3& hitPos, RigidBody*& hitRigidbody,String tag="",Viewport* vp=nullptr);
+
+    bool IsMousePressedOrTouch(MouseButton mousebtn=MOUSEB_LEFT,int fingerIdx=0); // TODO: real touch-pressed
+    bool IsMouseDownOrTouch(MouseButton mousebtn=MOUSEB_LEFT,int fingerIdx=0);
 
     void SetCameraNode(Node* cameraNode);
     inline Node* GetCameraNode() { return mCameraNode; }
 
+    Node* GetFirstChildWithTag(Node* startNode,const String& tag,bool recursive=false);
+    inline Viewport* GetViewport(){ return mViewport;}
 private:
     void SubscribeToEvents();
     void SetupSystems();
@@ -87,6 +93,7 @@ private:
     Scene* mScene;
     Viewport* mViewport;
 
+    Input* input;
 
     bool mRenderPhysics;
 

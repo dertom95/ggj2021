@@ -9,6 +9,8 @@
 # include "Subsystems/LuaScripting.h"
 #endif
 
+#include "laf/LAFLogic.h"
+
 GameLogic::GameLogic(Context* ctx)
     : Object(ctx),
       mCameraNode(nullptr),
@@ -41,6 +43,9 @@ void GameLogic::Start()
     SetupViewport();
     SetupInput();
     SetupUI();
+    LAFLogic* laf_logic = new LAFLogic(context_);
+    context_->RegisterSubsystem(laf_logic);
+    laf_logic->Setup();
 }
 
 
@@ -86,9 +91,9 @@ void GameLogic::SetupScene()
 
     SetupAudio();
 
-    mPhysicsWorld = mScene->GetComponent<PhysicsWorld>();
 
-    LoadFromFile("Scenes/Scene.xml");
+    LoadFromFile("Scenes/start_scene.xml");
+    mPhysicsWorld = mScene->GetComponent<PhysicsWorld>();
 
     mCamera = mScene->GetComponent<Camera>(true);
     if (mCamera){
@@ -154,6 +159,9 @@ void GameLogic::SetCameraNode(Node *cameraNode)
 
     if (mCameraNode) {
         mCamera = mCameraNode->GetComponent<Camera>();
+    }
+    if (mViewport){
+        mViewport->SetCamera(mCamera);
     }
 }
 
@@ -389,6 +397,7 @@ void GameLogic::SetupUI()
     mWindow->SetStyleAuto();
     mWindowTitle->SetStyleAuto();
     mWindowTitle->SetFontSize(14);
+    mWindow->SetVisible(false);
     // Subscribe to buttonClose release (following a 'press') events
  //   SubscribeToEvent(buttonClose, E_RELEASED, URHO3D_HANDLER(GameLogic, HandleClosePressed));
 
@@ -405,17 +414,17 @@ void GameLogic::SetUIText(String text,Color color)
     mWindowTitle->SetText(text);
 }
 
-bool GameLogic::MouseRaycast(float maxDistance, Vector3& hitPos, Node*& hitnode,String tag)
+bool GameLogic::MouseRaycast(float maxDistance, Vector3& hitPos, Node*& hitnode,String tag,Viewport* vp)
 {
     hitnode = nullptr;
 
     auto* ui = GetSubsystem<UI>();
     IntVector2 pos = ui->GetCursorPosition();
 
-    return Raycast(pos,maxDistance,hitPos,hitnode,tag);
+    return Raycast(pos,maxDistance,hitPos,hitnode,tag,vp);
 }
 
-bool GameLogic::TouchRaycast(int fingerIdx,float maxDistance, Vector3& hitPos, Node*& hitnode,String tag)
+bool GameLogic::TouchRaycast(int fingerIdx,float maxDistance, Vector3& hitPos, Node*& hitnode,String tag,Viewport* vp)
 {
     hitnode = nullptr;
 
@@ -424,18 +433,21 @@ bool GameLogic::TouchRaycast(int fingerIdx,float maxDistance, Vector3& hitPos, N
 
     IntVector2 pos = input->GetTouch(fingerIdx)->position_;
 
-    return Raycast(pos,maxDistance,hitPos,hitnode,tag);
+    return Raycast(pos,maxDistance,hitPos,hitnode,tag,vp);
 }
 
 
 
-bool GameLogic::Raycast(IntVector2 screennPos,float maxDistance, Vector3& hitPos, Node*& hitnode,String tag)
+bool GameLogic::Raycast(IntVector2 screennPos,float maxDistance, Vector3& hitPos, Node*& hitnode,String tag,Viewport* vp)
 {
     hitnode = nullptr;
 
     auto* graphics = GetSubsystem<Graphics>();
-    Scene* scene = GetSubsystem<Scene>();
-    Ray cameraRay = mCamera->GetScreenRay((float)screennPos.x_ / graphics->GetWidth(), (float)screennPos.y_ / graphics->GetHeight());
+    Scene* scene = vp ? vp->GetScene() : GetSubsystem<Scene>();
+    Ray cameraRay = vp
+                      ? vp->GetScreenRay(screennPos.x_,screennPos.y_)
+                      : mCamera->GetScreenRay((float)screennPos.x_ / graphics->GetWidth(), (float)screennPos.y_ / graphics->GetHeight());
+
     // Pick only geometry objects, not eg. zones or lights, only get the first (closest) hit
     PODVector<RayQueryResult> results;
     RayOctreeQuery query(results, cameraRay, RAY_TRIANGLE, maxDistance, DRAWABLE_GEOMETRY);
@@ -453,18 +465,22 @@ bool GameLogic::Raycast(IntVector2 screennPos,float maxDistance, Vector3& hitPos
     return false;
 }
 
-bool GameLogic::PhysicsRaycast(IntVector2 screenPos,float maxDistance, Vector3& hitPos, RigidBody*& hitDrawable,String tag)
+bool GameLogic::PhysicsRaycast(IntVector2 screenPos,float maxDistance, Vector3& hitPos, RigidBody*& hitDrawable,String tag,Viewport* vp)
 {
     hitDrawable = nullptr;
 
     auto* graphics = GetSubsystem<Graphics>();
-    Scene* scene = GetSubsystem<Scene>();
-    Ray cameraRay = mCamera->GetScreenRay((float)screenPos.x_ / graphics->GetWidth(), (float)screenPos.y_ / graphics->GetHeight());
+    Scene* scene = vp ? vp->GetScene() : GetSubsystem<Scene>();
+    Ray cameraRay = vp
+                        ? vp->GetScreenRay(screenPos.x_,screenPos.y_)
+                        : mCamera->GetScreenRay((float)screenPos.x_ / graphics->GetWidth(), (float)screenPos.y_ / graphics->GetHeight());
+
     // Pick only geometry objects, not eg. zones or lights, only get the first (closest) hit
 
     PODVector<PhysicsRaycastResult> results;
 
-    mPhysicsWorld->Raycast(results,cameraRay,maxDistance);
+    auto physics_world = scene->GetComponent<PhysicsWorld>(true);
+    physics_world->Raycast(results,cameraRay,maxDistance);
 
     if (results.Size() == 0){
         return false;
@@ -481,9 +497,9 @@ bool GameLogic::PhysicsRaycast(IntVector2 screenPos,float maxDistance, Vector3& 
     return false;
 }
 
-bool GameLogic::TouchPhysicsRaycast(int fingerIdx, float maxDistance, Vector3 &hitPos, RigidBody *&hitRigidbody,String tag)
+bool GameLogic::TouchPhysicsRaycast(int fingerIdx, float maxDistance, Vector3 &hitPos, RigidBody *&hitRigidbody,String tag,Viewport* vp)
 {
-    URHO3D_LOGINFO("TRY TOUCH!");
+    //URHO3D_LOGINFO("TRY TOUCH!");
     hitRigidbody = nullptr;
 
     Input* input = GetSubsystem<Input>();
@@ -492,30 +508,77 @@ bool GameLogic::TouchPhysicsRaycast(int fingerIdx, float maxDistance, Vector3 &h
 
 
     IntVector2 pos = input->GetTouch(fingerIdx)->position_;
-    URHO3D_LOGINFOF("TOUCH:  %i  vec:%s",fingerIdx,pos.ToString().CString());
+    //URHO3D_LOGINFOF("TOUCH:  %i  vec:%s",fingerIdx,pos.ToString().CString());
 
-    return PhysicsRaycast(pos,maxDistance,hitPos,hitRigidbody,tag);
+    return PhysicsRaycast(pos,maxDistance,hitPos,hitRigidbody,tag,vp);
 }
 
-bool GameLogic::MousePhysicsRaycast(float maxDistance, Vector3 &hitPos, RigidBody *&hitRigidbody,String tag)
+bool GameLogic::MousePhysicsRaycast(float maxDistance, Vector3 &hitPos, RigidBody *&hitRigidbody,String tag,Viewport* vp)
 {
     hitRigidbody = nullptr;
 
     auto* ui = GetSubsystem<UI>();
     IntVector2 pos = ui->GetCursorPosition();
 
-    return PhysicsRaycast(pos,maxDistance,hitPos,hitRigidbody,tag);
+    return PhysicsRaycast(pos,maxDistance,hitPos,hitRigidbody,tag,vp);
 }
 
-bool GameLogic::MouseOrTouchPhysicsRaycast(float maxDistance, Vector3 &hitPos, RigidBody *&hitRigidbody, String tag)
+bool GameLogic::MouseOrTouchPhysicsRaycast(float maxDistance, Vector3 &hitPos, RigidBody *&hitRigidbody, String tag,Viewport* vp)
 {
     Input* input = GetSubsystem<Input>();
 
-    URHO3D_LOGINFOF("TOUCHES:%i",input->GetNumTouches());
-    if (MousePhysicsRaycast(maxDistance,hitPos,hitRigidbody,tag)){
+    //URHO3D_LOGINFOF("TOUCHES:%i",input->GetNumTouches());
+    if (MousePhysicsRaycast(maxDistance,hitPos,hitRigidbody,tag,vp)){
         return true;
     }
-    if (TouchPhysicsRaycast(0,maxDistance,hitPos,hitRigidbody,tag)){
+    if (TouchPhysicsRaycast(0,maxDistance,hitPos,hitRigidbody,tag,vp)){
+        return true;
+    }
+    return false;
+}
+
+bool GameLogic::MouseOrTouchRaycast(float maxDistance, Vector3& hitPos, Node*& hitnode,String tag,Viewport* vp)
+{
+    if (MouseRaycast(maxDistance,hitPos,hitnode,tag,vp)){
+        return true;
+    }
+    if (TouchRaycast(0,maxDistance,hitPos,hitnode,tag,vp)){
+        return true;
+    }
+    return false;
+}
+
+
+Node* GameLogic::GetFirstChildWithTag(Node* startNode,const String& tag,bool recursive)
+{
+    PODVector<Node*> nodes;
+    startNode->GetChildrenWithTag(nodes,tag,recursive);
+    if (nodes.Size()==0) return nullptr;
+
+    return nodes[0];
+}
+
+bool GameLogic::IsMousePressedOrTouch(MouseButton mousebtn, int fingerIdx)
+{
+    Input* input = GetSubsystem<Input>();
+    if (input->GetMouseButtonPress(mousebtn)){
+        return true;
+    }
+    else if (input->GetNumTouches()>0) {
+        // TODO check for fingerIdx
+        return true;
+    }
+    return false;
+}
+
+bool GameLogic::IsMouseDownOrTouch(MouseButton mousebtn, int fingerIdx)
+{
+    Input* input = GetSubsystem<Input>();
+    if (input->GetMouseButtonDown(mousebtn)){
+        return true;
+    }
+    else if (input->GetNumTouches()>0) {
+        // TODO check for fingerIdx
         return true;
     }
     return false;

@@ -1,4 +1,6 @@
 
+#pragma once
+
 #include <Urho3D/Core/Object.h>
 #include "Rotator.h"
 #include "GroupInstance.h"
