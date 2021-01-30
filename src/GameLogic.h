@@ -68,6 +68,8 @@ public:
     inline Node* GetCameraNode() { return mCameraNode; }
 
     Node* GetFirstChildWithTag(Node* startNode,const String& tag,bool recursive=false);
+    Node* GetFirstParentWithTag(Node* startNode,const String& tag,bool recursive=false);
+
     inline Viewport* GetViewport(){ return mViewport;}
 private:
     void SubscribeToEvents();

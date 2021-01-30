@@ -558,6 +558,22 @@ Node* GameLogic::GetFirstChildWithTag(Node* startNode,const String& tag,bool rec
     return nodes[0];
 }
 
+Node* GameLogic::GetFirstParentWithTag(Node *startNode, const String &tag, bool recursive)
+{
+    Node* parent = startNode;
+    while (parent=parent->GetParent()){
+        if (parent->HasTag(tag)){
+            return parent;
+        }
+        if (!recursive){
+            return nullptr;
+        }
+    }
+    return nullptr;
+}
+
+
+
 bool GameLogic::IsMousePressedOrTouch(MouseButton mousebtn, int fingerIdx)
 {
     Input* input = GetSubsystem<Input>();
