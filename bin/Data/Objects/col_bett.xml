@@ -6,6 +6,7 @@
 		<attribute name="Scale" value="1 1 1"/>
 		<attribute name="Variables"/>
 		<attribute name="Tags">
+			<string value="target_element"/>
 			<string value="bett"/>
 			<string value="bett_recursive"/>
 		</attribute>
@@ -15,6 +16,21 @@
 			<attribute name="Cast Shadows" value="true"/>
 		</component>
 		<component id="259120018" type="TargetElementComponent"/>
+		<component id="259120019" type="CollisionShape">
+			<attribute name="Shape Type" value="TriangleMesh"/>
+			<attribute name="Size" value="1.0 1.0 1.0"/>
+			<attribute name="Offset Position" value="0.0 0.0 0.0"/>
+			<attribute name="Model" value="Model;Models/259-props-Cube.009.mdl"/>
+		</component>
+		<component id="259120020" type="RigidBody">
+			<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+			<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+			<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+			<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+			<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+			<attribute name="Use Gravity" value="False"/>
+			<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+		</component>
 		<node id="259120007">
 			<attribute name="Name" value="decke"/>
 			<attribute name="Position" value="0.0420229 -0.00847864 0.305457"/>
@@ -22,15 +38,31 @@
 			<attribute name="Scale" value="1 1 1"/>
 			<attribute name="Variables"/>
 			<attribute name="Tags">
+				<string value="target_element"/>
 				<string value="bett"/>
 				<string value="bett_recursive"/>
 			</attribute>
-			<component id="259120018" type="StaticModel">
+			<component id="259120020" type="StaticModel">
 				<attribute name="Model" value="Model;Models/259-props-Plane.mdl"/>
 				<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
 				<attribute name="Cast Shadows" value="true"/>
 			</component>
-			<component id="259120020" type="TargetElementComponent"/>
+			<component id="259120022" type="TargetElementComponent"/>
+			<component id="259120023" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Size" value="1.0 1.0 1.0"/>
+				<attribute name="Offset Position" value="0.0 0.0 0.0"/>
+				<attribute name="Model" value="Model;Models/259-props-Plane.mdl"/>
+			</component>
+			<component id="259120024" type="RigidBody">
+				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+			</component>
 		</node>
 	</node>
 	<node id="259120008">
@@ -43,7 +75,7 @@
 			<string value="bett"/>
 			<string value="bett_recursive"/>
 		</attribute>
-		<component id="259120020" type="StaticModel">
+		<component id="259120024" type="StaticModel">
 			<attribute name="Model" value="Model;Models/259-props-Cube.006.mdl"/>
 			<attribute name="Material" value="Material;Materials/grey.xml"/>
 			<attribute name="Cast Shadows" value="true"/>
@@ -59,11 +91,10 @@
 			<string value="bett"/>
 			<string value="bett_recursive"/>
 		</attribute>
-		<component id="259120021" type="StaticModel">
+		<component id="259120025" type="StaticModel">
 			<attribute name="Model" value="Model;Models/259-props-Cube.mdl"/>
 			<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
 			<attribute name="Cast Shadows" value="true"/>
 		</component>
-		<component id="259120023" type="TargetElementComponent"/>
 	</node>
 </node>

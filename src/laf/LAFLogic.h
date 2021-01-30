@@ -5,13 +5,16 @@
 #include "components/LAFComponents.h"
 #include <functional>
 
+typedef std::function<bool(float)> ProcessFunction;
+
 struct SceneInfo {
     String scene_name="";
 
     int swaps = 1;
     int color_toggles = 1;
-    float swap_speed = 3.0f;
-    float color_toggle_speed = 3.0f;
+    float swap_speed = 1.0f;
+    float color_toggle_speed = 1.f;
+    float show_pause = 1.0f;
 
     SceneInfo(const String& scene_name,int color_toggles,int swaps){
         this->scene_name=scene_name;
@@ -25,7 +28,9 @@ struct SceneInfo {
 
 struct Settings {
     float camera_speed = 2.0f;
-    float long_press_time = 0.2f;
+    float long_press_time = 0.1f;
+    float ingame_color_toggle_speed = 2.1f;
+    float ingame_swap_speed = 3.0f;
     Vector<String> color_materials = {"red","green","yellow","whitegrey"};
     String dragpoint_prefab = "Objects/col_default_targetpoint.xml";
     Vector<SceneInfo> scenes ={
@@ -52,6 +57,14 @@ struct TargetGroup {
     Vector<TargetElement> group_elements;
 };
 
+struct ProcessCtxProgress {
+    float progress;
+};
+
+struct ProcessCtxGroup {
+    Vector<ProcessFunction> group;
+};
+
 struct SceneData {
     SceneInfo scene_info;
     Vector3 camera_max_left;
@@ -60,6 +73,8 @@ struct SceneData {
     SharedPtr<Node> camera_node;
     SharedPtr<Node> drag_plane;
     SharedPtr<Camera> camera;
+
+    Vector<ProcessFunction> process_sequence;
 
     Vector<SharedPtr<TargetElementComponent>> te_all;
     Vector<SharedPtr<TargetGroupComponent>> targetGroups;
@@ -87,9 +102,10 @@ class LAFLogic : public Object
     URHO3D_OBJECT(LAFLogic,Object);
 public:
     enum class GameState {
-        paused = 0,
-        playing_observer = 1,
-        playing_phase2 = 2
+        init_scene = 0,
+        paused = 1,
+        playing_observer = 2,
+        playing_phase2 = 3
     };
 
     static void RegisterObject(Context *context);
@@ -97,6 +113,7 @@ public:
     LAFLogic(Context* ctx);
 
     void Setup();
+    void ShowInitScene();
     void StartScene(SceneInfo scene_info);
     void HandleUpdate(StringHash eventType, VariantMap& data);
     void HandleScreenChange(StringHash eventType, VariantMap& data);
@@ -109,17 +126,15 @@ private:
     bool IsStartScreenVisible();
     void ShowStartScreen(bool show);
 
-    int TE_NextColor(SharedPtr<TargetElementComponent> te,bool animate=false);
-    int TE_RandomColor(SharedPtr<TargetElementComponent> te,bool animate=false);
-    void TE_SetColor(SharedPtr<TargetElementComponent> te,int colorIdx,bool animate=false);
+    int TE_NextColor(SharedPtr<TargetElementComponent> te,bool animate=false,bool anim_in_sequence=false,float pause=0.0f);
+    int TE_RandomColor(SharedPtr<TargetElementComponent> te,bool animate=false,bool anim_in_sequence=false,float pause=0.0f);
+    void TE_SetColor(SharedPtr<TargetElementComponent> te,int colorIdx,bool animate=false,bool anim_in_sequence=false,float pause=0.0f);
     bool TE_CheckGoals(SharedPtr<TargetElementComponent> te);
     bool CheckSuccess();
 
 
     void StartPhase2();
 
-    void AddProcess(std::function<bool(float)> proc);
-    void ProcessLambdas(float dt);
 
     void OnShortClick();
     void OnLongClick();
@@ -130,15 +145,22 @@ private:
 
     void ProcessInput(float dt);
 
-    std::function<bool(float)> CreateSwapAnimation(SharedPtr<TargetElementComponent> swapA,SharedPtr<TargetElementComponent> swapB,float speed);
-    std::function<bool(float)> CreateMoveAnimation(SharedPtr<TargetElementComponent> swapA,Vector3 position,float speed);
-    std::function<bool(float)> CreateColorAnimation(SharedPtr<TargetElementComponent> te,SharedPtr<Material> targetMaterial,float speed);
+    void ProcessTES(Node* start_node);
 
+    void AddProcess(ProcessFunction proc,bool add_to_sceneseq=false,float pause=0.0f);
+    void ProcessLambdas(float dt);
+    ProcessFunction CreateSwapAnimation(SharedPtr<TargetElementComponent> swapA,SharedPtr<TargetElementComponent> swapB,float speed);
+    ProcessFunction CreateMoveAnimation(SharedPtr<TargetElementComponent> swapA,Vector3 position,float speed);
+    ProcessFunction CreateColorAnimation(SharedPtr<TargetElementComponent> te,SharedPtr<Material> targetMaterial,float speed);
+    ProcessFunction CreatePause(float secs);
+    ProcessFunction CreateSequence(Vector<ProcessFunction> sequence);
 
 
     SceneData sceneData;
 
-    GameState gamestate = GameState::paused;
+    bool init_scene_initialized=false;
+    GameState gamestate = GameState::init_scene;
+
     Settings settings;
 
     SharedPtr<Scene>  scene;
@@ -146,7 +168,7 @@ private:
     ClickCheck click_check;
     ActionDrag action_drag;
 
-    Vector<std::function<bool(float)>> processes;
+    Vector<ProcessFunction> processes;
 
     SharedPtr<Node> initialSceneNode;
     SharedPtr<Node> levelNode;

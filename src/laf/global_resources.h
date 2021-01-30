@@ -132,6 +132,11 @@ const char* path="Objects/col_tt1.xml";
 
 }
 namespace sounds {
+namespace Denkspiel_Neu_auf_Harfe_ogg {
+const char* name="Denkspiel_Neu_auf_Harfe";
+const char* path="Sounds/Denkspiel_Neu_auf_Harfe.ogg";
+
+}
 
 }
 namespace particles {
@@ -301,6 +306,96 @@ const char* path="Models/259-props-bett.mdl";
 namespace _259_start_scene_Cube_001_mdl {
 const char* name="259-start_scene-Cube.001";
 const char* path="Models/259-start_scene-Cube.001.mdl";
+
+}
+namespace _259_start_scene_Plane_006_mdl {
+const char* name="259-start_scene-Plane.006";
+const char* path="Models/259-start_scene-Plane.006.mdl";
+
+}
+namespace _259_start_scene_Plane_007_mdl {
+const char* name="259-start_scene-Plane.007";
+const char* path="Models/259-start_scene-Plane.007.mdl";
+
+}
+namespace _259_start_scene_Text_003_mdl {
+const char* name="259-start_scene-Text.003";
+const char* path="Models/259-start_scene-Text.003.mdl";
+
+}
+namespace _259_start_scene_Text_004_mdl {
+const char* name="259-start_scene-Text.004";
+const char* path="Models/259-start_scene-Text.004.mdl";
+
+}
+namespace _259_start_scene_Text_005_mdl {
+const char* name="259-start_scene-Text.005";
+const char* path="Models/259-start_scene-Text.005.mdl";
+
+}
+namespace _259_start_scene_Text_006_mdl {
+const char* name="259-start_scene-Text.006";
+const char* path="Models/259-start_scene-Text.006.mdl";
+
+}
+namespace _259_start_scene_Text_007_mdl {
+const char* name="259-start_scene-Text.007";
+const char* path="Models/259-start_scene-Text.007.mdl";
+
+}
+namespace _259_start_scene_Text_008_mdl {
+const char* name="259-start_scene-Text.008";
+const char* path="Models/259-start_scene-Text.008.mdl";
+
+}
+namespace _259_start_scene_Text_009_mdl {
+const char* name="259-start_scene-Text.009";
+const char* path="Models/259-start_scene-Text.009.mdl";
+
+}
+namespace _259_start_scene_Text_010_mdl {
+const char* name="259-start_scene-Text.010";
+const char* path="Models/259-start_scene-Text.010.mdl";
+
+}
+namespace _259_start_scene_Text_011_mdl {
+const char* name="259-start_scene-Text.011";
+const char* path="Models/259-start_scene-Text.011.mdl";
+
+}
+namespace _259_start_scene_Text_012_mdl {
+const char* name="259-start_scene-Text.012";
+const char* path="Models/259-start_scene-Text.012.mdl";
+
+}
+namespace _259_start_scene_Text_013_mdl {
+const char* name="259-start_scene-Text.013";
+const char* path="Models/259-start_scene-Text.013.mdl";
+
+}
+namespace _259_start_scene_Text_014_mdl {
+const char* name="259-start_scene-Text.014";
+const char* path="Models/259-start_scene-Text.014.mdl";
+
+}
+namespace _259_start_scene_Text_015_mdl {
+const char* name="259-start_scene-Text.015";
+const char* path="Models/259-start_scene-Text.015.mdl";
+
+}
+namespace _259_start_scene_Text_016_mdl {
+const char* name="259-start_scene-Text.016";
+const char* path="Models/259-start_scene-Text.016.mdl";
+
+}
+namespace _259_start_scene_Text_017_mdl {
+const char* name="259-start_scene-Text.017";
+const char* path="Models/259-start_scene-Text.017.mdl";
+
+}
+namespace _259_start_scene_Text_018_mdl {
+const char* name="259-start_scene-Text.018";
+const char* path="Models/259-start_scene-Text.018.mdl";
 
 }
 namespace _259_test_scene_Cube_002_mdl {

@@ -46,7 +46,7 @@ bool TargetElementComponent::IsColorOk()
 
 bool TargetElementComponent::IsPositionOk()
 {
-    return GetNode()->GetWorldPosition() == GetGoalPosition();
+    return GetNode()->GetWorldPosition().DistanceToPoint(GetGoalPosition())<0.01f;
 }
 
 bool TargetElementComponent::IsAllOk()

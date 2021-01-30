@@ -30,6 +30,8 @@ void LAFLogic::Setup()
 
     auto physicsWorld = scene->GetComponent<PhysicsWorld>(true);
 
+    gl->PlayMusic("Denkspiel_Neu_auf_Harfe.ogg");
+
     SubscribeToEvent(E_UPDATE,URHO3D_HANDLER(LAFLogic,HandleUpdate));
     SubscribeToEvent(E_SCREENMODE,URHO3D_HANDLER(LAFLogic,HandleScreenChange));
 }
@@ -69,9 +71,18 @@ void LAFLogic::StartScene(SceneInfo scene_info)
         sceneData.camera_max_right.y_ = sceneData.camera_node->GetWorldPosition().y_;
     }
 
+    ProcessTES(levelNode);
+
+    URHO3D_LOGINFOF("Initial success-check:%d",CheckSuccess());
+
+    gamestate = GameState::playing_observer;
+}
+
+void LAFLogic::ProcessTES(Node* start_node)
+{
     // process TARGET-ELEMENTS
     PODVector<TargetElementComponent*> target_elements;
-    levelNode->GetComponents<TargetElementComponent>(target_elements,true);
+    start_node->GetComponents<TargetElementComponent>(target_elements,true);
     for (TargetElementComponent* te : target_elements){
         int colorIdx=-1;
         if (te->IsColorSwitchPossible()){
@@ -84,7 +95,7 @@ void LAFLogic::StartScene(SceneInfo scene_info)
 
         auto te_group = te->GetNode()->GetParentComponent<TargetGroupComponent>(true);
         if (te_group){
-            te->SetGroup(te_group);
+            te->SetGroup(SharedPtr<TargetGroupComponent>(te_group));
             te_group->AddTargetElement(te);
         }
 
@@ -97,7 +108,7 @@ void LAFLogic::StartScene(SceneInfo scene_info)
 
     // process TARGET-GROUPS
     PODVector<TargetGroupComponent*> target_groups;
-    levelNode->GetComponents<TargetGroupComponent>(target_groups,true);
+    start_node->GetComponents<TargetGroupComponent>(target_groups,true);
     for (TargetGroupComponent* tg : target_groups){
         sceneData.targetGroups.Push(SharedPtr<TargetGroupComponent>(tg));
         if (tg->IsElementSwapAllowed()){
@@ -105,9 +116,6 @@ void LAFLogic::StartScene(SceneInfo scene_info)
         }
     }
 
-    URHO3D_LOGINFOF("Initial success-check:%d",CheckSuccess());
-
-    gamestate = GameState::playing_observer;
 }
 
 void LAFLogic::StartPhase2()
@@ -119,7 +127,7 @@ void LAFLogic::StartPhase2()
     for (int i=0; i < sceneData.scene_info.color_toggles; i++){
         int idx = Random((int)tempAllTargetElements.Size());
         SharedPtr<TargetElementComponent> te_element_tobe_recolored(tempAllTargetElements[idx]);
-        TE_RandomColor(te_element_tobe_recolored,true);
+        TE_RandomColor(te_element_tobe_recolored,false,true,sceneData.scene_info.show_pause);
         tempAllTargetElements.Erase(idx);
     }
 
@@ -141,91 +149,18 @@ void LAFLogic::StartPhase2()
         auto swapB = tmpGroupTElements[idx2];
         tmpGroupTElements.Erase(idx2);
 
-        AddProcess(CreateSwapAnimation(swapA,swapB,sceneData.scene_info.swap_speed));
+        AddProcess(CreateSwapAnimation(swapA,swapB,sceneData.scene_info.swap_speed),true,sceneData.scene_info.show_pause);
+
         created_swaps++;
     }
+
+    AddProcess(CreateSequence(sceneData.process_sequence));
+    sceneData.process_sequence.Clear();
 
 
     gamestate = GameState::playing_phase2;
 }
 
-std::function<bool(float)> LAFLogic::CreateColorAnimation(SharedPtr<TargetElementComponent> te,SharedPtr<Material> targetMaterial,float speed)
-{
-    if (te->IsColorAnimatedInProgress()){
-        return nullptr;
-    }
-    te->SetColorAnimated(true);
-
-    auto staticModel = te->GetNode()->GetComponent<StaticModel>(true);
-    SharedPtr<Material> current_mat = SharedPtr<Material>(staticModel->GetMaterial());
-    if (!current_mat){
-        staticModel->SetMaterial(targetMaterial->Clone());
-        current_mat=targetMaterial;
-    }
-    auto matname=current_mat->GetName().CString();
-    auto destinationColor = targetMaterial->GetShaderParameter("MatDiffColor").GetColor();
-
-    return [destinationColor,current_mat,speed,te](float dt){
-        auto currentColor = current_mat->GetShaderParameter("MatDiffColor").GetColor();
-        Color newColor = currentColor.Lerp(destinationColor,speed*dt);
-        float distance = newColor.ToVector3().DistanceToPoint(destinationColor.ToVector3());
-        bool finished = false;
-        if (distance < 0.025){
-            newColor = destinationColor;
-            finished = true;
-            te->SetColorAnimated(false);
-        }
-        current_mat->SetShaderParameter("MatDiffColor",newColor);
-        return !finished;
-    };
-}
-
-
-std::function<bool(float)> LAFLogic::CreateMoveAnimation(SharedPtr<TargetElementComponent> swapA,Vector3 destination,float speed)
-{
-    if (swapA->IsPositionAnimatedInProgress()){
-        return nullptr;
-    }
-
-    swapA->SetPositionAnimated(true);
-
-    return [destination,speed,swapA](float dt){
-        Vector3 currentPosA = swapA->GetNode()->GetWorldPosition();
-
-        bool finishedA = currentPosA==destination;
-
-        if (!finishedA){
-            Vector3 newPosA = currentPosA.Lerp(destination,dt*speed);
-            float distance = newPosA.DistanceToPoint(destination);
-            if (distance < 0.025){
-                newPosA = destination;
-                finishedA = true;
-                swapA->SetPositionAnimated(false);
-                swapA->SetLastPosition(destination);
-            }
-            swapA->GetNode()->SetWorldPosition(newPosA);
-        }
-
-        return !finishedA;
-    };
-}
-
-std::function<bool(float)> LAFLogic::CreateSwapAnimation(SharedPtr<TargetElementComponent> swapA,SharedPtr<TargetElementComponent> swapB,float speed){
-    if (swapA->IsPositionAnimatedInProgress() || swapB->IsPositionAnimatedInProgress()){
-        return nullptr;
-    }
-
-    Vector3 destB = swapA->GetLastPosition();
-    Vector3 destA = swapB->GetLastPosition();
-
-
-    auto anim1 = CreateMoveAnimation(swapA,destA,speed);
-    auto anim2 = CreateMoveAnimation(swapB,destB,speed);
-
-    return [anim1,anim2](float dt){
-        return anim1(dt) && anim2(dt);
-    };
-}
 
 
 void LAFLogic::SetCameraPos(float pos){
@@ -342,13 +277,14 @@ void LAFLogic::OnDragEnd(){
 
     if (behind_te){
         URHO3D_LOGINFOF("Valid behind:%s",behind_te->GetNode()->GetName().CString());
-        AddProcess(CreateMoveAnimation(behind_te,drag_te->GetLastPosition(),2.0f));
+        AddProcess(CreateMoveAnimation(behind_te,drag_te->GetLastPosition(),settings.ingame_swap_speed));
 
         drag_te->GetNode()->AddTag("target_element");
         drag_te->GetNode()->SetWorldPosition(behind_te->GetNode()->GetWorldPosition());
         drag_te->SetLastPosition(behind_te->GetNode()->GetWorldPosition());
     } else {
-        AddProcess(CreateMoveAnimation(action_drag.drag_te,action_drag.drag_te->GetLastPosition(),2.0f));
+        AddProcess(CreateMoveAnimation(action_drag.drag_te,action_drag.drag_te->GetLastPosition(),settings.ingame_swap_speed));
+        drag_te->GetNode()->AddTag("target_element");
     }
 
 }
@@ -382,105 +318,46 @@ void LAFLogic::ProcessInput(float dt){
     }
 
 
-    if (gl->IsMouseDownOrTouch()){
-        click_check.wasDown=true;
-        if (!action_drag.active){
-            click_check.downTimer+=dt;
-            if (click_check.downTimer >= settings.long_press_time){
-                OnLongClick();
-            }
-        } else {
-            OnDrag();
-        // drag
-        }
-    } else {
-        if (click_check.wasDown){
-            if (action_drag.active){
-                OnDragEnd();
-            } else {
-                OnShortClick();
-            }
-            action_drag.active=false;
-            click_check.wasDown=false;
-            click_check.downTimer=0.0f;
-        }
-    }
-
     if (gamestate == GameState::playing_phase2)
     {
-//        if (!action_drag.active){
-//            if (gl->IsMousePressedOrTouch()){
-//                Vector3 hitpos;
-//                Node* hitnode=nullptr;
-//                //if (gl->TouchOrMouseRaycast(10000.0f,hitpos,hitnode,"",gl->GetViewport())){
-//                if (gl->MouseOrTouchRaycast(10000.0f,hitpos,hitnode,"target_element",lafData.lafViewport)){
-//                    URHO3D_LOGINFOF("HIT: %s | %s",hitpos.ToString().CString(),hitnode->GetName().CString());
-//                    action_drag.active=true;
-//                    action_drag.drag_node=hitnode;
-//                    hitnode->SetParent(levelNode);
-//                    hitnode->SetScale(1.0f);
-//                    hitnode->SetRotation(Quaternion::IDENTITY);
-//                }
-//            }
-//        } else {
-//            if (!gl->IsMouseDownOrTouch()){
-//                // release
-//                action_drag.active=false;
-//                action_drag.drag_node=nullptr;
-//            } else {
-//                Vector3 hitpos;
-//                RigidBody* hitbody=nullptr;
-//                //if (gl->TouchOrMouseRaycast(10000.0f,hitpos,hitnode,"",gl->GetViewport())){
-
-//                if (gl->MouseOrTouchPhysicsRaycast(10000.0f,hitpos,hitbody,"drag_point")){
-//                    URHO3D_LOGINFOF("DRAGPOINT:%s",hitbody->GetNode()->GetName().CString());
-
-//                    Node* success_node = CheckSuccess(action_drag.drag_node,hitbody->GetNode());
-//                    if (success_node){
-//                        URHO3D_LOGINFOF("Success:%s",success_node->GetName().CString());
-//                        success_node->SetEnabled(true);
-//                    }
-
-//                    action_drag.position = hitpos;
-//                    action_drag.drag_node->SetPosition(hitpos);
-//                }
-//                else if (gl->MouseOrTouchPhysicsRaycast(10000.0f,hitpos,hitbody,"drag_plane")){
-//                    action_drag.position = hitpos;
-//                    action_drag.drag_node->SetPosition(hitpos);
-//                }
-//            }
-//        }
-    }
-
-
-}
-
-void LAFLogic::AddProcess(std::function<bool(float)> proc)
-{
-    if (proc){
-        processes.Push(proc);
-    }
-}
-
-void LAFLogic::ProcessLambdas(float dt)
-{
-    for (int i=processes.Size()-1;i>=0;i--){
-        bool keepRunning = processes[i](dt);
-        if (!keepRunning){
-            processes.Erase(i);
+        if (gl->IsMouseDownOrTouch()){
+            click_check.wasDown=true;
+            if (!action_drag.active){
+                click_check.downTimer+=dt;
+                if (click_check.downTimer >= settings.long_press_time){
+                    OnLongClick();
+                }
+            } else {
+                OnDrag();
+            // drag
+            }
+        } else {
+            if (click_check.wasDown){
+                if (action_drag.active){
+                    OnDragEnd();
+                } else {
+                    OnShortClick();
+                }
+                action_drag.active=false;
+                click_check.wasDown=false;
+                click_check.downTimer=0.0f;
+            }
         }
     }
+
+
 }
 
 
-int LAFLogic::TE_NextColor(SharedPtr<TargetElementComponent> te,bool animate)
+
+int LAFLogic::TE_NextColor(SharedPtr<TargetElementComponent> te,bool animate,bool anim_in_sequence,float pause)
 {
     int color_idx = te->GetColorIndex();
     color_idx++;
     if (color_idx >= settings.color_materials.Size()){
         color_idx=0;
     }
-    TE_SetColor(te,color_idx,animate);
+    TE_SetColor(te,color_idx,animate,anim_in_sequence,pause);
     return color_idx;
 }
 
@@ -500,14 +377,14 @@ bool LAFLogic::TE_CheckGoals(SharedPtr<TargetElementComponent> te)
     return te->IsAllOk();
 }
 
-int LAFLogic::TE_RandomColor(SharedPtr<TargetElementComponent> te,bool animate)
+int LAFLogic::TE_RandomColor(SharedPtr<TargetElementComponent> te,bool animate,bool anim_in_sequence,float pause)
 {
     int color_idx = Random((int)settings.color_materials.Size());
-    TE_SetColor(te,color_idx,animate);
+    TE_SetColor(te,color_idx,animate,anim_in_sequence,pause);
     return color_idx;
 }
 
-void LAFLogic::TE_SetColor(SharedPtr<TargetElementComponent> te,int color_idx,bool animate)
+void LAFLogic::TE_SetColor(SharedPtr<TargetElementComponent> te,int color_idx,bool animate,bool anim_in_sequence,float pause)
 {
     auto model = te->GetNode()->GetDerivedComponent<StaticModel>(true);
     te->SetColorIndex(color_idx);
@@ -517,8 +394,11 @@ void LAFLogic::TE_SetColor(SharedPtr<TargetElementComponent> te,int color_idx,bo
     String material_name = "Materials/"+settings.color_materials[color_idx]+".xml";
     SharedPtr<Material> color_material(resCache->GetResource<Material>(material_name));
     URHO3D_LOGINFOF("SetColorIdx:%i",color_idx);
-    if (animate){
-        AddProcess(CreateColorAnimation(te,color_material,sceneData.scene_info.color_toggle_speed));
+    if (animate||anim_in_sequence){
+        float anim_speed = gamestate==GameState::playing_phase2
+                                ? settings.ingame_color_toggle_speed
+                                :sceneData.scene_info.color_toggle_speed;
+        AddProcess(CreateColorAnimation(te,color_material,anim_speed),anim_in_sequence,pause);
     } else {
         model->SetMaterial(color_material->Clone());
     }
@@ -529,8 +409,52 @@ void LAFLogic::HandleUpdate(StringHash eventType, VariantMap& data)
     using namespace Update;
     float dt = data[P_TIMESTEP].GetFloat();
 
+
+    if (gamestate==GameState::init_scene){
+        if (!init_scene_initialized){
+            sceneData = SceneData();
+            ProcessTES(scene);
+            init_scene_initialized=true;
+        }
+        if (processes.Size()==0){
+            Vector<SharedPtr<TargetElementComponent>> tempTES(sceneData.te_all);
+            int idx = Random((int)tempTES.Size());
+            SharedPtr<TargetElementComponent> te1 = tempTES[idx];
+            tempTES.Erase(idx);
+            idx = Random((int)tempTES.Size());
+            SharedPtr<TargetElementComponent> te2 = tempTES[idx];
+            tempTES.Erase(idx);
+            idx = Random((int)tempTES.Size());
+            SharedPtr<TargetElementComponent> te3 = tempTES[idx];
+            tempTES.Erase(idx);
+            idx = Random((int)tempTES.Size());
+            SharedPtr<TargetElementComponent> te4 = tempTES[idx];
+            tempTES.Erase(idx);
+            idx = Random((int)tempTES.Size());
+            SharedPtr<TargetElementComponent> te5 = tempTES[idx];
+            tempTES.Erase(idx);
+            idx = Random((int)tempTES.Size());
+            SharedPtr<TargetElementComponent> te6 = tempTES[idx];
+            tempTES.Erase(idx);
+            idx = Random((int)tempTES.Size());
+            SharedPtr<TargetElementComponent> te7 = tempTES[idx];
+            tempTES.Erase(idx);
+
+            AddProcess(CreateSwapAnimation(te1,te2,0.25f+Random()));
+            AddProcess(CreateSwapAnimation(te3,te5,0.25f+Random()));
+            TE_RandomColor(te1,true);
+            TE_RandomColor(te3,true);
+            TE_RandomColor(te5,true);
+            TE_RandomColor(te6,true);
+            TE_RandomColor(te7,true);
+            AddProcess(CreatePause(6.0f));
+        }
+    }
+
     ProcessInput(dt);
     ProcessLambdas(dt);
+
+    URHO3D_LOGINFOF("SUCCESS? :%s",CheckSuccess()?"true":"false");
 }
 
 void LAFLogic::HandleScreenChange(StringHash eventType, VariantMap& data)

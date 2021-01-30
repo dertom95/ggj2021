@@ -46,8 +46,8 @@ public:
 
     inline bool IsColorSwitchPossible() { return color_switch;}
 
-    inline void SetGroup(TargetGroupComponent* grp){ group = grp;}
-    inline TargetGroupComponent* GetGroup() { return group; }
+    inline void SetGroup(SharedPtr<TargetGroupComponent> grp){ group = grp;}
+    inline SharedPtr<TargetGroupComponent> GetGroup() { return group; }
 
     inline void SetColorIndex(int idx) { current_color_idx=idx;}
     inline int GetColorIndex() { return current_color_idx;}

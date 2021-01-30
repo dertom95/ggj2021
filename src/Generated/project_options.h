@@ -3,4 +3,4 @@
 /* #undef GAME_ENABLE_LUA_SCRIPTING */
 
 #define PROJECT_NAME "ggj21_laf"
-#define GIT_HASH "1dceb8e"
+#define GIT_HASH "88538ac"
