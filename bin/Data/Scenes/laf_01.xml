@@ -191,6 +191,22 @@
 			</component>
 		</node>
 		<node id="823670008">
+			<attribute name="Name" value="Plane.001"/>
+			<attribute name="Position" value="-3.34659 -1.89888 -0.0103013"/>
+			<attribute name="Rotation" value="0.707107 -2.08831e-08 -4.57541e-09 -0.707107"/>
+			<attribute name="Scale" value="4.4545 1 6.13867"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="823670032" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-laf_01-Plane.002.mdl"/>
+				<attribute name="Material" value="Material"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="823670009">
 			<attribute name="Name" value="cam_look_at"/>
 			<attribute name="Position" value="-0.251822 -1.85916 -0.0126315"/>
 			<attribute name="Rotation" value="1 -0 -0 -0"/>
@@ -202,7 +218,7 @@
 				<string value="Collection_recursive"/>
 			</attribute>
 		</node>
-		<node id="823670009">
+		<node id="823670010">
 			<attribute name="Name" value="camera_max_left"/>
 			<attribute name="Position" value="7.83335 -1.85916 -7.6002"/>
 			<attribute name="Rotation" value="1 -0 -0 -0"/>
@@ -214,7 +230,7 @@
 				<string value="Collection_recursive"/>
 			</attribute>
 		</node>
-		<node id="823670010">
+		<node id="823670011">
 			<attribute name="Name" value="camera_max_right"/>
 			<attribute name="Position" value="7.83335 -1.85916 8.02765"/>
 			<attribute name="Rotation" value="1 -0 -0 -0"/>

@@ -158,14 +158,31 @@ void LAFLogic::SetupUI()
     txtHint->SetStyleAuto();
     txtHint->SetAlignment(HorizontalAlignment::HA_CENTER,VerticalAlignment::VA_CENTER);
 
+    // window
+    auto windowInstructions = new Window(context_);
+    windowInstructions->SetSize(450,200);
+    uiData.instructions_window = windowInstructions;
+    uiData.root_ingame->AddChild(windowInstructions);
+
+    auto instructions = new Text(context_);
+    uiData.txtInstructions=instructions;
+    windowInstructions->AddChild(instructions);
+    instructions->SetText("\nInstructions!\n-Observe items(color/position)!\n-Start Level\n- reorganize to former state\n- Long-Click: grab/drag\n- Short-Click: Swap Color");
+    instructions->SetStyleAuto();
+    //instructions->SetAlignment(HorizontalAlignment::HA_CENTER,VerticalAlignment::VA_CENTER);
+
+
+
     mUiRoot->SetStyleAuto();
     window->SetStyleAuto();
+    windowInstructions->SetStyleAuto();
     text->SetFontSize(50);
     text1->SetFontSize(50);
     text2->SetFontSize(50);
     txtBtnRestart->SetFontSize(25);
     txtHint->SetFontSize(25);
     txtBtnStart->SetFontSize(25);
+    instructions->SetFontSize(15);
 
 
 
@@ -216,6 +233,12 @@ void LAFLogic::LayoutUI()
         uiData.btnRestartLevel->SetSize(btnWidth,btnHeight);
         uiData.btnRestartLevel->SetPosition(graphics->GetWidth()-btnWidth-2*dx,dy*5);
 
+        float instructionWidth = 25*dx;
+        float instructionHeight = 15*dx;
+        uiData.instructions_window->SetSize(instructionWidth,instructionHeight);
+        uiData.instructions_window->SetPosition(dx,screenHeight-instructionHeight);
+        uiData.instructions_window->SetVisible(settings.current_level==0);
+
         if (gamestate==GameState::playing_observer){
             uiData.btnBottomRight->SetVisible(true);
             uiData.btnBottomRight->SetSize(btnWidth,btnHeight+2*dy);
@@ -233,14 +256,19 @@ void LAFLogic::LayoutUI()
         }
 
 
-        if (sceneData.scene_info.hint==""){
-            uiData.hint_window->SetVisible(false);
+        uiData.hint_window->SetVisible(true);
+
+        if (screenWidth < 2000) {
+            uiData.hint->SetFontSize(14);
+            uiData.txtInstructions->SetFontSize(14);
         } else {
-            uiData.hint_window->SetVisible(true);
-            uiData.hint->SetText(sceneData.scene_info.hint);
-            uiData.hint_window->SetPosition(dx*20,screenHeight - dy*11);
-            uiData.hint_window->SetSize(dx*60,dy*9);
+            uiData.hint->SetFontSize(25);
+            uiData.txtInstructions->SetFontSize(25);
         }
+
+        uiData.hint->SetText("Level "+String((int)settings.current_level+1)+"/"+String(settings.scenes.Size())+" - "+sceneData.scene_info.hint);
+        uiData.hint_window->SetPosition(dx*20,dy*2);
+        uiData.hint_window->SetSize(dx*60,dy*9);
 
 
     }
@@ -356,7 +384,7 @@ void LAFLogic::StartPhase2()
     }
 
     // swap
-    for (unsigned i=0,created_swaps=0; (created_swaps < sceneData.scene_info.swaps) && (i < tempAllTargetSwapGroups.Size()); i++){
+    for (unsigned i=0,created_swaps=0; created_swaps < sceneData.scene_info.swaps; i++){
         int idx = Random((int)tempAllTargetSwapGroups.Size());
         auto tg_swap = tempAllTargetSwapGroups[idx];
 
@@ -605,9 +633,13 @@ bool LAFLogic::TE_CheckGoals(SharedPtr<TargetElementComponent> te)
 
 int LAFLogic::TE_RandomColor(SharedPtr<TargetElementComponent> te,bool animate,bool anim_in_sequence,float pause)
 {
-    int color_idx = Random((int)settings.color_materials.Size());
-    TE_SetColor(te,color_idx,animate,anim_in_sequence,pause);
-    return color_idx;
+    int selection = te->GetColorIndex();
+    while (selection == te->GetColorIndex()){
+        selection = Random((int)settings.color_materials.Size());
+    }
+    TE_SetColor(te,selection,animate,anim_in_sequence,pause);
+
+    return selection;
 }
 
 void LAFLogic::TE_SetColor(SharedPtr<TargetElementComponent> te,int color_idx,bool animate,bool anim_in_sequence,float pause)

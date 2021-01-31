@@ -29,7 +29,7 @@ void GameLogic::Setup(VariantMap& engineParameters_)
 {
     engineParameters_[EP_FULL_SCREEN]=false;
     engineParameters_[EP_WINDOW_RESIZABLE]=true;
-    engineParameters_[EP_WINDOW_WIDTH]=1024;
+    engineParameters_[EP_WINDOW_WIDTH]=1280;
     engineParameters_[EP_WINDOW_HEIGHT]=768;
     engineParameters_[EP_WINDOW_TITLE]=String(PROJECT_NAME); // get the name from the CMake ProjectName
     engineParameters_[EP_RESOURCE_PATHS]="Data;CoreData";

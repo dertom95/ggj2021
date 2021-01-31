@@ -17,10 +17,11 @@ struct SceneInfo {
     float show_pause = 1.0f;
     String hint = "This is THE hint";
 
-    SceneInfo(const String& scene_name,int color_toggles,int swaps){
+    SceneInfo(const String& scene_name,int color_toggles,int swaps,String hint=""){
         this->scene_name=scene_name;
         this->swaps=swaps;
         this->color_toggles=color_toggles;
+        this->hint=hint;
     }
 
     SceneInfo(){
@@ -43,8 +44,12 @@ struct Settings {
     int best_level=0;
 
     Vector<SceneInfo> scenes ={
-        SceneInfo("Scenes/laf_01.xml",1,1),
-        SceneInfo("Scenes/test_scene.xml",2,2)
+//        SceneInfo("Scenes/laf_01.xml",1,0,"1 color toggle"),
+//        SceneInfo("Scenes/laf_01.xml",0,1,"1 position swap"),
+//        SceneInfo("Scenes/laf_01.xml",1,1,"1 color toggle / 1 position swap"),
+//        SceneInfo("Scenes/laf_01.xml",1,2,"1 color toggle / 2 position swap"),
+        SceneInfo("Scenes/laf_01.xml",0,2,"2 color toggle / 2 position swap"),
+        //SceneInfo("Scenes/test_scene.xml",,2)
     };
 };
 
@@ -76,6 +81,8 @@ struct UIData {
     SharedPtr<Text> txtBtnBottomRight;
     SharedPtr<Text> progress;
     SharedPtr<Window> hint_window;
+    SharedPtr<Window> instructions_window;
+    SharedPtr<Text> txtInstructions;
     SharedPtr<Text> hint;
 };
 
@@ -86,6 +93,8 @@ struct TargetGroup {
 
 struct ProcessCtxProgress {
     float progress;
+    Vector3 from=Vector3::ZERO;
+    Vector3 to=Vector3::ZERO;
 };
 
 struct ProcessCtxGroup {

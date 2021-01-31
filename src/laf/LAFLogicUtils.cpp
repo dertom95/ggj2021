@@ -76,9 +76,9 @@ ProcessFunction LAFLogic::CreateSequence(Vector<ProcessFunction> sequence)
 
 
 ProcessFunction LAFLogic::CreateSwapAnimation(SharedPtr<TargetElementComponent> swapA,SharedPtr<TargetElementComponent> swapB,float speed){
-    if (swapA->IsPositionAnimatedInProgress() || swapB->IsPositionAnimatedInProgress()){
-        return nullptr;
-    }
+//    if (swapA->IsPositionAnimatedInProgress() || swapB->IsPositionAnimatedInProgress()){
+//        return nullptr;
+//    }
 
     Vector3 destB = swapA->GetNode()->GetWorldPosition();
     Vector3 destA = swapB->GetNode()->GetWorldPosition();
@@ -87,10 +87,50 @@ ProcessFunction LAFLogic::CreateSwapAnimation(SharedPtr<TargetElementComponent> 
     auto anim1 = CreateMoveAnimation(swapA,destA,speed);
     auto anim2 = CreateMoveAnimation(swapB,destB,speed);
 
-    return [anim1,anim2](float dt){
-        bool finishedA = anim1(dt);
-        bool finishedB = anim2(dt);
-        return finishedA || finishedB;
+    ProcessCtxProgress* ctxA = new ProcessCtxProgress();
+    ProcessCtxProgress* ctxB = new ProcessCtxProgress();
+
+    return [ctxA,ctxB,swapA,swapB,speed](float dt){
+
+        ctxA->progress += speed*dt;
+        ctxB->progress += speed*dt;
+
+        if (ctxA->to==Vector3::ZERO){
+            ctxA->from=swapA->GetNode()->GetWorldPosition();
+            ctxA->to=swapB->GetNode()->GetWorldPosition();
+        }
+        if (ctxB->to==Vector3::ZERO){
+            ctxB->from=swapB->GetNode()->GetWorldPosition();
+            ctxB->to=swapA->GetNode()->GetWorldPosition();
+        }
+
+        Vector3 newPosA = ctxA->from.Lerp(ctxA->to,ctxA->progress);
+        Vector3 newPosB = ctxB->from.Lerp(ctxB->to,ctxB->progress);
+        bool finishedA=false;
+        bool finishedB=false;
+        if (ctxA->progress>=1.0f){
+            newPosA = ctxA->to;
+            swapA->SetPositionAnimated(false);
+            swapA->SetLastPosition(newPosA);
+            finishedA=true;
+        }
+        swapA->GetNode()->SetWorldPosition(newPosA);
+
+        if (ctxB->progress>=1.0f){
+            newPosB = ctxB->to;
+            swapB->SetPositionAnimated(false);
+            swapB->SetLastPosition(newPosB);
+            finishedB=true;
+        }
+        swapB->GetNode()->SetWorldPosition(newPosB);
+
+        bool finishedAll = (finishedA && finishedB);
+        if (finishedAll){
+            delete ctxA;
+            delete ctxB;
+        }
+
+        return !(finishedAll);
     };
 }
 
