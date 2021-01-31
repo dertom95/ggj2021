@@ -33,6 +33,7 @@ void GameLogic::Setup(VariantMap& engineParameters_)
     engineParameters_[EP_WINDOW_HEIGHT]=768;
     engineParameters_[EP_WINDOW_TITLE]=String(PROJECT_NAME); // get the name from the CMake ProjectName
     engineParameters_[EP_RESOURCE_PATHS]="Data;CoreData";
+    engineParameters_[EP_LOG_QUIET]=true;
     SubscribeToEvents();
 }
 
@@ -310,18 +311,19 @@ void GameLogic::LoadFromFile(String sceneName, Scene* loadInto)
     }
 }
 
-void GameLogic::PlaySound(String soundFile,float gain)
+void GameLogic::PlaySound(String soundFile,float gain,Scene* scene)
 {
     auto* cache = GetSubsystem<ResourceCache>();
     auto* sound = cache->GetResource<Sound>("Sounds/"+soundFile);
+    scene = scene == nullptr?mScene:scene;
 
-    PlaySound(sound,gain);
+    PlaySound(sound,gain,scene);
 }
 
-void GameLogic::PlaySound(Sound* sound,float gain)
+void GameLogic::PlaySound(Sound* sound,float gain,Scene* scene)
 {
-    SoundSource* soundSource = mScene->CreateComponent<SoundSource>();
-
+    SoundSource* soundSource = scene->CreateComponent<SoundSource>();
+    scene = scene == nullptr?mScene:scene;
     // Component will automatically remove itself when the sound finished playing
     soundSource->SetAutoRemoveMode(REMOVE_COMPONENT);
     soundSource->Play(sound->GetDecoderStream());

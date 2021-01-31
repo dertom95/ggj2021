@@ -1,0 +1,23 @@
+<scene id="1">
+	<component id="823100001" type="Octree"/>
+	<component id="823100003" type="DebugRenderer"/>
+	<node id="823100000">
+		<attribute name="Name" value="laf_01.001"/>
+		<component id="823100005" type="Zone">
+			<attribute name="Bounding Box Min" value="-2000 -2000 -2000"/>
+			<attribute name="Bounding Box Max" value="2000 2000 2000"/>
+			<attribute name="Ambient Color" value="0.15 0.15 0.15 1"/>
+			<attribute name="Fog Color" value="0.5 0.5 0.7 1"/>
+			<attribute name="Fog Start" value="300"/>
+			<attribute name="Fog End" value="500"/>
+		</component>
+		<component id="823100007" type="RenderData">
+			<attribute name="RenderPath" value="RenderPaths/Forward.xml"/>
+			<attribute name="HDR" value="False"/>
+			<attribute name="Gamma" value="False"/>
+			<attribute name="Bloom" value="False"/>
+			<attribute name="FXAA2" value="False"/>
+			<attribute name="sRGB" value="False"/>
+		</component>
+	</node>
+</scene>

@@ -1,0 +1,33 @@
+<node>
+	<node id="823120007">
+		<attribute name="Name" value="boat_020"/>
+		<attribute name="Position" value="1.36914e-07 0.0 0.0"/>
+		<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+		<attribute name="Scale" value="1 1 1"/>
+		<attribute name="Variables"/>
+		<attribute name="Tags">
+			<string value="boat2"/>
+			<string value="boat2_recursive"/>
+		</attribute>
+		<component id="823120032" type="StaticModel">
+			<attribute name="Model" value="Model;Models/823-props-boat_020.mdl"/>
+			<attribute name="Material" value="Material;Materials/laf_01_default.xml"/>
+			<attribute name="Cast Shadows" value="false"/>
+		</component>
+		<component id="823120034" type="TargetElementComponent"/>
+		<component id="823120035" type="RigidBody">
+			<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+			<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+			<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+			<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+			<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+			<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+		</component>
+		<component id="823120036" type="CollisionShape">
+			<attribute name="Shape Type" value="TriangleMesh"/>
+			<attribute name="Size" value="1.0 1.0 1.0"/>
+			<attribute name="Offset Position" value="0.0 0.0 0.0"/>
+			<attribute name="Model" value="Model;Models/823-props-boat_020.mdl"/>
+		</component>
+	</node>
+</node>

@@ -15,13 +15,15 @@ struct SceneInfo {
     float swap_speed = 1.0f;
     float color_toggle_speed = 1.f;
     float show_pause = 1.0f;
+    bool shuffle=true;
     String hint = "This is THE hint";
 
-    SceneInfo(const String& scene_name,int color_toggles,int swaps,String hint=""){
+    SceneInfo(const String& scene_name,int color_toggles,int swaps,String hint="",bool shuffle=true){
         this->scene_name=scene_name;
         this->swaps=swaps;
         this->color_toggles=color_toggles;
         this->hint=hint;
+        this->shuffle=shuffle;
     }
 
     SceneInfo(){
@@ -37,19 +39,42 @@ struct Settings {
     String dragpoint_prefab = "Objects/col_default_targetpoint.xml";
 
     int scene_start_easy=0;
-    int scene_start_medium=1;
-    int scene_start_hard=0;
+    int scene_start_medium=8;
+    int scene_start_hard=14;
 
     int current_level=0;
     int best_level=0;
 
     Vector<SceneInfo> scenes ={
-//        SceneInfo("Scenes/laf_01.xml",1,0,"1 color toggle"),
-//        SceneInfo("Scenes/laf_01.xml",0,1,"1 position swap"),
-//        SceneInfo("Scenes/laf_01.xml",1,1,"1 color toggle / 1 position swap"),
-//        SceneInfo("Scenes/laf_01.xml",1,2,"1 color toggle / 2 position swap"),
-        SceneInfo("Scenes/laf_01.xml",0,2,"2 color toggle / 2 position swap"),
-        //SceneInfo("Scenes/test_scene.xml",,2)
+        SceneInfo("Scenes/laf_01.xml",0,1,"1 position swap",false),
+        SceneInfo("Scenes/laf_01.xml",1,1,"1 color toggle / 1 position swap",false),
+        SceneInfo("Scenes/laf_01.xml",1,2,"1 color toggle / 2 position swap",false),
+        SceneInfo("Scenes/laf_01.xml",2,2,"2 color toggle / 2 position swap",false),
+
+        SceneInfo("Scenes/test_scene.xml",1,1,"The famous test scene :D color 1/swap 1"),
+        SceneInfo("Scenes/test_scene.xml",2,1,"The famous test scene :D color 2/swap 2"),
+        SceneInfo("Scenes/test_scene.xml",1,2,"The famous test scene :D color 3/swap 3"),
+        SceneInfo("Scenes/test_scene.xml",2,2,"The famous test scene :D color 5/swap 5"),
+
+        SceneInfo("Scenes/laf_03.xml",1,1,"1 color toggle / 1 position swap"),
+        SceneInfo("Scenes/laf_03.xml",2,0,"2 color toggle / 0 position swap"),
+        SceneInfo("Scenes/laf_03.xml",0,2,"0 color toggle / 2 position swap"),
+        SceneInfo("Scenes/laf_03.xml",3,0,"3 color toggle / 0 position swap"),
+        SceneInfo("Scenes/laf_03.xml",2,2,"2 color toggle / 2 position swap"),
+        SceneInfo("Scenes/laf_03.xml",3,3,"3 color toggle / 3 position swap"),
+
+        SceneInfo("Scenes/laf_04.xml",1,0,"1 color toggle / 1 position swap"),
+        SceneInfo("Scenes/laf_04.xml",2,0,"2 color toggle / 0 position swap"),
+        SceneInfo("Scenes/laf_04.xml",0,2,"0 color toggle / 2 position swap"),
+        SceneInfo("Scenes/laf_04.xml",3,0,"3 color toggle / 0 position swap"),
+        SceneInfo("Scenes/laf_04.xml",2,2,"2 color toggle / 2 position swap"),
+        SceneInfo("Scenes/laf_04.xml",3,3,"3 color toggle / 3 position swap"),
+        SceneInfo("Scenes/laf_04.xml",4,4,"4 color toggle / 4 position swap"),
+        SceneInfo("Scenes/laf_04.xml",5,5,"5 color toggle / 5 position swap"),
+        SceneInfo("Scenes/laf_04.xml",6,6,"6 color toggle / 6 position swap"),
+        SceneInfo("Scenes/laf_04.xml",7,7,"7 color toggle / 7 position swap"),
+
+
     };
 };
 
@@ -192,7 +217,7 @@ private:
 
     void ProcessInput(float dt);
 
-    void ProcessTES(Node* start_node);
+    void ProcessTES(Node* start_node,bool shuffle=false);
 
     void AddProcess(ProcessFunction proc,bool add_to_sceneseq=false,float pause=0.0f);
     void ProcessLambdas(float dt);

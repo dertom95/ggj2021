@@ -1,9 +1,9 @@
 <scene id="1">
-	<component id="259120001" type="Octree"/>
-	<component id="259120003" type="DebugRenderer"/>
-	<node id="259120000">
+	<component id="823120001" type="Octree"/>
+	<component id="823120003" type="DebugRenderer"/>
+	<node id="823120000">
 		<attribute name="Name" value="props"/>
-		<component id="259120005" type="Zone">
+		<component id="823120005" type="Zone">
 			<attribute name="Bounding Box Min" value="-2000 -2000 -2000"/>
 			<attribute name="Bounding Box Max" value="2000 2000 2000"/>
 			<attribute name="Ambient Color" value="0.15 0.15 0.15 1"/>
@@ -11,7 +11,7 @@
 			<attribute name="Fog Start" value="300"/>
 			<attribute name="Fog End" value="500"/>
 		</component>
-		<component id="259120007" type="RenderData">
+		<component id="823120007" type="RenderData">
 			<attribute name="RenderPath" value="RenderPaths/Forward.xml"/>
 			<attribute name="HDR" value="False"/>
 			<attribute name="Gamma" value="False"/>
@@ -19,232 +19,243 @@
 			<attribute name="FXAA2" value="False"/>
 			<attribute name="sRGB" value="False"/>
 		</component>
-		<node id="259120001">
-			<attribute name="Name" value="L"/>
-			<attribute name="Position" value="-2 0 -3.45178"/>
+		<node id="823120001">
+			<attribute name="Name" value="Cube"/>
+			<attribute name="Position" value="1.67458 0.0638261 -16.0186"/>
 			<attribute name="Rotation" value="1 -0 -0 -0"/>
-			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Scale" value="1.68058 1.68058 1.68058"/>
 			<attribute name="Variables"/>
 			<attribute name="Tags">
-				<string value="Lost"/>
-				<string value="Lost_recursive"/>
+				<string value="p14"/>
+				<string value="p14_recursive"/>
 			</attribute>
-			<component id="259120008" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-props-L.mdl"/>
-				<attribute name="Material" value="Material;Materials/test_mat.xml"/>
+			<component id="823120008" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-props-Cube.mdl"/>
+				<attribute name="Material" value="Material"/>
 				<attribute name="Cast Shadows" value="true"/>
 			</component>
-		</node>
-		<node id="259120002">
-			<attribute name="Name" value="O"/>
-			<attribute name="Position" value="-2 0 -1.45178"/>
-			<attribute name="Rotation" value="1 -0 -0 -0"/>
-			<attribute name="Scale" value="1 1 1"/>
-			<attribute name="Variables"/>
-			<attribute name="Tags">
-				<string value="Lost"/>
-				<string value="Lost_recursive"/>
-			</attribute>
-			<component id="259120009" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-props-O.mdl"/>
-				<attribute name="Material" value="Material;"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-		</node>
-		<node id="259120003">
-			<attribute name="Name" value="S.001"/>
-			<attribute name="Position" value="-2 0 0.548215"/>
-			<attribute name="Rotation" value="1 -0 -0 -0"/>
-			<attribute name="Scale" value="1 1 1"/>
-			<attribute name="Variables"/>
-			<attribute name="Tags">
-				<string value="Lost"/>
-				<string value="Lost_recursive"/>
-			</attribute>
-			<component id="259120010" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-props-S.mdl"/>
-				<attribute name="Material" value="Material;"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-		</node>
-		<node id="259120004">
-			<attribute name="Name" value="Sun.001"/>
-			<attribute name="Position" value="0.650418 0.374008 -0.908621"/>
-			<attribute name="Rotation" value="0.989113 -5.03703e-09 -0 -0.147159"/>
-			<attribute name="Scale" value="1 1 1"/>
-			<attribute name="Variables"/>
-			<component id="259120012" type="RotationFix"/>
-			<component id="259120014" type="Light">
-				<attribute name="Is Enabled" value="true"/>
-				<attribute name="Use Physical Values" value="False"/>
-				<attribute name="Brightness Multiplier" value="1.5"/>
-				<attribute name="Light Type" value="Directional"/>
-				<attribute name="Specular Intensity" value="1.0"/>
-				<attribute name="Color" value="1.0 1.0 1.0 1"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-		</node>
-		<node id="259120005">
-			<attribute name="Name" value="T.001"/>
-			<attribute name="Position" value="-2 0 2.54822"/>
-			<attribute name="Rotation" value="1 -0 -0 -0"/>
-			<attribute name="Scale" value="1 1 1"/>
-			<attribute name="Variables"/>
-			<attribute name="Tags">
-				<string value="Lost"/>
-				<string value="Lost_recursive"/>
-			</attribute>
-			<component id="259120015" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-props-T.mdl"/>
-				<attribute name="Material" value="Material;"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-		</node>
-		<node id="259120006">
-			<attribute name="Name" value="color_test"/>
-			<attribute name="Position" value="-7.29113e-08 0 -2.13013"/>
-			<attribute name="Rotation" value="1 -0 -0 -0"/>
-			<attribute name="Scale" value="0.349496 0.349496 0.349496"/>
-			<attribute name="Variables"/>
-			<component id="259120016" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-props-Suzanne.001.mdl"/>
-				<attribute name="Material" value="Material;Materials/green.xml"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-		</node>
-		<node id="259120007">
-			<attribute name="Name" value="color_test.001"/>
-			<attribute name="Position" value="-1.09968e-07 0 -3.21276"/>
-			<attribute name="Rotation" value="1 -0 -0 -0"/>
-			<attribute name="Scale" value="0.349496 0.349496 0.349496"/>
-			<attribute name="Variables"/>
-			<component id="259120017" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-props-Suzanne.002.mdl"/>
-				<attribute name="Material" value="Material;Materials/yellow.xml"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-		</node>
-		<node id="259120008">
-			<attribute name="Name" value="color_test.002"/>
-			<attribute name="Position" value="-1.44459e-07 0 -4.22042"/>
-			<attribute name="Rotation" value="1 -0 -0 -0"/>
-			<attribute name="Scale" value="0.349496 0.349496 0.349496"/>
-			<attribute name="Variables"/>
-			<component id="259120018" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-props-Suzanne.003.mdl"/>
-				<attribute name="Material" value="Material;Materials/red.xml"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-		</node>
-		<node id="259120009">
-			<attribute name="Name" value="color_test.003"/>
-			<attribute name="Position" value="-1.8238e-07 0 -5.3283"/>
-			<attribute name="Rotation" value="1 -0 -0 -0"/>
-			<attribute name="Scale" value="0.349496 0.349496 0.349496"/>
-			<attribute name="Variables"/>
-			<component id="259120019" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-props-Suzanne.004.mdl"/>
-				<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-		</node>
-		<node id="259120010">
-			<attribute name="Name" value="kissen"/>
-			<attribute name="Position" value="-0.00970934 0.43925 -0.305949"/>
-			<attribute name="Rotation" value="1 -0 -0 -0"/>
-			<attribute name="Scale" value="1 1 1"/>
-			<attribute name="Variables"/>
-			<attribute name="Tags">
-				<string value="target_element"/>
-				<string value="bett"/>
-				<string value="bett_recursive"/>
-			</attribute>
-			<component id="259120020" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-props-Cube.009.mdl"/>
-				<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259120022" type="TargetElementComponent"/>
-			<component id="259120023" type="CollisionShape">
-				<attribute name="Shape Type" value="TriangleMesh"/>
-				<attribute name="Size" value="1.0 1.0 1.0"/>
-				<attribute name="Offset Position" value="0.0 0.0 0.0"/>
-				<attribute name="Model" value="Model;Models/259-props-Cube.009.mdl"/>
-			</component>
-			<component id="259120024" type="RigidBody">
+			<component id="823120010" type="TargetElementComponent"/>
+			<component id="823120011" type="RigidBody">
 				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
 				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
 				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
 				<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
 				<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
-				<attribute name="Use Gravity" value="False"/>
 				<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
 			</component>
-			<node id="259120011">
-				<attribute name="Name" value="decke"/>
-				<attribute name="Position" value="0.0420229 -0.00847864 0.305457"/>
-				<attribute name="Rotation" value="1 -0 -0 -0"/>
-				<attribute name="Scale" value="1 1 1"/>
-				<attribute name="Variables"/>
-				<attribute name="Tags">
-					<string value="target_element"/>
-					<string value="bett"/>
-					<string value="bett_recursive"/>
-				</attribute>
-				<component id="259120024" type="StaticModel">
-					<attribute name="Model" value="Model;Models/259-props-Plane.mdl"/>
-					<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
-					<attribute name="Cast Shadows" value="true"/>
-				</component>
-				<component id="259120026" type="TargetElementComponent"/>
-				<component id="259120027" type="CollisionShape">
-					<attribute name="Shape Type" value="TriangleMesh"/>
-					<attribute name="Size" value="1.0 1.0 1.0"/>
-					<attribute name="Offset Position" value="0.0 0.0 0.0"/>
-					<attribute name="Model" value="Model;Models/259-props-Plane.mdl"/>
-				</component>
-				<component id="259120028" type="RigidBody">
-					<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
-					<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
-					<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
-					<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
-					<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
-					<attribute name="Use Gravity" value="False"/>
-					<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
-				</component>
-			</node>
-		</node>
-		<node id="259120012">
-			<attribute name="Name" value="gestell"/>
-			<attribute name="Position" value="-0.0489604 0.40374 0.0334476"/>
-			<attribute name="Rotation" value="-1.62921e-07 -0 -1 -0"/>
-			<attribute name="Scale" value="1 1 1"/>
-			<attribute name="Variables"/>
-			<attribute name="Tags">
-				<string value="bett"/>
-				<string value="bett_recursive"/>
-			</attribute>
-			<component id="259120028" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-props-Cube.006.mdl"/>
-				<attribute name="Material" value="Material;Materials/grey.xml"/>
-				<attribute name="Cast Shadows" value="true"/>
+			<component id="823120012" type="CollisionShape">
+				<attribute name="Size" value="1.0 8.0 3.0"/>
+				<attribute name="Offset Position" value="-0.5 3.0 0.0"/>
 			</component>
 		</node>
-		<node id="259120013">
-			<attribute name="Name" value="matraze"/>
-			<attribute name="Position" value="5.01988e-10 0.343461 0.0146658"/>
+		<node id="823120002">
+			<attribute name="Name" value="Cube.001"/>
+			<attribute name="Position" value="2.43328 0.0187296 -8.05162"/>
+			<attribute name="Rotation" value="-1.70145e-07 -0 -1 -0"/>
+			<attribute name="Scale" value="2.43327 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="p12"/>
+				<string value="p12_recursive"/>
+			</attribute>
+			<component id="823120012" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-props-Cube.003.mdl"/>
+				<attribute name="Material" value="Material"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+			<component id="823120014" type="TargetElementComponent"/>
+			<component id="823120015" type="RigidBody">
+				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+			</component>
+			<component id="823120016" type="CollisionShape">
+				<attribute name="Size" value="1.0 8.0 6.0"/>
+				<attribute name="Offset Position" value="-0.5 3.0 0.0"/>
+			</component>
+		</node>
+		<node id="823120003">
+			<attribute name="Name" value="Icosphere"/>
+			<attribute name="Position" value="0.538036 0.123954 -12.0501"/>
 			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="2.19428 2.19428 2.19428"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="p13"/>
+				<string value="p13_recursive"/>
+			</attribute>
+			<component id="823120016" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-props-Icosphere.mdl"/>
+				<attribute name="Material" value="Material"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+			<component id="823120018" type="TargetElementComponent"/>
+			<component id="823120019" type="RigidBody">
+				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+			</component>
+			<component id="823120020" type="CollisionShape">
+				<attribute name="Shape Type" value="Sphere"/>
+				<attribute name="Size" value="3.0 3.0 3.0"/>
+				<attribute name="Offset Position" value="-1.5 0.0 0.0"/>
+			</component>
+		</node>
+		<node id="823120004">
+			<attribute name="Name" value="Torus"/>
+			<attribute name="Position" value="2.43328 -0.077776 -3.99298"/>
+			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+			<attribute name="Scale" value="2.55276 2.55276 2.55276"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="p11"/>
+				<string value="p11_recursive"/>
+			</attribute>
+			<component id="823120020" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-props-Torus.mdl"/>
+				<attribute name="Material" value="Material"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+			<component id="823120022" type="TargetElementComponent"/>
+			<component id="823120023" type="RigidBody">
+				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+			</component>
+			<component id="823120024" type="CollisionShape">
+				<attribute name="Shape Type" value="Sphere"/>
+				<attribute name="Size" value="3.0 3.0 3.0"/>
+				<attribute name="Offset Position" value="-1.5 0.0 0.0"/>
+			</component>
+		</node>
+		<node id="823120005">
+			<attribute name="Name" value="boat"/>
+			<attribute name="Position" value="0 0 0"/>
+			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
 			<attribute name="Scale" value="1 1 1"/>
 			<attribute name="Variables"/>
 			<attribute name="Tags">
-				<string value="bett"/>
-				<string value="bett_recursive"/>
+				<string value="boat1"/>
+				<string value="boat1_recursive"/>
 			</attribute>
-			<component id="259120029" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-props-Cube.mdl"/>
-				<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
-				<attribute name="Cast Shadows" value="true"/>
+			<component id="823120024" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-props-boat.mdl"/>
+				<attribute name="Material" value="Material;Materials/VCol.xml"/>
+				<attribute name="Cast Shadows" value="false"/>
 			</component>
+			<component id="823120026" type="TargetElementComponent"/>
+			<component id="823120027" type="RigidBody">
+				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+			</component>
+			<component id="823120028" type="CollisionShape">
+				<attribute name="Size" value="3.0 3.0 3.0"/>
+				<attribute name="Offset Position" value="-0.5 0.0 0.0"/>
+			</component>
+		</node>
+		<node id="823120006">
+			<attribute name="Name" value="boat_012"/>
+			<attribute name="Position" value="2.73828e-07 0 8"/>
+			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="boat4"/>
+				<string value="boat4_recursive"/>
+			</attribute>
+			<component id="823120028" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-props-boat_012.mdl"/>
+				<attribute name="Material" value="Material;Materials/laf_01_default.xml"/>
+				<attribute name="Cast Shadows" value="false"/>
+			</component>
+			<component id="823120030" type="RigidBody">
+				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+			</component>
+			<component id="823120031" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Size" value="1.0 1.0 1.0"/>
+				<attribute name="Offset Position" value="0.0 0.0 0.0"/>
+				<attribute name="Model" value="Model;Models/823-props-boat_012.mdl"/>
+			</component>
+			<component id="823120032" type="TargetElementComponent"/>
+		</node>
+		<node id="823120007">
+			<attribute name="Name" value="boat_020"/>
+			<attribute name="Position" value="1.36914e-07 0 4"/>
+			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="boat2"/>
+				<string value="boat2_recursive"/>
+			</attribute>
+			<component id="823120032" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-props-boat_020.mdl"/>
+				<attribute name="Material" value="Material;Materials/laf_01_default.xml"/>
+				<attribute name="Cast Shadows" value="false"/>
+			</component>
+			<component id="823120034" type="TargetElementComponent"/>
+			<component id="823120035" type="RigidBody">
+				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+			</component>
+			<component id="823120036" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Size" value="1.0 1.0 1.0"/>
+				<attribute name="Offset Position" value="0.0 0.0 0.0"/>
+				<attribute name="Model" value="Model;Models/823-props-boat_020.mdl"/>
+			</component>
+		</node>
+		<node id="823120008">
+			<attribute name="Name" value="boat_023"/>
+			<attribute name="Position" value="4.10743e-07 0 12"/>
+			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="boat3"/>
+				<string value="boat3_recursive"/>
+			</attribute>
+			<component id="823120036" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-props-boat_023.mdl"/>
+				<attribute name="Material" value="Material;Materials/laf_01_default.xml"/>
+				<attribute name="Cast Shadows" value="false"/>
+			</component>
+			<component id="823120038" type="RigidBody">
+				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+			</component>
+			<component id="823120039" type="CollisionShape">
+				<attribute name="Size" value="3.0 3.0 3.0"/>
+				<attribute name="Offset Position" value="-0.5 0.0 0.0"/>
+			</component>
+			<component id="823120040" type="TargetElementComponent"/>
 		</node>
 	</node>
 </scene>

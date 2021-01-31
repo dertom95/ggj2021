@@ -1,0 +1,32 @@
+<node>
+	<node id="823120004">
+		<attribute name="Name" value="Torus"/>
+		<attribute name="Position" value="2.43328 -0.077776 0.007019999999999804"/>
+		<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+		<attribute name="Scale" value="2.55276 2.55276 2.55276"/>
+		<attribute name="Variables"/>
+		<attribute name="Tags">
+			<string value="p11"/>
+			<string value="p11_recursive"/>
+		</attribute>
+		<component id="823120020" type="StaticModel">
+			<attribute name="Model" value="Model;Models/823-props-Torus.mdl"/>
+			<attribute name="Material" value="Material"/>
+			<attribute name="Cast Shadows" value="true"/>
+		</component>
+		<component id="823120022" type="TargetElementComponent"/>
+		<component id="823120023" type="RigidBody">
+			<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+			<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+			<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+			<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+			<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+			<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+		</component>
+		<component id="823120024" type="CollisionShape">
+			<attribute name="Shape Type" value="Sphere"/>
+			<attribute name="Size" value="3.0 3.0 3.0"/>
+			<attribute name="Offset Position" value="-1.5 0.0 0.0"/>
+		</component>
+	</node>
+</node>

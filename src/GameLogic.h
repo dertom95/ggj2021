@@ -40,8 +40,8 @@ public:
     inline Scene* GetScene() { return mScene; }
     inline void   SetScene(SharedPtr<Scene> scene) { mScene = scene; }
 
-    void PlaySound(Sound* soundFile,float gain=0.75f);
-    void PlaySound(String soundFile,float gain=0.75f);
+    void PlaySound(Sound* soundFile,float gain=0.75f,Scene* scene=nullptr);
+    void PlaySound(String soundFile,float gain=0.75f,Scene* scene=nullptr);
     void PlayMusic(Sound* musicFile,bool looped=true,float gain=0.25f);
     void PlayMusic(String musicFile,bool looped=true,float gain=0.25f);
     float GetMusicPosition();

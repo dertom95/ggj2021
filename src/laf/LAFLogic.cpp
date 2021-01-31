@@ -32,6 +32,7 @@ void LAFLogic::Setup()
 
     gl->PlayMusic("Denkspiel_Neu_auf_Harfe.ogg");
 
+
     SubscribeToEvent(E_UPDATE,URHO3D_HANDLER(LAFLogic,HandleUpdate));
     SubscribeToEvent(E_SCREENMODE,URHO3D_HANDLER(LAFLogic,HandleScreenChange));
 
@@ -74,8 +75,6 @@ void LAFLogic::SetupUI()
     text->SetColor(Color::WHITE);
     text->SetSize(300,200);
     button->AddChild(text);
-
-
 
 
     button = new Button(context_);
@@ -167,7 +166,7 @@ void LAFLogic::SetupUI()
     auto instructions = new Text(context_);
     uiData.txtInstructions=instructions;
     windowInstructions->AddChild(instructions);
-    instructions->SetText("\nInstructions!\n-Observe items(color/position)!\n-Start Level\n- reorganize to former state\n- Long-Click: grab/drag\n- Short-Click: Swap Color");
+    instructions->SetText("\nInstructions!\n-Observe items(color/position)!\n-Start Level\n- reorganize to former state\n- Long-Click: grab/drag\n- Short-Click: Swap Color\n- Arrows-Keys: Rotate");
     instructions->SetStyleAuto();
     //instructions->SetAlignment(HorizontalAlignment::HA_CENTER,VerticalAlignment::VA_CENTER);
 
@@ -201,7 +200,7 @@ void LAFLogic::LayoutUI()
     float dy = graphics->GetHeight() / 100.0f;
 
     uiData.root_start->SetVisible(false);
-    uiData.root_ingame->SetVisible(true);
+    uiData.root_ingame->SetVisible(false);
 
     int screenWidth = graphics->GetWidth();
     int screenHeight = graphics->GetHeight();
@@ -277,10 +276,13 @@ void LAFLogic::LayoutUI()
 void LAFLogic::OnSuccess(){
     gamestate=GameState::success;
     LayoutUI();
+    //gl->PlaySound("Denkspiel_Neu_auf_Harfe.ogg");
 }
 
 void LAFLogic::StartScene(int idx)
 {
+    //gl->PlayMusic("Denkspiel_Neu_auf_Harfe.ogg");
+
     processes.Clear();
     SetGameState(GameState::playing_observer);
 
@@ -321,14 +323,12 @@ void LAFLogic::StartScene(int idx)
         sceneData.camera_max_right.y_ = sceneData.camera_node->GetWorldPosition().y_;
     }
 
-    ProcessTES(levelNode);
-
+    ProcessTES(levelNode,sceneData.scene_info.shuffle);
 
     LayoutUI();
-
 }
 
-void LAFLogic::ProcessTES(Node* start_node)
+void LAFLogic::ProcessTES(Node* start_node,bool shuffle)
 {
     // process TARGET-ELEMENTS
     PODVector<TargetElementComponent*> target_elements;
@@ -365,6 +365,28 @@ void LAFLogic::ProcessTES(Node* start_node)
         sceneData.targetGroups.Push(SharedPtr<TargetGroupComponent>(tg));
         if (tg->IsElementSwapAllowed()){
             sceneData.targetSwapGroups.Push(SharedPtr<TargetGroupComponent>(tg));
+        }
+
+        if (shuffle && tg->GetTargetElements().Size()>1){
+            Vector<SharedPtr<TargetElementComponent>> tmpGroupTElements(tg->GetTargetElements());
+
+            int idx1 = Random((int)tmpGroupTElements.Size());
+            auto swapA = tmpGroupTElements[idx1];
+            tmpGroupTElements.Erase(idx1);
+
+            int idx2 = Random((int)tmpGroupTElements.Size());
+            auto swapB = tmpGroupTElements[idx2];
+            tmpGroupTElements.Erase(idx2);
+
+            Vector3 posA = swapA->GetNode()->GetWorldPosition();
+            Vector3 posB = swapB->GetNode()->GetWorldPosition();
+            swapA->GetNode()->SetWorldPosition(posB);
+            swapB->GetNode()->SetWorldPosition(posA);
+
+            swapA->SetGoalPosition(posB);
+            swapA->SetLastPosition(posB);
+            swapB->SetGoalPosition(posA);
+            swapB->SetLastPosition(posA);
         }
     }
 
@@ -543,14 +565,15 @@ void LAFLogic::OnDragEnd(){
 }
 
 void LAFLogic::ProcessInput(float dt){
-//    if (input->GetKeyPress(KEY_1)){
-//        StartScene(0);
-//    }
+    if (gamestate==GameState::playing_observer && input->GetKeyPress(KEY_P)){
+        NextLevel();
+    }
 //    else if (input->GetKeyPress(KEY_2)){
 //        StartScene(1);
 //    }
 //    else
-        if (input->GetKeyPress(KEY_0)){
+
+    if (input->GetKeyPress(KEY_0)){
         ShowStartScreen(!IsStartScreenVisible());
     }
     else if (input->GetKeyPress(KEY_9)){
@@ -772,6 +795,7 @@ void LAFLogic::HandleUI(StringHash eventType, VariantMap& data)
         }
         else if (ui_state==UIState::ingame){
             if (ui_elem==uiData.btnRestartLevel){
+                //NextLevel();
                 StartScene(settings.current_level);
             }
             else if (ui_elem==uiData.btnBottomRight){

@@ -1,0 +1,31 @@
+<node>
+	<node id="823120002">
+		<attribute name="Name" value="Cube.001"/>
+		<attribute name="Position" value="2.43328 0.0187296 -0.05161999999999978"/>
+		<attribute name="Rotation" value="-1.70145e-07 -0 -1 -0"/>
+		<attribute name="Scale" value="2.43327 1 1"/>
+		<attribute name="Variables"/>
+		<attribute name="Tags">
+			<string value="p12"/>
+			<string value="p12_recursive"/>
+		</attribute>
+		<component id="823120012" type="StaticModel">
+			<attribute name="Model" value="Model;Models/823-props-Cube.003.mdl"/>
+			<attribute name="Material" value="Material"/>
+			<attribute name="Cast Shadows" value="true"/>
+		</component>
+		<component id="823120014" type="TargetElementComponent"/>
+		<component id="823120015" type="RigidBody">
+			<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+			<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+			<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+			<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+			<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+			<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+		</component>
+		<component id="823120016" type="CollisionShape">
+			<attribute name="Size" value="1.0 8.0 6.0"/>
+			<attribute name="Offset Position" value="-0.5 3.0 0.0"/>
+		</component>
+	</node>
+</node>

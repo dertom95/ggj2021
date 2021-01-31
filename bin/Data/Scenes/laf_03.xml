@@ -1,0 +1,199 @@
+<scene id="1">
+	<component id="823690001" type="Octree"/>
+	<component id="823690003" type="DebugRenderer"/>
+	<node id="823690000">
+		<attribute name="Name" value="laf_03"/>
+		<component id="823690005" type="Zone">
+			<attribute name="Bounding Box Min" value="-2000 -2000 -2000"/>
+			<attribute name="Bounding Box Max" value="2000 2000 2000"/>
+			<attribute name="Ambient Color" value="0.15 0.15 0.15 1"/>
+			<attribute name="Fog Color" value="0.5 0.5 0.7 1"/>
+			<attribute name="Fog Start" value="300"/>
+			<attribute name="Fog End" value="500"/>
+		</component>
+		<component id="823690007" type="RenderData">
+			<attribute name="RenderPath" value="RenderPaths/Forward.xml"/>
+			<attribute name="HDR" value="False"/>
+			<attribute name="Gamma" value="False"/>
+			<attribute name="Bloom" value="False"/>
+			<attribute name="FXAA2" value="False"/>
+			<attribute name="sRGB" value="False"/>
+		</component>
+		<node id="823690001">
+			<attribute name="Name" value="Camera.003"/>
+			<attribute name="Position" value="19.0719 -1.45348 -0.20764"/>
+			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="camera"/>
+				<string value="Collection.002"/>
+				<string value="Collection.002_recursive"/>
+			</attribute>
+			<component id="823690009" type="RotationFix"/>
+			<component id="823690011" type="Camera">
+				<attribute name="Orthographic" value="true"/>
+				<attribute name="Orthographic Size" value="26.099998474121094"/>
+				<attribute name="Near Clip" value="0.10000000149011612"/>
+				<attribute name="Far Clip" value="1000.0"/>
+			</component>
+		</node>
+		<node id="823690002">
+			<attribute name="Name" value="Empty.002"/>
+			<attribute name="Position" value="0.826501 -1.89888 -0.0103014"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection.002"/>
+				<string value="Collection.002_recursive"/>
+			</attribute>
+			<component id="823690013" type="TargetGroupComponent"/>
+			<node id="823690003">
+				<attribute name="Name" value="p11"/>
+				<attribute name="Position" value="-0.970981 -1.21378 -5.96383"/>
+				<attribute name="Rotation" value="1 -0 -0 -0"/>
+				<attribute name="Scale" value="0.663643 0.663643 0.663643"/>
+				<attribute name="Variables"/>
+				<attribute name="Tags">
+					<string value="Collection.002"/>
+					<string value="Collection.002_recursive"/>
+				</attribute>
+				<component id="47" type="GroupInstance">
+					<attribute name="groupFilename" value="Objects/col_p11.xml"/>
+				</component>
+			</node>
+			<node id="823690004">
+				<attribute name="Name" value="p12"/>
+				<attribute name="Position" value="-0.970981 -1.11298 -14.0009"/>
+				<attribute name="Rotation" value="1 -0 -0 -0"/>
+				<attribute name="Scale" value="0.663643 0.663643 0.663643"/>
+				<attribute name="Variables"/>
+				<attribute name="Tags">
+					<string value="Collection.002"/>
+					<string value="Collection.002_recursive"/>
+				</attribute>
+				<component id="56" type="GroupInstance">
+					<attribute name="groupFilename" value="Objects/col_p12.xml"/>
+				</component>
+			</node>
+			<node id="823690005">
+				<attribute name="Name" value="p13"/>
+				<attribute name="Position" value="-0.97098 -1.37612 9.78468"/>
+				<attribute name="Rotation" value="1 -0 -0 -0"/>
+				<attribute name="Scale" value="0.663643 0.663643 0.663643"/>
+				<attribute name="Variables"/>
+				<attribute name="Tags">
+					<string value="Collection.002"/>
+					<string value="Collection.002_recursive"/>
+				</attribute>
+				<component id="65" type="GroupInstance">
+					<attribute name="groupFilename" value="Objects/col_p13.xml"/>
+				</component>
+			</node>
+			<node id="823690006">
+				<attribute name="Name" value="p14"/>
+				<attribute name="Position" value="-0.896706 -1.2029 1.62183"/>
+				<attribute name="Rotation" value="1 -0 -0 -0"/>
+				<attribute name="Scale" value="0.663643 0.663643 0.663643"/>
+				<attribute name="Variables"/>
+				<attribute name="Tags">
+					<string value="Collection.002"/>
+					<string value="Collection.002_recursive"/>
+				</attribute>
+				<component id="74" type="GroupInstance">
+					<attribute name="groupFilename" value="Objects/col_p14.xml"/>
+				</component>
+			</node>
+		</node>
+		<node id="823690007">
+			<attribute name="Name" value="Light.002"/>
+			<attribute name="Position" value="0 1.17514 0"/>
+			<attribute name="Rotation" value="0.808081 -2.0163e-08 -0 -0.589071"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection.002"/>
+				<string value="Collection.002_recursive"/>
+			</attribute>
+			<component id="823690014" type="RotationFix"/>
+			<component id="823690016" type="Light">
+				<attribute name="Is Enabled" value="true"/>
+				<attribute name="Use Physical Values" value="False"/>
+				<attribute name="Brightness Multiplier" value="1.0"/>
+				<attribute name="Light Type" value="Directional"/>
+				<attribute name="Specular Intensity" value="1.0"/>
+				<attribute name="Color" value="1.0 1.0 1.0 1"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="823690008">
+			<attribute name="Name" value="Plane.003"/>
+			<attribute name="Position" value="-22.0251 -1.85916 -0.0126308"/>
+			<attribute name="Rotation" value="0.707107 -1.55895e-08 -2.98859e-08 -0.707107"/>
+			<attribute name="Scale" value="10.5728 6.79838 36.6833"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="drag_plane"/>
+				<string value="Collection.002"/>
+				<string value="Collection.002_recursive"/>
+			</attribute>
+			<component id="823690017" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-laf_03-Plane.003.mdl"/>
+				<attribute name="Is Enabled" value="false"/>
+				<attribute name="Material" value="Material"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+			<component id="823690019" type="RigidBody">
+				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+			</component>
+			<component id="823690020" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Size" value="1.0 1.0 1.0"/>
+				<attribute name="Offset Position" value="0.0 0.0 0.0"/>
+				<attribute name="Model" value="Model;Models/823-laf_03-Plane.003.mdl"/>
+			</component>
+		</node>
+		<node id="823690009">
+			<attribute name="Name" value="cam_look_at.002"/>
+			<attribute name="Position" value="-0.251822 -1.85916 -0.0126315"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="camera_lookat"/>
+				<string value="Collection.002"/>
+				<string value="Collection.002_recursive"/>
+			</attribute>
+		</node>
+		<node id="823690010">
+			<attribute name="Name" value="camera_max_left.002"/>
+			<attribute name="Position" value="7.83335 -1.85916 -7.6002"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="camera_max_left"/>
+				<string value="Collection.002"/>
+				<string value="Collection.002_recursive"/>
+			</attribute>
+		</node>
+		<node id="823690011">
+			<attribute name="Name" value="camera_max_right.002"/>
+			<attribute name="Position" value="7.83335 -1.85916 8.02765"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="camera_max_right"/>
+				<string value="Collection.002"/>
+				<string value="Collection.002_recursive"/>
+			</attribute>
+		</node>
+	</node>
+</scene>
