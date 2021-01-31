@@ -33,8 +33,13 @@ struct Settings {
     float ingame_swap_speed = 3.0f;
     Vector<String> color_materials = {"red","green","yellow","whitegrey"};
     String dragpoint_prefab = "Objects/col_default_targetpoint.xml";
+
+    int scene_start_easy=0;
+    int scene_start_medium=0;
+    int scene_start_hard=0;
+
     Vector<SceneInfo> scenes ={
-        SceneInfo("Scenes/test_scene.xml",1,1),
+        SceneInfo("Scenes/easy_01.xml",1,1),
         SceneInfo("Scenes/test_scene.xml",1,1)
     };
 };
@@ -50,6 +55,12 @@ struct TargetElement {
 //    TargetElement(Node* node){
 //        this->node=node;
 //    }
+};
+
+struct UIData {
+    SharedPtr<Button> btnEasy;
+    SharedPtr<Button> btnMedium;
+    SharedPtr<Button> btnHard;
 };
 
 struct TargetGroup {
@@ -108,15 +119,23 @@ public:
         playing_phase2 = 3
     };
 
+    enum class UIState {
+        init_scene = 0,
+        ingame = 1,
+    };
+
     static void RegisterObject(Context *context);
 
     LAFLogic(Context* ctx);
 
     void Setup();
-    void ShowInitScene();
+    void SetupUI();
+    void LayoutUI();
     void StartScene(SceneInfo scene_info);
     void HandleUpdate(StringHash eventType, VariantMap& data);
     void HandleScreenChange(StringHash eventType, VariantMap& data);
+    void HandleUI(StringHash eventType,VariantMap& data);
+
 private:
 
     void AddTargetElement(String itemtype,String groupName);
@@ -157,9 +176,13 @@ private:
 
 
     SceneData sceneData;
+    UIData uiData;
 
     bool init_scene_initialized=false;
     GameState gamestate = GameState::init_scene;
+    UIState ui_state = UIState::init_scene;
+
+    SharedPtr<Window> window_init_screen;
 
     Settings settings;
 

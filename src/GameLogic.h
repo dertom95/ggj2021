@@ -71,6 +71,7 @@ public:
     Node* GetFirstParentWithTag(Node* startNode,const String& tag,bool recursive=false);
 
     inline Viewport* GetViewport(){ return mViewport;}
+
 private:
     void SubscribeToEvents();
     void SetupSystems();

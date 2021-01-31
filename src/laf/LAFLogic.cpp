@@ -34,12 +34,175 @@ void LAFLogic::Setup()
 
     SubscribeToEvent(E_UPDATE,URHO3D_HANDLER(LAFLogic,HandleUpdate));
     SubscribeToEvent(E_SCREENMODE,URHO3D_HANDLER(LAFLogic,HandleScreenChange));
+
+    SetupUI();
 }
 
 
 
+void LAFLogic::SetupUI()
+{
+    auto mUiRoot = GetSubsystem<UI>()->GetRoot();
+
+    // Create the Window and add it to the UI's root node
+    // Load XML file containing default UI style sheet
+    auto* cache = GetSubsystem<ResourceCache>();
+    auto* style = cache->GetResource<XMLFile>("UI/DefaultStyle.xml");
+    // Set the loaded style as default style
+    mUiRoot->SetDefaultStyle(style);
+
+    auto button = new Button(context_);
+    uiData.btnEasy = button;
+    mUiRoot->AddChild(button);
+    button->SetSize(300,200);
+    button->SetColor(Color(0.5f,0.5f,0.5f,1.0f));
+    button->SetStyleAuto();
+
+    auto text = new Text(context_);
+    text->SetStyleAuto();
+    text->SetText("EASY");
+    text->SetAlignment(HorizontalAlignment::HA_CENTER,VerticalAlignment::VA_CENTER);
+    text->SetColor(Color::WHITE);
+    text->SetSize(300,200);
+    button->AddChild(text);
+    mUiRoot->AddChild(button);
+
+
+
+
+    button = new Button(context_);
+    uiData.btnMedium = button;
+    mUiRoot->AddChild(button);
+    button->SetSize(300,200);
+    button->SetColor(Color(0.5f,0.5f,0.5f,1.0f));
+    button->SetStyleAuto();
+
+    auto text1 = new Text(context_);
+    text1->SetStyleAuto();
+    text1->SetText("MEDIUM");
+    text1->SetAlignment(HorizontalAlignment::HA_CENTER,VerticalAlignment::VA_CENTER);
+    text1->SetColor(Color::WHITE);
+    text1->SetSize(300,200);
+    button->AddChild(text1);
+    mUiRoot->AddChild(button);
+
+    button = new Button(context_);
+    uiData.btnHard = button;
+    mUiRoot->AddChild(button);
+    button->SetSize(300,200);
+    button->SetColor(Color(0.5f,0.5f,0.5f,1.0f));
+    button->SetStyleAuto();
+
+    auto text2 = new Text(context_);
+    text2->SetStyleAuto();
+    text2->SetText("HARD");
+    text2->SetAlignment(HorizontalAlignment::HA_CENTER,VerticalAlignment::VA_CENTER);
+    text2->SetColor(Color::WHITE);
+    text2->SetSize(300,200);
+    button->AddChild(text2);
+
+    mUiRoot->AddChild(button);
+
+
+    mUiRoot->SetStyleAuto();
+    uiData.btnEasy->SetStyleAuto();
+    uiData.btnMedium->SetStyleAuto();
+    uiData.btnHard->SetStyleAuto();
+    text->SetStyleAuto();
+    text->SetFontSize(50);
+    text1->SetStyleAuto();
+    text1->SetFontSize(50);
+    text2->SetStyleAuto();
+    text2->SetFontSize(50);
+
+    SubscribeToEvent(E_UIMOUSECLICK, URHO3D_HANDLER(LAFLogic, HandleUI));
+
+    LayoutUI();
+
+
+//    auto mWindow = new Window(context_);
+//    mUiRoot->AddChild(mWindow);
+
+//    // Set Window size and layout settings
+//    mWindow->SetMinWidth(784);
+//    mWindow->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
+//    mWindow->SetAlignment(HA_LEFT, VA_TOP);
+//    mWindow->SetName("Window");
+
+//    // Create Window 'titlebar' container
+//    auto* titleBar = new UIElement(context_);
+//    titleBar->SetMinSize(0, 24);
+//    titleBar->SetVerticalAlignment(VA_TOP);
+//    titleBar->SetLayoutMode(LM_HORIZONTAL);
+
+//    // Create the Window title Text
+//    auto mWindowTitle = new Text(context_);
+//    mWindowTitle->SetText("Die Karawane!");
+
+//    auto button = new Button(context_);
+//    button->AddChild(mWindowTitle);
+
+////    windowTitle->SetName("WindowTitle");
+
+////    windowTitle->SetText("Hello GUI!");
+
+//    // Add the controls to the title bar
+//    titleBar->AddChild(button);
+
+
+//    // Add the title bar to the Window
+//    mWindow->AddChild(titleBar);
+
+//    // Apply styles
+//    mWindow->SetStyleAuto();
+////    mWindowTitle->SetStyleAuto();
+//    //mWindowTitle->SetFontSize(14);
+//    mWindow->SetPosition(100,100);
+//    mWindow->SetVisible(true);
+//    // Subscribe to buttonClose release (following a 'press') events
+// //   SubscribeToEvent(buttonClose, E_RELEASED, URHO3D_HANDLER(GameLogic, HandleClosePressed));
+
+    // Subscribe also to all UI mouse clicks just to see where we have clicked
+}
+
+void LAFLogic::LayoutUI()
+{
+    auto graphics = GetSubsystem<Graphics>();
+    float dx = graphics->GetWidth()/100.0f;
+    float dy = graphics->GetHeight()/100.0f;
+
+    uiData.btnEasy->SetVisible(false);
+    uiData.btnHard->SetVisible(false);
+    uiData.btnMedium->SetVisible(false);
+
+    if (ui_state==UIState::init_scene){
+        ShowStartScreen(true);
+
+        uiData.btnEasy->SetVisible(true);
+        uiData.btnHard->SetVisible(true);
+        uiData.btnMedium->SetVisible(true);
+
+        float btnWidth=Min(300,(int)(25*dx));
+        float btnHeight=Min(200,(int)(15*dy));
+        uiData.btnEasy->SetSize(btnWidth,btnHeight);
+        uiData.btnEasy->SetPosition(dx*10,graphics->GetHeight()-dy*40);
+
+        uiData.btnMedium->SetSize(btnWidth,btnHeight);
+        uiData.btnMedium->SetPosition(dx*40,graphics->GetHeight()-dy*40);
+
+        uiData.btnHard->SetSize(btnWidth,btnHeight);
+        uiData.btnHard->SetPosition(dx*70,graphics->GetHeight()-dy*40);
+    } else {
+        ShowStartScreen(false);
+    }
+}
+
+
 void LAFLogic::StartScene(SceneInfo scene_info)
 {
+    ui_state = UIState::ingame;
+    LayoutUI();
+
     sceneData = SceneData();
     sceneData.scene_info = scene_info;
     gl->LoadFromFile(scene_info.scene_name,levelNode);
@@ -457,6 +620,30 @@ void LAFLogic::HandleUpdate(StringHash eventType, VariantMap& data)
     URHO3D_LOGINFOF("SUCCESS? :%s",CheckSuccess()?"true":"false");
 }
 
+void LAFLogic::HandleUI(StringHash eventType, VariantMap& data)
+{
+    if (eventType==E_UIMOUSECLICK){
+        using namespace UIMouseClick;
+        auto v_ui_elem = data[P_ELEMENT];
+        auto ui_elem = v_ui_elem.GetPtr();
+
+        if (ui_state == UIState::init_scene){
+            if (ui_elem==uiData.btnEasy){
+                URHO3D_LOGINFO("EASY");
+                StartScene(settings.scenes[settings.scene_start_easy]);
+            } else if (ui_elem==uiData.btnMedium){
+                URHO3D_LOGINFO("MEDIUM");
+                StartScene(settings.scenes[settings.scene_start_medium]);
+            } else if (ui_elem==uiData.btnHard){
+                URHO3D_LOGINFO("HARD");
+                StartScene(settings.scenes[settings.scene_start_hard]);
+            }
+        }
+    }
+}
+
+
 void LAFLogic::HandleScreenChange(StringHash eventType, VariantMap& data)
 {
+    LayoutUI();
 }

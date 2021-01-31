@@ -29,8 +29,8 @@ void GameLogic::Setup(VariantMap& engineParameters_)
 {
     engineParameters_[EP_FULL_SCREEN]=false;
     engineParameters_[EP_WINDOW_RESIZABLE]=true;
-    engineParameters_[EP_WINDOW_WIDTH]=800;
-    engineParameters_[EP_WINDOW_HEIGHT]=600;
+    engineParameters_[EP_WINDOW_WIDTH]=1024;
+    engineParameters_[EP_WINDOW_HEIGHT]=768;
     engineParameters_[EP_WINDOW_TITLE]=String(PROJECT_NAME); // get the name from the CMake ProjectName
     engineParameters_[EP_RESOURCE_PATHS]="Data;CoreData";
     SubscribeToEvents();
@@ -382,6 +382,7 @@ void GameLogic::SetupUI()
     mWindowTitle->SetText("Die Karawane!");
     auto t = new Text(context_);
     t->SetText("Die Karawane!");
+    t->SetFontSize(200);
 //    windowTitle->SetName("WindowTitle");
 
 //    windowTitle->SetText("Hello GUI!");
@@ -396,7 +397,7 @@ void GameLogic::SetupUI()
     // Apply styles
     mWindow->SetStyleAuto();
     mWindowTitle->SetStyleAuto();
-    mWindowTitle->SetFontSize(14);
+    mWindowTitle->SetFontSize(200);
     mWindow->SetVisible(false);
     // Subscribe to buttonClose release (following a 'press') events
  //   SubscribeToEvent(buttonClose, E_RELEASED, URHO3D_HANDLER(GameLogic, HandleClosePressed));

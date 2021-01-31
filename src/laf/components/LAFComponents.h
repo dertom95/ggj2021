@@ -70,6 +70,7 @@ public:
     bool IsColorOk();
     bool IsPositionOk();
     bool IsAllOk();
+
 private:
     bool color_switch=true;
     SharedPtr<TargetGroupComponent> group;

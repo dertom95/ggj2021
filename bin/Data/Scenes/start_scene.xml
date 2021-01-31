@@ -102,6 +102,10 @@
 			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
 			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
 			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="lost"/>
+				<string value="lost_recursive"/>
+			</attribute>
 			<component id="259430020" type="StaticModel">
 				<attribute name="Model" value="Model;Models/259-start_scene-Text.003.mdl"/>
 				<attribute name="Material" value="Material;Materials/test_mat.xml"/>
@@ -115,6 +119,10 @@
 			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
 			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
 			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="lost"/>
+				<string value="lost_recursive"/>
+			</attribute>
 			<component id="259430022" type="StaticModel">
 				<attribute name="Model" value="Model;Models/259-start_scene-Text.004.mdl"/>
 				<attribute name="Material" value="Material"/>
@@ -128,6 +136,10 @@
 			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
 			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
 			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="lost"/>
+				<string value="lost_recursive"/>
+			</attribute>
 			<component id="259430024" type="StaticModel">
 				<attribute name="Model" value="Model;Models/259-start_scene-Text.005.mdl"/>
 				<attribute name="Material" value="Material"/>
@@ -141,6 +153,10 @@
 			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
 			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
 			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="lost"/>
+				<string value="lost_recursive"/>
+			</attribute>
 			<component id="259430026" type="StaticModel">
 				<attribute name="Model" value="Model;Models/259-start_scene-Text.006.mdl"/>
 				<attribute name="Material" value="Material"/>
