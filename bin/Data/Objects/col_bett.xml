@@ -1,5 +1,5 @@
 <node>
-	<node id="259120006">
+	<node id="259120010">
 		<attribute name="Name" value="kissen"/>
 		<attribute name="Position" value="-0.00970934 0.43925 -0.305949"/>
 		<attribute name="Rotation" value="1 -0 -0 -0"/>
@@ -10,19 +10,19 @@
 			<string value="bett"/>
 			<string value="bett_recursive"/>
 		</attribute>
-		<component id="259120016" type="StaticModel">
+		<component id="259120020" type="StaticModel">
 			<attribute name="Model" value="Model;Models/259-props-Cube.009.mdl"/>
 			<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
 			<attribute name="Cast Shadows" value="true"/>
 		</component>
-		<component id="259120018" type="TargetElementComponent"/>
-		<component id="259120019" type="CollisionShape">
+		<component id="259120022" type="TargetElementComponent"/>
+		<component id="259120023" type="CollisionShape">
 			<attribute name="Shape Type" value="TriangleMesh"/>
 			<attribute name="Size" value="1.0 1.0 1.0"/>
 			<attribute name="Offset Position" value="0.0 0.0 0.0"/>
 			<attribute name="Model" value="Model;Models/259-props-Cube.009.mdl"/>
 		</component>
-		<component id="259120020" type="RigidBody">
+		<component id="259120024" type="RigidBody">
 			<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
 			<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
 			<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
@@ -31,7 +31,7 @@
 			<attribute name="Use Gravity" value="False"/>
 			<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
 		</component>
-		<node id="259120007">
+		<node id="259120011">
 			<attribute name="Name" value="decke"/>
 			<attribute name="Position" value="0.0420229 -0.00847864 0.305457"/>
 			<attribute name="Rotation" value="1 -0 -0 -0"/>
@@ -42,19 +42,19 @@
 				<string value="bett"/>
 				<string value="bett_recursive"/>
 			</attribute>
-			<component id="259120020" type="StaticModel">
+			<component id="259120024" type="StaticModel">
 				<attribute name="Model" value="Model;Models/259-props-Plane.mdl"/>
 				<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
 				<attribute name="Cast Shadows" value="true"/>
 			</component>
-			<component id="259120022" type="TargetElementComponent"/>
-			<component id="259120023" type="CollisionShape">
+			<component id="259120026" type="TargetElementComponent"/>
+			<component id="259120027" type="CollisionShape">
 				<attribute name="Shape Type" value="TriangleMesh"/>
 				<attribute name="Size" value="1.0 1.0 1.0"/>
 				<attribute name="Offset Position" value="0.0 0.0 0.0"/>
 				<attribute name="Model" value="Model;Models/259-props-Plane.mdl"/>
 			</component>
-			<component id="259120024" type="RigidBody">
+			<component id="259120028" type="RigidBody">
 				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
 				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
 				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
@@ -65,7 +65,7 @@
 			</component>
 		</node>
 	</node>
-	<node id="259120008">
+	<node id="259120012">
 		<attribute name="Name" value="gestell"/>
 		<attribute name="Position" value="-0.0489604 0.40374 0.0334476"/>
 		<attribute name="Rotation" value="-1.62921e-07 -0 -1 -0"/>
@@ -75,13 +75,13 @@
 			<string value="bett"/>
 			<string value="bett_recursive"/>
 		</attribute>
-		<component id="259120024" type="StaticModel">
+		<component id="259120028" type="StaticModel">
 			<attribute name="Model" value="Model;Models/259-props-Cube.006.mdl"/>
 			<attribute name="Material" value="Material;Materials/grey.xml"/>
 			<attribute name="Cast Shadows" value="true"/>
 		</component>
 	</node>
-	<node id="259120009">
+	<node id="259120013">
 		<attribute name="Name" value="matraze"/>
 		<attribute name="Position" value="5.01988e-10 0.343461 0.0146658"/>
 		<attribute name="Rotation" value="1 -0 -0 -0"/>
@@ -91,7 +91,7 @@
 			<string value="bett"/>
 			<string value="bett_recursive"/>
 		</attribute>
-		<component id="259120025" type="StaticModel">
+		<component id="259120029" type="StaticModel">
 			<attribute name="Model" value="Model;Models/259-props-Cube.mdl"/>
 			<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
 			<attribute name="Cast Shadows" value="true"/>

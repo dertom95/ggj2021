@@ -38,11 +38,20 @@ void LAFLogic::Setup()
     SetupUI();
 }
 
-
+void LAFLogic::NextLevel(){
+    int next_id = settings.current_level+1;
+    if (next_id >= settings.scenes.Size()) {
+        next_id = settings.current_level;
+    }
+    StartScene(next_id);
+}
 
 void LAFLogic::SetupUI()
 {
     auto mUiRoot = GetSubsystem<UI>()->GetRoot();
+
+    uiData.root_start = new UIElement(context_);
+    mUiRoot->AddChild(uiData.root_start);
 
     // Create the Window and add it to the UI's root node
     // Load XML file containing default UI style sheet
@@ -53,7 +62,7 @@ void LAFLogic::SetupUI()
 
     auto button = new Button(context_);
     uiData.btnEasy = button;
-    mUiRoot->AddChild(button);
+    uiData.root_start->AddChild(button);
     button->SetSize(300,200);
     button->SetColor(Color(0.5f,0.5f,0.5f,1.0f));
     button->SetStyleAuto();
@@ -65,14 +74,13 @@ void LAFLogic::SetupUI()
     text->SetColor(Color::WHITE);
     text->SetSize(300,200);
     button->AddChild(text);
-    mUiRoot->AddChild(button);
 
 
 
 
     button = new Button(context_);
     uiData.btnMedium = button;
-    mUiRoot->AddChild(button);
+    uiData.root_start->AddChild(button);
     button->SetSize(300,200);
     button->SetColor(Color(0.5f,0.5f,0.5f,1.0f));
     button->SetStyleAuto();
@@ -84,11 +92,10 @@ void LAFLogic::SetupUI()
     text1->SetColor(Color::WHITE);
     text1->SetSize(300,200);
     button->AddChild(text1);
-    mUiRoot->AddChild(button);
 
     button = new Button(context_);
     uiData.btnHard = button;
-    mUiRoot->AddChild(button);
+    uiData.root_start->AddChild(button);
     button->SetSize(300,200);
     button->SetColor(Color(0.5f,0.5f,0.5f,1.0f));
     button->SetStyleAuto();
@@ -101,86 +108,94 @@ void LAFLogic::SetupUI()
     text2->SetSize(300,200);
     button->AddChild(text2);
 
-    mUiRoot->AddChild(button);
 
+
+
+    // ingame
+    uiData.root_ingame = new UIElement(context_);
+    mUiRoot->AddChild(uiData.root_ingame);
+
+    // restart
+    button = new Button(context_);
+    uiData.btnRestartLevel = button;
+    uiData.root_ingame->AddChild(button);
+    button->SetSize(200,90);
+    button->SetColor(Color(0.5f,0.5f,0.5f,1.0f));
+    button->SetStyleAuto();
+
+    auto txtBtnRestart = new Text(context_);
+    txtBtnRestart->SetStyleAuto();
+    txtBtnRestart->SetText("Restart");
+    txtBtnRestart->SetAlignment(HorizontalAlignment::HA_CENTER,VerticalAlignment::VA_CENTER);
+    txtBtnRestart->SetColor(Color::WHITE);
+    button->AddChild(txtBtnRestart);
+
+    // start
+    button = new Button(context_);
+    uiData.btnBottomRight = button;
+    uiData.root_ingame->AddChild(button);
+    button->SetSize(200,90);
+    button->SetColor(Color(0.5f,0.5f,0.5f,1.0f));
+    button->SetStyleAuto();
+
+    auto txtBtnStart = new Text(context_);
+    uiData.txtBtnBottomRight = txtBtnStart;
+    txtBtnStart->SetStyleAuto();
+    txtBtnStart->SetText("Start");
+    txtBtnStart->SetAlignment(HorizontalAlignment::HA_CENTER,VerticalAlignment::VA_CENTER);
+    txtBtnStart->SetColor(Color::WHITE);
+    button->AddChild(txtBtnStart);
+
+    // window
+    auto window = new Window(context_);
+    uiData.hint_window = window;
+    uiData.root_ingame->AddChild(window);
+
+    auto txtHint = new Text(context_);
+    uiData.hint = txtHint;
+    window->AddChild(txtHint);
+    txtHint->SetText("This is a hint!");
+    txtHint->SetStyleAuto();
+    txtHint->SetAlignment(HorizontalAlignment::HA_CENTER,VerticalAlignment::VA_CENTER);
 
     mUiRoot->SetStyleAuto();
-    uiData.btnEasy->SetStyleAuto();
-    uiData.btnMedium->SetStyleAuto();
-    uiData.btnHard->SetStyleAuto();
-    text->SetStyleAuto();
+    window->SetStyleAuto();
     text->SetFontSize(50);
-    text1->SetStyleAuto();
     text1->SetFontSize(50);
-    text2->SetStyleAuto();
     text2->SetFontSize(50);
+    txtBtnRestart->SetFontSize(25);
+    txtHint->SetFontSize(25);
+    txtBtnStart->SetFontSize(25);
+
+
+
+
+
 
     SubscribeToEvent(E_UIMOUSECLICK, URHO3D_HANDLER(LAFLogic, HandleUI));
 
     LayoutUI();
-
-
-//    auto mWindow = new Window(context_);
-//    mUiRoot->AddChild(mWindow);
-
-//    // Set Window size and layout settings
-//    mWindow->SetMinWidth(784);
-//    mWindow->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
-//    mWindow->SetAlignment(HA_LEFT, VA_TOP);
-//    mWindow->SetName("Window");
-
-//    // Create Window 'titlebar' container
-//    auto* titleBar = new UIElement(context_);
-//    titleBar->SetMinSize(0, 24);
-//    titleBar->SetVerticalAlignment(VA_TOP);
-//    titleBar->SetLayoutMode(LM_HORIZONTAL);
-
-//    // Create the Window title Text
-//    auto mWindowTitle = new Text(context_);
-//    mWindowTitle->SetText("Die Karawane!");
-
-//    auto button = new Button(context_);
-//    button->AddChild(mWindowTitle);
-
-////    windowTitle->SetName("WindowTitle");
-
-////    windowTitle->SetText("Hello GUI!");
-
-//    // Add the controls to the title bar
-//    titleBar->AddChild(button);
-
-
-//    // Add the title bar to the Window
-//    mWindow->AddChild(titleBar);
-
-//    // Apply styles
-//    mWindow->SetStyleAuto();
-////    mWindowTitle->SetStyleAuto();
-//    //mWindowTitle->SetFontSize(14);
-//    mWindow->SetPosition(100,100);
-//    mWindow->SetVisible(true);
-//    // Subscribe to buttonClose release (following a 'press') events
-// //   SubscribeToEvent(buttonClose, E_RELEASED, URHO3D_HANDLER(GameLogic, HandleClosePressed));
-
-    // Subscribe also to all UI mouse clicks just to see where we have clicked
 }
 
 void LAFLogic::LayoutUI()
 {
     auto graphics = GetSubsystem<Graphics>();
-    float dx = graphics->GetWidth()/100.0f;
-    float dy = graphics->GetHeight()/100.0f;
+    float dx = graphics->GetWidth() / 100.0f;
+    float dy = graphics->GetHeight() / 100.0f;
 
-    uiData.btnEasy->SetVisible(false);
-    uiData.btnHard->SetVisible(false);
-    uiData.btnMedium->SetVisible(false);
+    uiData.root_start->SetVisible(false);
+    uiData.root_ingame->SetVisible(true);
+
+    int screenWidth = graphics->GetWidth();
+    int screenHeight = graphics->GetHeight();
 
     if (ui_state==UIState::init_scene){
         ShowStartScreen(true);
+        uiData.root_start->SetVisible(true);
 
-        uiData.btnEasy->SetVisible(true);
-        uiData.btnHard->SetVisible(true);
-        uiData.btnMedium->SetVisible(true);
+//        uiData.btnEasy->SetVisible(true);
+//        uiData.btnHard->SetVisible(true);
+//        uiData.btnMedium->SetVisible(true);
 
         float btnWidth=Min(300,(int)(25*dx));
         float btnHeight=Min(200,(int)(15*dy));
@@ -194,14 +209,58 @@ void LAFLogic::LayoutUI()
         uiData.btnHard->SetPosition(dx*70,graphics->GetHeight()-dy*40);
     } else {
         ShowStartScreen(false);
+        uiData.root_ingame->SetVisible(true);
+
+        float btnWidth=Min(200,(int)(15*dx));
+        float btnHeight=Min(90,(int)(7*dy));
+        uiData.btnRestartLevel->SetSize(btnWidth,btnHeight);
+        uiData.btnRestartLevel->SetPosition(graphics->GetWidth()-btnWidth-2*dx,dy*5);
+
+        if (gamestate==GameState::playing_observer){
+            uiData.btnBottomRight->SetVisible(true);
+            uiData.btnBottomRight->SetSize(btnWidth,btnHeight+2*dy);
+            uiData.btnBottomRight->SetPosition(graphics->GetWidth()-btnWidth-2*dx,screenHeight - btnHeight - dy*5);
+            uiData.txtBtnBottomRight->SetText("Start");
+        }
+        else if (gamestate==GameState::success){
+            uiData.btnBottomRight->SetVisible(true);
+            uiData.btnBottomRight->SetSize(btnWidth,btnHeight+2*dy);
+            uiData.btnBottomRight->SetPosition(graphics->GetWidth()-btnWidth-2*dx,screenHeight - btnHeight - dy*5);
+            uiData.txtBtnBottomRight->SetText("Next");
+        }
+        else {
+            uiData.btnBottomRight->SetVisible(false);
+        }
+
+
+        if (sceneData.scene_info.hint==""){
+            uiData.hint_window->SetVisible(false);
+        } else {
+            uiData.hint_window->SetVisible(true);
+            uiData.hint->SetText(sceneData.scene_info.hint);
+            uiData.hint_window->SetPosition(dx*20,screenHeight - dy*11);
+            uiData.hint_window->SetSize(dx*60,dy*9);
+        }
+
+
     }
 }
 
-
-void LAFLogic::StartScene(SceneInfo scene_info)
-{
-    ui_state = UIState::ingame;
+void LAFLogic::OnSuccess(){
+    gamestate=GameState::success;
     LayoutUI();
+}
+
+void LAFLogic::StartScene(int idx)
+{
+    processes.Clear();
+    SetGameState(GameState::playing_observer);
+
+
+    auto scene_info = settings.scenes[idx];
+    settings.current_level = idx;
+    settings.best_level = Max(idx,settings.best_level);
+    ui_state = UIState::ingame;
 
     sceneData = SceneData();
     sceneData.scene_info = scene_info;
@@ -236,9 +295,9 @@ void LAFLogic::StartScene(SceneInfo scene_info)
 
     ProcessTES(levelNode);
 
-    URHO3D_LOGINFOF("Initial success-check:%d",CheckSuccess());
 
-    gamestate = GameState::playing_observer;
+    LayoutUI();
+
 }
 
 void LAFLogic::ProcessTES(Node* start_node)
@@ -255,6 +314,8 @@ void LAFLogic::ProcessTES(Node* start_node)
             auto model = te->GetNode()->GetComponent<StaticModel>(true);
             model->SetMaterial(model->GetMaterial()->Clone());
         }
+
+        te->GetNode()->AddTag("target_element");
 
         auto te_group = te->GetNode()->GetParentComponent<TargetGroupComponent>(true);
         if (te_group){
@@ -321,7 +382,8 @@ void LAFLogic::StartPhase2()
     sceneData.process_sequence.Clear();
 
 
-    gamestate = GameState::playing_phase2;
+    SetGameState(GameState::playing_phase2);
+    LayoutUI();
 }
 
 
@@ -453,13 +515,14 @@ void LAFLogic::OnDragEnd(){
 }
 
 void LAFLogic::ProcessInput(float dt){
-    if (input->GetKeyPress(KEY_1)){
-        StartScene(settings.scenes[0]);
-    }
-    else if (input->GetKeyPress(KEY_2)){
-        StartScene(settings.scenes[1]);
-    }
-    else if (input->GetKeyPress(KEY_0)){
+//    if (input->GetKeyPress(KEY_1)){
+//        StartScene(0);
+//    }
+//    else if (input->GetKeyPress(KEY_2)){
+//        StartScene(1);
+//    }
+//    else
+        if (input->GetKeyPress(KEY_0)){
         ShowStartScreen(!IsStartScreenVisible());
     }
     else if (input->GetKeyPress(KEY_9)){
@@ -567,11 +630,42 @@ void LAFLogic::TE_SetColor(SharedPtr<TargetElementComponent> te,int color_idx,bo
     }
 }
 
+String GetGameState(LAFLogic::GameState gs){
+    if (gs==LAFLogic::GameState::init_scene){
+        return "init_scene";
+    }
+    if (gs==LAFLogic::GameState::paused){
+        return "paused";
+    }
+    if (gs==LAFLogic::GameState::playing_observer){
+        return "playing_observer";
+    }
+    if (gs==LAFLogic::GameState::playing_phase2){
+        return "playing_phase2";
+    }
+    if (gs==LAFLogic::GameState::success){
+        return "success";
+    }
+    return "unknown";
+}
+
+void LAFLogic::SetGameState(GameState state){
+    if (gamestate==state){
+        return;
+    }
+    gamestate=state;
+    requestState=state;
+}
+
 void LAFLogic::HandleUpdate(StringHash eventType, VariantMap& data)
 {
     using namespace Update;
     float dt = data[P_TIMESTEP].GetFloat();
 
+    if (gamestate!=requestState){
+        gamestate=requestState;
+        LayoutUI();
+    }
 
     if (gamestate==GameState::init_scene){
         if (!init_scene_initialized){
@@ -617,7 +711,12 @@ void LAFLogic::HandleUpdate(StringHash eventType, VariantMap& data)
     ProcessInput(dt);
     ProcessLambdas(dt);
 
-    URHO3D_LOGINFOF("SUCCESS? :%s",CheckSuccess()?"true":"false");
+    if (gamestate==GameState::playing_phase2 && CheckSuccess()){
+        OnSuccess();
+    }
+
+
+    URHO3D_LOGINFOF("SUCCESS? :%s state:%s",CheckSuccess()?"True":"false",GetGameState(gamestate).CString());
 }
 
 void LAFLogic::HandleUI(StringHash eventType, VariantMap& data)
@@ -630,13 +729,26 @@ void LAFLogic::HandleUI(StringHash eventType, VariantMap& data)
         if (ui_state == UIState::init_scene){
             if (ui_elem==uiData.btnEasy){
                 URHO3D_LOGINFO("EASY");
-                StartScene(settings.scenes[settings.scene_start_easy]);
+                StartScene(settings.scene_start_easy);
             } else if (ui_elem==uiData.btnMedium){
                 URHO3D_LOGINFO("MEDIUM");
-                StartScene(settings.scenes[settings.scene_start_medium]);
+                StartScene(settings.scene_start_medium);
             } else if (ui_elem==uiData.btnHard){
                 URHO3D_LOGINFO("HARD");
-                StartScene(settings.scenes[settings.scene_start_hard]);
+                StartScene(settings.scene_start_hard);
+            }
+        }
+        else if (ui_state==UIState::ingame){
+            if (ui_elem==uiData.btnRestartLevel){
+                StartScene(settings.current_level);
+            }
+            else if (ui_elem==uiData.btnBottomRight){
+                if (gamestate==GameState::playing_observer){
+                    StartPhase2();
+                }
+                else if (gamestate==GameState::success){
+                    NextLevel();
+                }
             }
         }
     }

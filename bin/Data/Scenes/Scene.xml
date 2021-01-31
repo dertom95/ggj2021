@@ -1,0 +1,110 @@
+<scene id="1">
+	<component id="823440001" type="Octree"/>
+	<component id="823440003" type="DebugRenderer"/>
+	<node id="823440000">
+		<attribute name="Name" value="Scene"/>
+		<component id="823440005" type="Zone">
+			<attribute name="Bounding Box Min" value="-2000 -2000 -2000"/>
+			<attribute name="Bounding Box Max" value="2000 2000 2000"/>
+			<attribute name="Ambient Color" value="0.15 0.15 0.15 1"/>
+			<attribute name="Fog Color" value="0.5 0.5 0.7 1"/>
+			<attribute name="Fog Start" value="300"/>
+			<attribute name="Fog End" value="500"/>
+		</component>
+		<component id="823440007" type="RenderData">
+			<attribute name="RenderPath" value="RenderPaths/Forward.xml"/>
+			<attribute name="HDR" value="False"/>
+			<attribute name="Gamma" value="False"/>
+			<attribute name="Bloom" value="False"/>
+			<attribute name="FXAA2" value="False"/>
+			<attribute name="sRGB" value="False"/>
+		</component>
+		<node id="823440001">
+			<attribute name="Name" value="AND"/>
+			<attribute name="Position" value="10.4148 -1.85916 -0.143046"/>
+			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="823440008" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-Scene-Text.004.mdl"/>
+				<attribute name="Material" value="Material"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="823440002">
+			<attribute name="Name" value="Camera"/>
+			<attribute name="Position" value="6.92579 4.95831 7.35889"/>
+			<attribute name="Rotation" value="0.780483 0.208704 -0.336872 -0.483536"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="823440010" type="RotationFix"/>
+			<component id="823440012" type="Camera">
+				<attribute name="Orthographic" value="false"/>
+				<attribute name="FOV" value="39.597755335771296"/>
+				<attribute name="Near Clip" value="0.10000000149011612"/>
+				<attribute name="Far Clip" value="100.0"/>
+			</component>
+		</node>
+		<node id="823440003">
+			<attribute name="Name" value="FOUND"/>
+			<attribute name="Position" value="-4.51279e-07 -3.35876 1.54466e-14"/>
+			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="823440013" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-Scene-Text.002.mdl"/>
+				<attribute name="Material" value="Material"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="823440004">
+			<attribute name="Name" value="LOST"/>
+			<attribute name="Position" value="10.4148 -0.478714 -0.182215"/>
+			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="823440014" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-Scene-Text.003.mdl"/>
+				<attribute name="Material" value="Material"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="823440005">
+			<attribute name="Name" value="Light"/>
+			<attribute name="Position" value="-1.00545 5.90386 4.07625"/>
+			<attribute name="Rotation" value="0.570947 0.272171 -0.75588 -0.169076"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="823440016" type="RotationFix"/>
+			<component id="823440018" type="Light">
+				<attribute name="Is Enabled" value="true"/>
+				<attribute name="Use Physical Values" value="False"/>
+				<attribute name="Brightness Multiplier" value="1000.0"/>
+				<attribute name="Light Type" value="Point"/>
+				<attribute name="Range" value="0.10000000149011612"/>
+				<attribute name="Color" value="1.0 1.0 1.0 1"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+	</node>
+</scene>

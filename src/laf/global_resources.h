@@ -51,6 +51,11 @@ const char* name="Scene";
 const char* path="Scenes/Scene.xml";
 
 }
+namespace easy_01_xml {
+const char* name="easy_01";
+const char* path="Scenes/easy_01.xml";
+
+}
 namespace export_targetelements_xml {
 const char* name="export_targetelements";
 const char* path="Scenes/export_targetelements.xml";
@@ -102,6 +107,11 @@ const char* path="Objects/col_bett.xml";
 namespace col_default_targetpoint_xml {
 const char* name="col_default_targetpoint";
 const char* path="Objects/col_default_targetpoint.xml";
+
+}
+namespace col_lost_xml {
+const char* name="col_lost";
+const char* path="Objects/col_lost.xml";
 
 }
 namespace col_test1_xml {
@@ -216,6 +226,36 @@ const char* path="Models/220-Scene-Suzanne.mdl";
 namespace _220_Scene_cb2_mdl {
 const char* name="220-Scene-cb2";
 const char* path="Models/220-Scene-cb2.mdl";
+
+}
+namespace _259_easy_01_Cube_004_mdl {
+const char* name="259-easy_01-Cube.004";
+const char* path="Models/259-easy_01-Cube.004.mdl";
+
+}
+namespace _259_easy_01_Plane_008_mdl {
+const char* name="259-easy_01-Plane.008";
+const char* path="Models/259-easy_01-Plane.008.mdl";
+
+}
+namespace _259_easy_01_Plane_009_mdl {
+const char* name="259-easy_01-Plane.009";
+const char* path="Models/259-easy_01-Plane.009.mdl";
+
+}
+namespace _259_easy_01_Plane_010_mdl {
+const char* name="259-easy_01-Plane.010";
+const char* path="Models/259-easy_01-Plane.010.mdl";
+
+}
+namespace _259_easy_01_Plane_011_mdl {
+const char* name="259-easy_01-Plane.011";
+const char* path="Models/259-easy_01-Plane.011.mdl";
+
+}
+namespace _259_easy_01_Plane_012_mdl {
+const char* name="259-easy_01-Plane.012";
+const char* path="Models/259-easy_01-Plane.012.mdl";
 
 }
 namespace _259_itemtypes_Cone_001_mdl {

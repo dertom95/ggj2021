@@ -1,0 +1,230 @@
+<scene id="1">
+	<component id="823670001" type="Octree"/>
+	<component id="823670003" type="DebugRenderer"/>
+	<node id="823670000">
+		<attribute name="Name" value="laf_01"/>
+		<component id="823670005" type="Zone">
+			<attribute name="Bounding Box Min" value="-2000 -2000 -2000"/>
+			<attribute name="Bounding Box Max" value="2000 2000 2000"/>
+			<attribute name="Ambient Color" value="0.15 0.15 0.15 1"/>
+			<attribute name="Fog Color" value="0.5 0.5 0.7 1"/>
+			<attribute name="Fog Start" value="300"/>
+			<attribute name="Fog End" value="500"/>
+		</component>
+		<component id="823670007" type="RenderData">
+			<attribute name="RenderPath" value="RenderPaths/Forward.xml"/>
+			<attribute name="HDR" value="False"/>
+			<attribute name="Gamma" value="False"/>
+			<attribute name="Bloom" value="False"/>
+			<attribute name="FXAA2" value="False"/>
+			<attribute name="sRGB" value="False"/>
+		</component>
+		<node id="823670001">
+			<attribute name="Name" value="Empty"/>
+			<attribute name="Position" value="0.826501 -1.89888 -0.0103014"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="823670009" type="TargetGroupComponent"/>
+			<node id="823670002">
+				<attribute name="Name" value="AND"/>
+				<attribute name="Position" value="-1.07832 0.039721 -0.00233012"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="1 1 1"/>
+				<attribute name="Variables"/>
+				<attribute name="Tags">
+					<string value="Collection"/>
+					<string value="Collection_recursive"/>
+				</attribute>
+				<component id="823670009" type="StaticModel">
+					<attribute name="Model" value="Model;Models/823-laf_01-Text.004.mdl"/>
+					<attribute name="Material" value="Material;Materials/laf_01_default.xml"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="823670011" type="TargetElementComponent"/>
+				<component id="823670012" type="RigidBody">
+					<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+					<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+				</component>
+				<component id="823670013" type="CollisionShape">
+					<attribute name="Size" value="1.0 1.0 3.0"/>
+					<attribute name="Offset Position" value="-0.5 0.0 0.0"/>
+				</component>
+			</node>
+			<node id="823670003">
+				<attribute name="Name" value="FOUND"/>
+				<attribute name="Position" value="-0.826502 -1.45988 0.0140275"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="1 1 1"/>
+				<attribute name="Variables"/>
+				<attribute name="Tags">
+					<string value="Collection"/>
+					<string value="Collection_recursive"/>
+				</attribute>
+				<component id="823670013" type="StaticModel">
+					<attribute name="Model" value="Model;Models/823-laf_01-Text.002.mdl"/>
+					<attribute name="Material" value="Material;Materials/laf_01_default.xml"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="823670015" type="TargetElementComponent"/>
+				<component id="823670016" type="RigidBody">
+					<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+					<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+				</component>
+				<component id="823670017" type="CollisionShape">
+					<attribute name="Size" value="1.0 1.0 3.0"/>
+					<attribute name="Offset Position" value="-0.5 0.0 0.0"/>
+				</component>
+			</node>
+			<node id="823670004">
+				<attribute name="Name" value="LOST"/>
+				<attribute name="Position" value="-1.07832 1.42016 -0.0116973"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="1 1 1"/>
+				<attribute name="Variables"/>
+				<attribute name="Tags">
+					<string value="Collection"/>
+					<string value="Collection_recursive"/>
+				</attribute>
+				<component id="823670017" type="StaticModel">
+					<attribute name="Model" value="Model;Models/823-laf_01-Text.003.mdl"/>
+					<attribute name="Material" value="Material;Materials/laf_01_default.xml"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="823670019" type="TargetElementComponent"/>
+				<component id="823670020" type="RigidBody">
+					<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+					<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+				</component>
+				<component id="823670021" type="CollisionShape">
+					<attribute name="Size" value="1.0 1.0 3.0"/>
+					<attribute name="Offset Position" value="-0.5 0.0 0.0"/>
+				</component>
+			</node>
+		</node>
+		<node id="823670005">
+			<attribute name="Name" value="Camera.001"/>
+			<attribute name="Position" value="19.0719 -1.45348 -0.20764"/>
+			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="camera"/>
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="823670022" type="RotationFix"/>
+			<component id="823670024" type="Camera">
+				<attribute name="Orthographic" value="true"/>
+				<attribute name="Orthographic Size" value="9.899999618530273"/>
+				<attribute name="Near Clip" value="0.10000000149011612"/>
+				<attribute name="Far Clip" value="1000.0"/>
+			</component>
+		</node>
+		<node id="823670006">
+			<attribute name="Name" value="Light"/>
+			<attribute name="Position" value="0 1.17514 0"/>
+			<attribute name="Rotation" value="0.808081 -2.0163e-08 -0 -0.589071"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="823670026" type="RotationFix"/>
+			<component id="823670028" type="Light">
+				<attribute name="Is Enabled" value="true"/>
+				<attribute name="Use Physical Values" value="False"/>
+				<attribute name="Brightness Multiplier" value="1.0"/>
+				<attribute name="Light Type" value="Directional"/>
+				<attribute name="Specular Intensity" value="1.0"/>
+				<attribute name="Color" value="1.0 1.0 1.0 1"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+		</node>
+		<node id="823670007">
+			<attribute name="Name" value="Plane"/>
+			<attribute name="Position" value="-22.0251 -1.85916 -0.0126308"/>
+			<attribute name="Rotation" value="0.707107 -1.92443e-08 -8.40167e-09 -0.707107"/>
+			<attribute name="Scale" value="6.79838 6.79838 11.5182"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="drag_plane"/>
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+			<component id="823670029" type="StaticModel">
+				<attribute name="Model" value="Model;Models/823-laf_01-Plane.mdl"/>
+				<attribute name="Is Enabled" value="false"/>
+				<attribute name="Material" value="Material"/>
+				<attribute name="Cast Shadows" value="true"/>
+			</component>
+			<component id="823670031" type="RigidBody">
+				<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+				<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+				<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+				<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+			</component>
+			<component id="823670032" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Size" value="1.0 1.0 1.0"/>
+				<attribute name="Offset Position" value="0.0 0.0 0.0"/>
+				<attribute name="Model" value="Model;Models/823-laf_01-Plane.mdl"/>
+			</component>
+		</node>
+		<node id="823670008">
+			<attribute name="Name" value="cam_look_at"/>
+			<attribute name="Position" value="-0.251822 -1.85916 -0.0126315"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="camera_lookat"/>
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+		</node>
+		<node id="823670009">
+			<attribute name="Name" value="camera_max_left"/>
+			<attribute name="Position" value="7.83335 -1.85916 -7.6002"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="camera_max_left"/>
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+		</node>
+		<node id="823670010">
+			<attribute name="Name" value="camera_max_right"/>
+			<attribute name="Position" value="7.83335 -1.85916 8.02765"/>
+			<attribute name="Rotation" value="1 -0 -0 -0"/>
+			<attribute name="Scale" value="1 1 1"/>
+			<attribute name="Variables"/>
+			<attribute name="Tags">
+				<string value="camera_max_right"/>
+				<string value="Collection"/>
+				<string value="Collection_recursive"/>
+			</attribute>
+		</node>
+	</node>
+</scene>

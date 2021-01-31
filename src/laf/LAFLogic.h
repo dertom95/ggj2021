@@ -15,6 +15,7 @@ struct SceneInfo {
     float swap_speed = 1.0f;
     float color_toggle_speed = 1.f;
     float show_pause = 1.0f;
+    String hint = "This is THE hint";
 
     SceneInfo(const String& scene_name,int color_toggles,int swaps){
         this->scene_name=scene_name;
@@ -35,12 +36,15 @@ struct Settings {
     String dragpoint_prefab = "Objects/col_default_targetpoint.xml";
 
     int scene_start_easy=0;
-    int scene_start_medium=0;
+    int scene_start_medium=1;
     int scene_start_hard=0;
 
+    int current_level=0;
+    int best_level=0;
+
     Vector<SceneInfo> scenes ={
-        SceneInfo("Scenes/easy_01.xml",1,1),
-        SceneInfo("Scenes/test_scene.xml",1,1)
+        SceneInfo("Scenes/laf_01.xml",1,1),
+        SceneInfo("Scenes/test_scene.xml",2,2)
     };
 };
 
@@ -58,9 +62,21 @@ struct TargetElement {
 };
 
 struct UIData {
+    // start-screen
+    SharedPtr<UIElement> root_start;
     SharedPtr<Button> btnEasy;
     SharedPtr<Button> btnMedium;
     SharedPtr<Button> btnHard;
+
+    // ingame
+    SharedPtr<UIElement> root_ingame;
+    SharedPtr<Button> btnRestartLevel;
+    SharedPtr<Button> btnMainMenu;
+    SharedPtr<Button> btnBottomRight;
+    SharedPtr<Text> txtBtnBottomRight;
+    SharedPtr<Text> progress;
+    SharedPtr<Window> hint_window;
+    SharedPtr<Text> hint;
 };
 
 struct TargetGroup {
@@ -116,7 +132,8 @@ public:
         init_scene = 0,
         paused = 1,
         playing_observer = 2,
-        playing_phase2 = 3
+        playing_phase2 = 3,
+        success=4,
     };
 
     enum class UIState {
@@ -131,7 +148,7 @@ public:
     void Setup();
     void SetupUI();
     void LayoutUI();
-    void StartScene(SceneInfo scene_info);
+    void StartScene(int idx);
     void HandleUpdate(StringHash eventType, VariantMap& data);
     void HandleScreenChange(StringHash eventType, VariantMap& data);
     void HandleUI(StringHash eventType,VariantMap& data);
@@ -151,14 +168,16 @@ private:
     bool TE_CheckGoals(SharedPtr<TargetElementComponent> te);
     bool CheckSuccess();
 
-
+    void NextLevel();
     void StartPhase2();
-
+    void SetGameState(GameState state);
 
     void OnShortClick();
     void OnLongClick();
     void OnDrag();
     void OnDragEnd();
+
+    void OnSuccess();
 
     SharedPtr<TargetElementComponent> PickBehindDragElement(bool only_valid=true);
 
@@ -180,6 +199,8 @@ private:
 
     bool init_scene_initialized=false;
     GameState gamestate = GameState::init_scene;
+    GameState requestState = GameState::init_scene;
+
     UIState ui_state = UIState::init_scene;
 
     SharedPtr<Window> window_init_screen;

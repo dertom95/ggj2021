@@ -37,43 +37,127 @@
 			</component>
 		</node>
 		<node id="259430002">
-			<attribute name="Name" value="Plane.005"/>
-			<attribute name="Position" value="6.10502e-07 4.61841 -0.29281"/>
-			<attribute name="Rotation" value="0.707107 -1.44897e-08 -4.92224e-08 -0.707107"/>
-			<attribute name="Scale" value="1 1 5.06742"/>
-			<attribute name="Variables"/>
-			<component id="259430013" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Plane.006.mdl"/>
-				<attribute name="Material" value="Material;Materials/nice_green.xml;Materials/red.xml"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-		</node>
-		<node id="259430003">
-			<attribute name="Name" value="Plane.006"/>
-			<attribute name="Position" value="-0.63247 -3.7145 -0.249543"/>
-			<attribute name="Rotation" value="0.707107 -1.27576e-08 -2.11161e-07 -0.707107"/>
-			<attribute name="Scale" value="0.299802 1 5.53103"/>
-			<attribute name="Variables"/>
-			<component id="259430014" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Plane.007.mdl"/>
-				<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-		</node>
-		<node id="259430004">
 			<attribute name="Name" value="initial_scene"/>
-			<attribute name="Position" value="0.770227 4.0089 -2.63638e-08"/>
+			<attribute name="Position" value="0.770227 8.51379 -2.63638e-08"/>
 			<attribute name="Rotation" value="1 -0 -0 -0"/>
 			<attribute name="Scale" value="1 1 1"/>
 			<attribute name="Variables"/>
+			<node id="259430003">
+				<attribute name="Name" value="L"/>
+				<attribute name="Position" value="0.108707 -6.47084 0.118578"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
+				<attribute name="Variables"/>
+				<component id="259430013" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.003.mdl"/>
+					<attribute name="Material" value="Material;Materials/test_mat.xml"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="259430015" type="TargetElementComponent"/>
+				<component id="259430016" type="CollisionShape">
+					<attribute name="Shape Type" value="TriangleMesh"/>
+					<attribute name="Size" value="1.0 1.0 1.0"/>
+					<attribute name="Offset Position" value="0.0 0.0 0.0"/>
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.003.mdl"/>
+				</component>
+				<component id="259430017" type="RigidBody">
+					<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+					<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Use Gravity" value="False"/>
+					<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+				</component>
+			</node>
+			<node id="259430004">
+				<attribute name="Name" value="O"/>
+				<attribute name="Position" value="0.119997 -6.47146 -0.816564"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
+				<attribute name="Variables"/>
+				<component id="259430017" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.004.mdl"/>
+					<attribute name="Material" value="Material;"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="259430019" type="TargetElementComponent"/>
+				<component id="259430020" type="CollisionShape">
+					<attribute name="Shape Type" value="TriangleMesh"/>
+					<attribute name="Size" value="1.0 1.0 1.0"/>
+					<attribute name="Offset Position" value="0.0 0.0 0.0"/>
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.004.mdl"/>
+				</component>
+				<component id="259430021" type="RigidBody">
+					<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+					<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Use Gravity" value="False"/>
+					<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+				</component>
+			</node>
 			<node id="259430005">
+				<attribute name="Name" value="Plane.005"/>
+				<attribute name="Position" value="-0.770227 -3.89537 -0.29281"/>
+				<attribute name="Rotation" value="0.707107 -1.44897e-08 -4.92224e-08 -0.707107"/>
+				<attribute name="Scale" value="1 1 5.06742"/>
+				<attribute name="Variables"/>
+				<component id="259430021" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Plane.006.mdl"/>
+					<attribute name="Material" value="Material;Materials/nice_green.xml;Materials/red.xml"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+			</node>
+			<node id="259430006">
+				<attribute name="Name" value="Plane.006"/>
+				<attribute name="Position" value="-1.4027 -12.2283 -0.249543"/>
+				<attribute name="Rotation" value="0.707107 -1.27576e-08 -2.11161e-07 -0.707107"/>
+				<attribute name="Scale" value="0.299802 1 5.53103"/>
+				<attribute name="Variables"/>
+				<component id="259430022" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Plane.007.mdl"/>
+					<attribute name="Material" value="Material;Materials/whitegrey.xml"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+			</node>
+			<node id="259430007">
+				<attribute name="Name" value="S"/>
+				<attribute name="Position" value="0.119997 -6.47291 -1.66605"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
+				<attribute name="Variables"/>
+				<component id="259430023" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.005.mdl"/>
+					<attribute name="Material" value="Material;"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="259430025" type="TargetElementComponent"/>
+				<component id="259430026" type="CollisionShape">
+					<attribute name="Shape Type" value="TriangleMesh"/>
+					<attribute name="Size" value="1.0 1.0 1.0"/>
+					<attribute name="Offset Position" value="0.0 0.0 0.0"/>
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.005.mdl"/>
+				</component>
+				<component id="259430027" type="RigidBody">
+					<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+					<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Use Gravity" value="False"/>
+					<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+				</component>
+			</node>
+			<node id="259430008">
 				<attribute name="Name" value="Sun.002"/>
-				<attribute name="Position" value="0.0151431 2.74768 -0.0534318"/>
+				<attribute name="Position" value="-0.755084 5.7895 -0.0534318"/>
 				<attribute name="Rotation" value="0.88518 -1.59248e-08 -0 -0.465249"/>
 				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
 				<attribute name="Variables"/>
-				<component id="259430016" type="RotationFix"/>
-				<component id="259430018" type="Light">
+				<component id="259430028" type="RotationFix"/>
+				<component id="259430030" type="Light">
 					<attribute name="Is Enabled" value="true"/>
 					<attribute name="Use Physical Values" value="False"/>
 					<attribute name="Brightness Multiplier" value="1.0"/>
@@ -83,214 +167,162 @@
 					<attribute name="Cast Shadows" value="true"/>
 				</component>
 			</node>
-		</node>
-		<node id="259430006">
-			<attribute name="Name" value="Text.002"/>
-			<attribute name="Position" value="0.757954 -1.05438 4.9476"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="1 1 1"/>
-			<attribute name="Variables"/>
-			<component id="259430019" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.002.mdl"/>
-				<attribute name="Material" value="Material"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-		</node>
-		<node id="259430007">
-			<attribute name="Name" value="Text.003"/>
-			<attribute name="Position" value="0.878934 2.04294 0.118578"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
-			<attribute name="Variables"/>
-			<attribute name="Tags">
-				<string value="lost"/>
-				<string value="lost_recursive"/>
-			</attribute>
-			<component id="259430020" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.003.mdl"/>
-				<attribute name="Material" value="Material;Materials/test_mat.xml"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259430022" type="TargetElementComponent"/>
-		</node>
-		<node id="259430008">
-			<attribute name="Name" value="Text.004"/>
-			<attribute name="Position" value="0.890224 2.04233 -0.816564"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
-			<attribute name="Variables"/>
-			<attribute name="Tags">
-				<string value="lost"/>
-				<string value="lost_recursive"/>
-			</attribute>
-			<component id="259430022" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.004.mdl"/>
-				<attribute name="Material" value="Material"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259430024" type="TargetElementComponent"/>
-		</node>
-		<node id="259430009">
-			<attribute name="Name" value="Text.005"/>
-			<attribute name="Position" value="0.890224 2.04087 -1.66605"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
-			<attribute name="Variables"/>
-			<attribute name="Tags">
-				<string value="lost"/>
-				<string value="lost_recursive"/>
-			</attribute>
-			<component id="259430024" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.005.mdl"/>
-				<attribute name="Material" value="Material"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259430026" type="TargetElementComponent"/>
-		</node>
-		<node id="259430010">
-			<attribute name="Name" value="Text.006"/>
-			<attribute name="Position" value="0.878934 2.04015 0.986277"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
-			<attribute name="Variables"/>
-			<attribute name="Tags">
-				<string value="lost"/>
-				<string value="lost_recursive"/>
-			</attribute>
-			<component id="259430026" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.006.mdl"/>
-				<attribute name="Material" value="Material"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259430028" type="TargetElementComponent"/>
-		</node>
-		<node id="259430011">
-			<attribute name="Name" value="Text.007"/>
-			<attribute name="Position" value="0.90435 1.02347 -0.475892"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
-			<attribute name="Variables"/>
-			<component id="259430028" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.007.mdl"/>
-				<attribute name="Material" value="Material"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259430030" type="TargetElementComponent"/>
-		</node>
-		<node id="259430012">
-			<attribute name="Name" value="Text.008"/>
-			<attribute name="Position" value="0.878934 1.02207 0.542002"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
-			<attribute name="Variables"/>
-			<component id="259430030" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.008.mdl"/>
-				<attribute name="Material" value="Material"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259430032" type="TargetElementComponent"/>
-		</node>
-		<node id="259430013">
-			<attribute name="Name" value="Text.009"/>
-			<attribute name="Position" value="0.868808 1.02545 -1.32669"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
-			<attribute name="Variables"/>
-			<component id="259430032" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.009.mdl"/>
-				<attribute name="Material" value="Material"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259430034" type="TargetElementComponent"/>
-		</node>
-		<node id="259430014">
-			<attribute name="Name" value="Text.010"/>
-			<attribute name="Position" value="0.869011 0.00380242 -2.05199"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
-			<attribute name="Variables"/>
-			<component id="259430034" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.010.mdl"/>
-				<attribute name="Material" value="Material"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259430036" type="TargetElementComponent"/>
-		</node>
-		<node id="259430015">
-			<attribute name="Name" value="Text.011"/>
-			<attribute name="Position" value="0.868657 0.00141978 1.30696"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
-			<attribute name="Variables"/>
-			<component id="259430036" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.011.mdl"/>
-				<attribute name="Material" value="Material"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259430038" type="TargetElementComponent"/>
-		</node>
-		<node id="259430016">
-			<attribute name="Name" value="Text.012"/>
-			<attribute name="Position" value="0.869011 0.00117958 -1.24109"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
-			<attribute name="Variables"/>
-			<component id="259430038" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.012.mdl"/>
-				<attribute name="Material" value="Material"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259430040" type="TargetElementComponent"/>
-		</node>
-		<node id="259430017">
-			<attribute name="Name" value="Text.013"/>
-			<attribute name="Position" value="0.869062 0.00141799 -0.392044"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
-			<attribute name="Variables"/>
-			<component id="259430040" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.013.mdl"/>
-				<attribute name="Material" value="Material"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259430042" type="TargetElementComponent"/>
-		</node>
-		<node id="259430018">
-			<attribute name="Name" value="Text.014"/>
-			<attribute name="Position" value="0.868657 0.00595009 0.457439"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
-			<attribute name="Variables"/>
-			<component id="259430042" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.014.mdl"/>
-				<attribute name="Material" value="Material"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-			<component id="259430044" type="TargetElementComponent"/>
-		</node>
-		<node id="259430019">
-			<attribute name="Name" value="Text.015"/>
-			<attribute name="Position" value="-1.59332e-07 4.21387 -0.189287"/>
-			<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
-			<attribute name="Scale" value="0.819477 0.819477 0.819477"/>
-			<attribute name="Variables"/>
-			<component id="259430044" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.015.mdl"/>
-				<attribute name="Material" value="Material;Materials/VertexColor.xml"/>
-				<attribute name="Cast Shadows" value="true"/>
-			</component>
-		</node>
-		<node id="259430020">
-			<attribute name="Name" value="Text.016"/>
-			<attribute name="Position" value="-0.265889 -3.80066 -4.56708"/>
-			<attribute name="Rotation" value="0.707107 -2.76942e-08 2.70939e-09 -0.707107"/>
-			<attribute name="Scale" value="0.580261 0.580261 0.450348"/>
-			<attribute name="Variables"/>
-			<component id="259430045" type="StaticModel">
-				<attribute name="Model" value="Model;Models/259-start_scene-Text.018.mdl"/>
-				<attribute name="Material" value="Material;Materials/black.xml"/>
-				<attribute name="Cast Shadows" value="false"/>
-			</component>
+			<node id="259430009">
+				<attribute name="Name" value="T"/>
+				<attribute name="Position" value="0.108707 -6.47364 0.986277"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
+				<attribute name="Variables"/>
+				<component id="259430031" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.006.mdl"/>
+					<attribute name="Material" value="Material;"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="259430033" type="TargetElementComponent"/>
+				<component id="259430034" type="CollisionShape">
+					<attribute name="Shape Type" value="TriangleMesh"/>
+					<attribute name="Size" value="1.0 1.0 1.0"/>
+					<attribute name="Offset Position" value="0.0 0.0 0.0"/>
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.006.mdl"/>
+				</component>
+				<component id="259430035" type="RigidBody">
+					<attribute name="Anisotropic Friction" value="1.0 1.0 1.0"/>
+					<attribute name="Linear Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Angular Velocity" value="0.0 0.0 0.0"/>
+					<attribute name="Linear Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Angular Factor" value="1.0 1.0 1.0"/>
+					<attribute name="Use Gravity" value="False"/>
+					<attribute name="Gravity Override" value="0.0 0.0 0.0"/>
+				</component>
+			</node>
+			<node id="259430010">
+				<attribute name="Name" value="Text.007"/>
+				<attribute name="Position" value="0.134123 -7.49032 -0.475892"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
+				<attribute name="Variables"/>
+				<component id="259430035" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.007.mdl"/>
+					<attribute name="Material" value="Material;"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="259430037" type="TargetElementComponent"/>
+			</node>
+			<node id="259430011">
+				<attribute name="Name" value="Text.008"/>
+				<attribute name="Position" value="0.108707 -7.49171 0.542002"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
+				<attribute name="Variables"/>
+				<component id="259430037" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.008.mdl"/>
+					<attribute name="Material" value="Material;"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="259430039" type="TargetElementComponent"/>
+			</node>
+			<node id="259430012">
+				<attribute name="Name" value="Text.009"/>
+				<attribute name="Position" value="0.0985813 -7.48833 -1.32669"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
+				<attribute name="Variables"/>
+				<component id="259430039" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.009.mdl"/>
+					<attribute name="Material" value="Material;"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="259430041" type="TargetElementComponent"/>
+			</node>
+			<node id="259430013">
+				<attribute name="Name" value="Text.010"/>
+				<attribute name="Position" value="0.0987837 -8.50998 -2.05199"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
+				<attribute name="Variables"/>
+				<component id="259430041" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.010.mdl"/>
+					<attribute name="Material" value="Material;"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="259430043" type="TargetElementComponent"/>
+			</node>
+			<node id="259430014">
+				<attribute name="Name" value="Text.011"/>
+				<attribute name="Position" value="0.0984295 -8.51237 1.30696"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
+				<attribute name="Variables"/>
+				<component id="259430043" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.011.mdl"/>
+					<attribute name="Material" value="Material;"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="259430045" type="TargetElementComponent"/>
+			</node>
+			<node id="259430015">
+				<attribute name="Name" value="Text.012"/>
+				<attribute name="Position" value="0.0987837 -8.51261 -1.24109"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
+				<attribute name="Variables"/>
+				<component id="259430045" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.012.mdl"/>
+					<attribute name="Material" value="Material;"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="259430047" type="TargetElementComponent"/>
+			</node>
+			<node id="259430016">
+				<attribute name="Name" value="Text.013"/>
+				<attribute name="Position" value="0.0988344 -8.51237 -0.392044"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
+				<attribute name="Variables"/>
+				<component id="259430047" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.013.mdl"/>
+					<attribute name="Material" value="Material;"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="259430049" type="TargetElementComponent"/>
+			</node>
+			<node id="259430017">
+				<attribute name="Name" value="Text.014"/>
+				<attribute name="Position" value="0.0984295 -8.50784 0.457439"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.849406 0.849406 0.849406"/>
+				<attribute name="Variables"/>
+				<component id="259430049" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.014.mdl"/>
+					<attribute name="Material" value="Material;"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+				<component id="259430051" type="TargetElementComponent"/>
+			</node>
+			<node id="259430018">
+				<attribute name="Name" value="Text.015"/>
+				<attribute name="Position" value="-0.770227 -4.29991 -0.189287"/>
+				<attribute name="Rotation" value="0.707107 -2.42032e-08 -0 -0.707107"/>
+				<attribute name="Scale" value="0.819477 0.819477 0.819477"/>
+				<attribute name="Variables"/>
+				<component id="259430051" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.015.mdl"/>
+					<attribute name="Material" value="Material;Materials/VertexColor.xml"/>
+					<attribute name="Cast Shadows" value="true"/>
+				</component>
+			</node>
+			<node id="259430019">
+				<attribute name="Name" value="Text.016"/>
+				<attribute name="Position" value="-1.03612 -12.3144 -4.56708"/>
+				<attribute name="Rotation" value="0.707107 -2.76942e-08 2.70939e-09 -0.707107"/>
+				<attribute name="Scale" value="0.580261 0.580261 0.450348"/>
+				<attribute name="Variables"/>
+				<component id="259430052" type="StaticModel">
+					<attribute name="Model" value="Model;Models/259-start_scene-Text.018.mdl"/>
+					<attribute name="Material" value="Material;Materials/black.xml"/>
+					<attribute name="Cast Shadows" value="false"/>
+				</component>
+			</node>
 		</node>
 	</node>
 </scene>
